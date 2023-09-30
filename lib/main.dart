@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';import 'package:flutter/material.dart';
+import 'package:quiz_app/finQuiz.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/theme.dart';
 import 'package:device_preview/device_preview.dart';
@@ -21,7 +22,7 @@ class Myapp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: theme(),
       title: 'Quiz Master',
-      home: Nav() ,
+      home: FinQuiz(),
     );
   }
 }

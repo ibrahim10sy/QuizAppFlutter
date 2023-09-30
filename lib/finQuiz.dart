@@ -22,9 +22,56 @@ class FinQuiz extends StatelessWidget {
   // ignore: dead_code
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: Center(
-          child: Image.asset('../assets/images/lose.png'),
-        ));
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          children: [
+            Image.asset('assets/images/finishQuiz.png'),
+            const Text("Vous avez completé le quiz"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.amber),
+                ),
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.amber),
+                ),
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.amber),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.amber),
+            ),
+            Row(
+              children: [
+                // IconButton(onPressed: (){}, icon: icon.)
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

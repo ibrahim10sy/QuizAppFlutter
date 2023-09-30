@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/before_start_quiz.dart';
+import 'package:quiz_app/pages/question_choose.dart';
+import 'package:quiz_app/pages/splashScreen.dart';
 
 
 void main(){
@@ -7,11 +10,15 @@ void main(){
 }
 
 class Myapp extends StatelessWidget {
+  
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home: Nav() ,
+      home:  QuestionChoose() ,
+      // home:  BeforeStartQuiz() ,
     );
   }
 }

@@ -6,7 +6,6 @@ class ButtonChip extends StatelessWidget {
   const ButtonChip({
     Key? key,
     required this.press,
-    required this.pressHover,
     required this.text,
     this.textColor = const Color(0xFF3F489C),
     this.backgroundColor = Colors.white,
@@ -19,7 +18,6 @@ class ButtonChip extends StatelessWidget {
   }) : super(key: key);
 
   final Function() press;
-  final Function(bool) pressHover;
   final String text;
   final Color textColor;
   final Color selectedTextColor;

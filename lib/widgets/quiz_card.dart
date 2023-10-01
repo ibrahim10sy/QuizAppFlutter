@@ -20,19 +20,17 @@ class QuizCard extends StatelessWidget {
     return GestureDetector(
       onTap: press as void Function(),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/images/background-quiz-card.jpg"),
             fit: BoxFit.cover,
           ),
-            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Column(
           children: [
             Flexible(
-              flex: 3,
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
@@ -52,7 +50,6 @@ class QuizCard extends StatelessWidget {
             ),
             const SizedBox(height: 5,),
             Flexible(
-              flex: 1,
                 child: Padding(
               padding: const EdgeInsets.only(left: 5, right: 5, bottom: 0),
               child: Column(
@@ -67,16 +64,19 @@ class QuizCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     maxLines: 1,),
+                  const SizedBox(height: 5,),
+                  Text('${quiz.nbQuestion} Q', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+
                   Container(
-                    margin: EdgeInsets.only(top: 5),
+                    margin: const EdgeInsets.only(top: 5),
                     child: Row(
                       children: [
                         CircleAvatar(
                           radius: 13,
                           backgroundImage: AssetImage(quiz.user.imageUrl),
                         ),
-                        const SizedBox(width: 10,),
-                        Text(quiz.user.name, style: TextStyle(color: Colors.white),)
+                        const SizedBox(width: 5,),
+                        Text(quiz.user.name, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)
                       ],
                     ),
                   ),

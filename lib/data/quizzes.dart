@@ -6,7 +6,7 @@ List<User> users = [
   User(name: 'Marvel-Quiz', imageUrl: "assets/images/Marvel-Quiz.jpg"), // 0
   User(name: 'Anime-zone', imageUrl: 'assets/images/Anime-zone.jpg'), // 1
   User(name: 'Jujutsu Kaisen', imageUrl: 'assets/images/Jujutsu Kaisen.jpg'), // 2
-  User(name: 'Kimetsu no Yaiba', imageUrl: 'assets/images/Kimetsu no Yaiba.jpg'), // 3
+  User(name: 'Kimetsu no Yaibabbbbbbbbbbb', imageUrl: 'assets/images/Kimetsu no Yaiba.jpg'), // 3
 
 ];
 

@@ -18,11 +18,11 @@ class _spalshScreenState extends State<spalshScreen> {
     super.initState();
 
     Timer(
-     const  Duration(seconds:4), 
+     const  Duration(seconds:5), 
       () =>
       Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-      builder: (_) => const Nav()))
+      builder: (_) => const Nav(),),),
      );
     
     
@@ -53,7 +53,7 @@ class _spalshScreenState extends State<spalshScreen> {
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                   fontFamily: 'Italic',
+                   fontFamily: 'Molle',
                   ),
                 )
 

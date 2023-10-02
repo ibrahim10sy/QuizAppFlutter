@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'pages/accueil.dart';
 import 'pages/liste.dart';
 import 'pages/quiz.dart';
-import 'pages/profile.dart';
+// import 'pages/profile.dart';
+import 'pages/comptepublic.dart';
 
 
 
@@ -21,7 +22,8 @@ List<Widget> _listTab = <Widget>[
    Accueil(),
    Liste(),
    Quiz(),
-   Profile()
+   Comptepublic()
+  //  Profile()
 
 ];
 

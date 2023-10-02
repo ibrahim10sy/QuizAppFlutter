@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
+// import 'package:quiz_app/comptepublic';
+
 
 
 void main(){

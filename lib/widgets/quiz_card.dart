@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/models/quiz.dart';
 
-
-
-
 class QuizCard extends StatelessWidget {
   const QuizCard({
     Key? key,
@@ -76,7 +73,7 @@ class QuizCard extends StatelessWidget {
                           backgroundImage: AssetImage(quiz.user.imageUrl),
                         ),
                         const SizedBox(width: 5,),
-                        Text(quiz.user.name, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)
+                        Text(quiz.user.login, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)
                       ],
                     ),
                   ),

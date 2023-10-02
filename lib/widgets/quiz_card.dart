@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/models/quiz.dart';
 
+import '../constantes.dart';
+
 class QuizCard extends StatelessWidget {
   const QuizCard({
     Key? key,
@@ -20,7 +22,7 @@ class QuizCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/background-quiz-card.jpg"),
+              image: NetworkImage(kBaseUrlForImage+"background-quiz-card.jpg"),
             fit: BoxFit.cover,
           ),
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -37,8 +39,8 @@ class QuizCard extends StatelessWidget {
                         bottomRight: Radius.zero
                     ),
                     image: DecorationImage(
-                      image: AssetImage(
-                        quiz.imageUrl,
+                      image: NetworkImage(
+                        kBaseUrlForImage + quiz.imageUrl,
                       ),
                       fit: BoxFit.cover,
                     )
@@ -70,7 +72,7 @@ class QuizCard extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 13,
-                          backgroundImage: AssetImage(quiz.user.imageUrl),
+                          backgroundImage: NetworkImage(kBaseUrlForImage+quiz.user.imageUrl),
                         ),
                         const SizedBox(width: 5,),
                         Text(quiz.user.login, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)

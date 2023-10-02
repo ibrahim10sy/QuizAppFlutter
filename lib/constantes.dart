@@ -8,3 +8,5 @@ const List<String> kCategories = [
   "anime", "science", "histoire", "informatique",
   "culture generale", "geographie", "mecanique"
 ];
+
+const kBaseUrlForImage = "http://10.0.2.2/quizmasterimg/";

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/extensions/string_extension.dart';
-import 'package:quiz_app/models/category.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 import 'package:quiz_app/services/user_service.dart';
 import 'package:quiz_app/widgets/buttom_chip.dart';
@@ -30,7 +29,7 @@ class _BodyState extends State<Body> {
 
   @override
   void initState() {
-    defaultCategory = Category.anime;
+    defaultCategory = kCategories[0];
     categories = ["Animé", "Science", "Histoire", "Informatique", "Culture générale", "Géographie", "Mécanique"];
     super.initState();
 

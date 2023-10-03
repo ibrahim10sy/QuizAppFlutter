@@ -77,6 +77,7 @@ class QuizService {
   }
 
   Future<Quiz?> createQuiz(int userId, Quiz quiz) async{
+    print(quiz.category);
     final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'), body: quiz.toJson());
     if(response.statusCode == 200) {
       var responseDate = json.decode(response.body);

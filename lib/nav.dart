@@ -3,7 +3,7 @@ import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/categories.dart';
 import 'pages/home/home.dart';
 import 'pages/liste.dart';
-import 'pages/quiz.dart';
+import 'pages/quiz_detail.dart';
 import 'pages/profile.dart';
 
 

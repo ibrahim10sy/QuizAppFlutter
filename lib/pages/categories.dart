@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/pages/quiz_detail.dart';
 
 class Categorie extends StatefulWidget {
   const Categorie({super.key});
@@ -43,10 +44,11 @@ class _CategorieState extends State<Categorie> {
                       height: 150,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.red),
+                          color: Colors.white),
                       child: Column(
                         children: [
-                          Expanded(
+                         GestureDetector(
+                          child:Expanded(
                               flex: 5,
                               child: Container(
                                 //color: Colors.red,
@@ -56,7 +58,15 @@ class _CategorieState extends State<Categorie> {
                                   height: 60,
                                   width: 70,
                                 ),
-                              )),
+                                
+                              ),
+                              
+                              ),
+                              onTap:() {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) =>QuizDetail(categorie: 'informatique')
+                                ));
+                              },
+                         ),
                           Expanded(
                             flex: 2,
                             child: Container(

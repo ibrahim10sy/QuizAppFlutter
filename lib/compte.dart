@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/widgets/quiz_card.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,7 +58,8 @@ class Compte extends StatelessWidget {
                     TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                          foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.blue,
                           minimumSize: const Size(80, 30),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
@@ -67,7 +69,8 @@ class Compte extends StatelessWidget {
                     TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                          foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.blue,
                           minimumSize: const Size(80, 30),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
@@ -77,7 +80,8 @@ class Compte extends StatelessWidget {
                     TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                            foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.blue,
                             minimumSize: const Size(80, 30),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
@@ -86,7 +90,8 @@ class Compte extends StatelessWidget {
                     TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                            foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.blue,
                             minimumSize: const Size(80, 30),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
@@ -95,7 +100,8 @@ class Compte extends StatelessWidget {
                     TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                            foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.blue,
                             minimumSize: const Size(80, 30),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
@@ -104,6 +110,8 @@ class Compte extends StatelessWidget {
                 ),
                 // GestureDetector(),
               ),
+              //QuizCard(quiz: , press: (){}),
+
               const SizedBox(height: 490),
               Container(
                 width: 800,

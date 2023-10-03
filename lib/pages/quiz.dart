@@ -94,8 +94,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.all(20),
-                margin: EdgeInsets.all(1),
+                padding: EdgeInsets.all(2),
                 height: 200,
                 width: double.infinity,
                 child: (image != null)
@@ -133,14 +132,14 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                child: ElevatedButton(
-                  onPressed: pickImages,
-                  child: Text('Ajouter une image'),
-                ),
-              ),
+              // Container(
+              //   child: ElevatedButton(
+              //     onPressed: pickImages,
+              //     child: Text('Ajouter une image'),
+              //   ),
+              // ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Container(
                   margin: EdgeInsets.all(3),
@@ -323,7 +322,9 @@ class _QuestionPageState extends State<QuestionPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -345,7 +346,9 @@ class _QuestionPageState extends State<QuestionPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -367,7 +370,9 @@ class _QuestionPageState extends State<QuestionPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -389,7 +394,9 @@ class _QuestionPageState extends State<QuestionPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -411,10 +418,27 @@ class _QuestionPageState extends State<QuestionPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 5,),
-                    
-                     
-          ]),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/success');
+                        },
+                        child: Text('Valider'),
+                        style: ElevatedButton.styleFrom(
+                          primary:
+                              Color(0xFF031B49), // Couleur de fond du bouton
+                          onPrimary: Colors.white, // Couleur du texte
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 20, // Espacement vertical
+                            horizontal: 30, // Espacement horizontal
+                          ),
+                        ))
+                  ]),
             ),
           ],
         ),
@@ -422,10 +446,6 @@ class _QuestionPageState extends State<QuestionPage> {
     );
   }
 }
-
-
-
-
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({super.key});

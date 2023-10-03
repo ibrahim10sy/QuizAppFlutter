@@ -18,10 +18,10 @@ class _NavState extends State<Nav> {
   int _selectedIndex = 0;
 
 List<Widget> _listTab = <Widget>[
-   Accueil(),
-   Liste(),
-   Quiz(),
-   Profile()
+    Accueil(),
+    Liste(),
+    Quiz(),
+    Profile()
 
 ];
 
@@ -36,9 +36,9 @@ List<Widget> _listTab = <Widget>[
       
       body:Center(
         child: _listTab.elementAt(_selectedIndex),
-      ), 
+      ),
       
-     bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
       backgroundColor : d_color,
   
       items: const <BottomNavigationBarItem> [
@@ -66,8 +66,8 @@ List<Widget> _listTab = <Widget>[
         
       ],
       currentIndex: _selectedIndex,
-       selectedItemColor: Colors.white,
-      onTap: _currentIndex, 
+        selectedItemColor: Colors.white,
+      onTap: _currentIndex,
       ),
     );
   }

@@ -11,7 +11,7 @@ class Comptepublic extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Votre Titre d\'Application',
+      title: 'compte_public',
       home: Scaffold(
         body: SingleChildScrollView(
           child: Column(
@@ -37,11 +37,11 @@ class Comptepublic extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '10          100',
+                        '10      100',
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Quiz       Joueurs',
+                        'Quiz   Joueurs',
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -52,8 +52,9 @@ class Comptepublic extends StatelessWidget {
               // HorizontalList
               HorizontalList(),
 
+
               // QuizSection
-              QuizSection(),
+             
             ],
           ),
         ),
@@ -107,6 +108,37 @@ class ProfilSection extends StatelessWidget {
 }
 
 class HorizontalList extends StatelessWidget {
+
+   @override
+  Widget build(BuildContext context) {
+    return DefaultTabController( // Ajoutez ce widget
+      length: 4, // Spécifiez le nombre d'onglets
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Liste horizontale'),
+          bottom: TabBar( // Ajoutez ce widget
+            tabs: [
+              // Spécifiez les onglets avec des icônes et/ou du texte
+              Tab(icon: Icon(Icons.movie), text: 'Animé'),
+              Tab(icon: Icon(Icons.palette), text: 'Art'),
+              Tab(icon: Icon(Icons.history), text: 'Histoire'),
+              Tab(icon: Icon(Icons.computer), text: 'Informatique'),
+            ],
+          ),
+        ),
+        body: TabBarView( // Ajoutez ce widget
+          children: [
+            // Spécifiez les widgets à afficher pour chaque onglet
+            Icon(Icons.movie, size: 350),
+            Icon(Icons.palette, size: 350),
+            Icon(Icons.history, size: 350),
+            Icon(Icons.computer, size: 350),
+          ],
+        ),
+      ),
+    );
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -237,14 +269,16 @@ class HorizontalList extends StatelessWidget {
       ),
     );
   }
-}
 
 
-class QuizSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // Vous pouvez ajouter d'autres widgets ici
-    );
-  }
-}
+
+
+
+// class RowSection extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       // Vous pouvez ajouter d'autres widgets ici
+//     );
+//   }
+// }

@@ -58,7 +58,6 @@ class _LostState extends State<Lost> {
 
     //   ),
     // ),
-    // SizedBox(height: 40,),
     // Container(
     //   padding: EdgeInsets.only(left: 120), // Ajoutez une marge à gauche du deuxième texte
     //   child: Text(

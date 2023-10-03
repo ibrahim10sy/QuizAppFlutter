@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/models/quiz.dart';
 
-
-
+import '../constantes.dart';
 
 class QuizCard extends StatelessWidget {
   const QuizCard({
@@ -20,12 +19,12 @@ class QuizCard extends StatelessWidget {
     return GestureDetector(
       onTap: press as void Function(),
       child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/background-quiz-card.jpg"),
-            fit: BoxFit.fitHeight,
+              image: NetworkImage(kBaseUrlForImage+"background-quiz-card.jpg"),
+            fit: BoxFit.cover,
           ),
-            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Column(
@@ -40,8 +39,8 @@ class QuizCard extends StatelessWidget {
                         bottomRight: Radius.zero
                     ),
                     image: DecorationImage(
-                      image: AssetImage(
-                        quiz.imageUrl,
+                      image: NetworkImage(
+                        kBaseUrlForImage+quiz.category+"/"+quiz.imageUrl,
                       ),
                       fit: BoxFit.cover,
                     )
@@ -49,22 +48,40 @@ class QuizCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(quiz.title),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 13,
-                      backgroundImage: AssetImage(quiz.user.imageUrl),
+            Flexible(
+                child: Padding(
+              padding: const EdgeInsets.only(left: 5, right: 5, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    quiz.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(width: 10,),
-                    Text(quiz.user.name)
-                  ],
-                ),
-              ],
-            )
+                    maxLines: 1,),
+                  const SizedBox(height: 5,),
+                  Text('${quiz.nbQuestion} Q', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+
+                  Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 13,
+                          backgroundImage: NetworkImage(kBaseUrlForImage+"user/"+quiz.user.imageUrl),
+                        ),
+                        const SizedBox(width: 5,),
+                        Text(quiz.user.login, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ))
           ],
         ),
       ),

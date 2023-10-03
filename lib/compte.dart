@@ -57,8 +57,7 @@ class Compte extends StatelessWidget {
                     TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          primary: Colors.white,
+                          foregroundColor: Colors.white, backgroundColor: Colors.blue,
                           minimumSize: const Size(80, 30),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
@@ -68,8 +67,7 @@ class Compte extends StatelessWidget {
                     TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white, backgroundColor: Colors.blue,
                           minimumSize: const Size(80, 30),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
@@ -79,8 +77,7 @@ class Compte extends StatelessWidget {
                     TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            primary: Colors.white,
+                            foregroundColor: Colors.white, backgroundColor: Colors.blue,
                             minimumSize: const Size(80, 30),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
@@ -89,8 +86,7 @@ class Compte extends StatelessWidget {
                     TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white, backgroundColor: Colors.blue,
                             minimumSize: const Size(80, 30),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
@@ -99,14 +95,14 @@ class Compte extends StatelessWidget {
                     TextButton(
                         onPressed: () {},
                         style: TextButton.styleFrom(
-                            primary: Colors.white,
-                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white, backgroundColor: Colors.blue,
                             minimumSize: const Size(80, 30),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         child: const Text('Actualité')),
                   ],
                 ),
+                // GestureDetector(),
               ),
               const SizedBox(height: 490),
               Container(

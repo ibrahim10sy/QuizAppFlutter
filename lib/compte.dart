@@ -31,22 +31,109 @@ class Compte extends StatelessWidget {
                 radius: 80,
                 backgroundImage: AssetImage('assets/images/finishQuiz.png'),
               ),
-              const Padding(
-                padding: EdgeInsets.all(8),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 32,
-                  weight: 40,
+              // const Padding(
+              //   padding: EdgeInsets.all(8),
+              //   child: Icon(
+              //     Icons.add,
+              //     color: Colors.white,
+              //     size: 32,
+              //     weight: 40,
+              //   ),
+              // ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 32,
+                weight: 40,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          primary: Colors.white,
+                          minimumSize: const Size(80, 30),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: const Text('Animés'),
+                    ),
+                    const SizedBox(width: 8),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: Colors.blue,
+                          minimumSize: const Size(80, 30),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: const Text('Art'),
+                    ),
+                    const SizedBox(width: 8),
+                    TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            primary: Colors.white,
+                            minimumSize: const Size(80, 30),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Text('Histoire')),
+                    const SizedBox(width: 8),
+                    TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.blue,
+                            minimumSize: const Size(80, 30),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Text('Culture')),
+                    const SizedBox(width: 8),
+                    TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.blue,
+                            minimumSize: const Size(80, 30),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Text('Actualité')),
+                  ],
                 ),
               ),
-              Row(
-                children: [
-                  TextButton(onPressed: () {}, child: const Text('Animés')),
-                  TextButton(onPressed: () {}, child: const Text('Animés')),
-                  TextButton(onPressed: () {}, child: const Text('Animés')),
-                  TextButton(onPressed: () {}, child: const Text('Animés')),
-                ],
+              const SizedBox(height: 490),
+              Container(
+                width: 800,
+                height: 30,
+                color: const Color.fromARGB(255, 43, 27, 114),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.add_box,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.grid_view_sharp,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
               )
             ],
           ),

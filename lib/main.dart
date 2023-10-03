@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/theme.dart';
 
+import 'package:quiz_app/pages/categories.dart';
 
 
 void main(){
@@ -12,10 +13,10 @@ class Myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       theme: theme(),
+      debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home: Nav() ,
+      home:Nav() ,
     );
   }
 }

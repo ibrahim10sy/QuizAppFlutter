@@ -9,4 +9,4 @@ const List<String> kCategories = [
   "culture general", "geographie", "mecanique"
 ];
 
-const kBaseUrlForImage = "http://10.0.2.2/quizmasterimg/";
+const kBaseUrlForImage = "http://192.168.137.139/quizmasterimg/";

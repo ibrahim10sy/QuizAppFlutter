@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class QuizService {
-  static const baseQuizUrl = "http://10.0.2.2:9000/api/quizzes?domain=";
+  static const baseQuizUrl = "http://192.168.137.139:9000/api/quizzes?domain=";
 
   Future<List<Quiz>?> getQuizzes(String category) async{
     final response = await http.get(Uri.parse(baseQuizUrl+category));

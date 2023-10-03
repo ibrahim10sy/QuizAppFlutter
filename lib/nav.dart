@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/accueil.dart';
+import 'package:quiz_app/constantes.dart';
+import 'pages/home/home.dart';
 import 'pages/liste.dart';
 import 'pages/quiz.dart';
 import 'pages/profile.dart';
@@ -12,13 +13,13 @@ class Nav extends StatefulWidget {
   @override
   State<Nav> createState() => _NavState();
 }
-const d_color = Color(0xFF031B49);
+final bottomNavigationBackgroundColor = kAppBarColor;
 
 class _NavState extends State<Nav> {
   int _selectedIndex = 0;
 
 List<Widget> _listTab = <Widget>[
-   Accueil(),
+   Home(),
    Liste(),
    Quiz(),
    Profile()
@@ -39,29 +40,29 @@ List<Widget> _listTab = <Widget>[
       ), 
       
      bottomNavigationBar: BottomNavigationBar(
-      backgroundColor : d_color,
+      backgroundColor : bottomNavigationBackgroundColor,
   
-      items: const <BottomNavigationBarItem> [
+      items: <BottomNavigationBarItem> [
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: const Icon(Icons.home),
             label: 'Home',
-            backgroundColor : d_color,
+            backgroundColor : bottomNavigationBackgroundColor,
           ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.list),
+          icon: const Icon(Icons.list),
           label: 'Liste',
-          backgroundColor : d_color,
+          backgroundColor : bottomNavigationBackgroundColor,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.quiz),
+          icon: const Icon(Icons.quiz),
           label: 'Quiz',
-          backgroundColor : d_color,
+          backgroundColor : bottomNavigationBackgroundColor,
         ),
         
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: const Icon(Icons.person),
           label: 'Profile',
-          backgroundColor : d_color,
+          backgroundColor : bottomNavigationBackgroundColor,
         ),
         
       ],

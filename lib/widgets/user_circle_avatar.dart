@@ -19,7 +19,7 @@ class UserCircleAvatar extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 40,
-              backgroundImage: NetworkImage(kBaseUrlForImage+imageUrl),
+              backgroundImage: NetworkImage(kBaseUrlForImage+"user/"+imageUrl),
             ),
             Text(title, style: const TextStyle(fontSize: 12),),
           ],

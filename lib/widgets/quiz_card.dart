@@ -40,7 +40,7 @@ class QuizCard extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       image: NetworkImage(
-                        kBaseUrlForImage + quiz.imageUrl,
+                        kBaseUrlForImage+quiz.category+"/"+quiz.imageUrl,
                       ),
                       fit: BoxFit.cover,
                     )
@@ -72,7 +72,7 @@ class QuizCard extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 13,
-                          backgroundImage: NetworkImage(kBaseUrlForImage+quiz.user.imageUrl),
+                          backgroundImage: NetworkImage(kBaseUrlForImage+"user/"+quiz.user.imageUrl),
                         ),
                         const SizedBox(width: 5,),
                         Text(quiz.user.login, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)

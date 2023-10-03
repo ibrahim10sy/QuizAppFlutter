@@ -6,7 +6,7 @@ const kTextColor = Colors.black; // Couleur par defaut des texte
 
 const List<String> kCategories = [
   "anime", "science", "histoire", "informatique",
-  "culture generale", "geographie", "mecanique"
+  "culture general", "geographie", "mecanique"
 ];
 
 const kBaseUrlForImage = "http://10.0.2.2/quizmasterimg/";

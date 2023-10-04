@@ -1,4 +1,7 @@
+// ignore_for_file: recursive_getters
+
 import 'package:flutter/material.dart';
+// import 'package:quiz_app/models/quiz.dart';
 // import 'package:quiz_app/widgets/quiz_card.dart';
 
 void main() {
@@ -17,6 +20,24 @@ class MyApp extends StatelessWidget {
 class Compte extends StatelessWidget {
   const Compte({super.key});
 
+  // get visibility => visibility;
+
+  // get description => description;
+
+  // get creationDate => creationDate;
+
+  // get category => category;
+
+  // get quizId => quizId;
+
+  // get title => title;
+
+  // get nbQuestion => nbQuestion;
+
+  // get imageUrl => imageUrl;
+
+  // get user => user;
+
   @override
   // ignore: dead_code
   Widget build(BuildContext context) {
@@ -26,29 +47,25 @@ class Compte extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 80,
+                height: 50,
               ),
-              const CircleAvatar(
-                radius: 80,
-                backgroundImage: AssetImage('assets/images/finishQuiz.png'),
+              const Stack(
+                alignment: Alignment.bottomRight,
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: AssetImage('assets/images/finishQuiz.png'),
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 32,
+                    weight: 40,
+                  ),
+                ],
               ),
-              // const Padding(
-              //   padding: EdgeInsets.all(8),
-              //   child: Icon(
-              //     Icons.add,
-              //     color: Colors.white,
-              //     size: 32,
-              //     weight: 40,
-              //   ),
-              // ),
               const SizedBox(
-                width: 10,
-              ),
-              const Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 32,
-                weight: 40,
+                height: 20,
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -110,7 +127,18 @@ class Compte extends StatelessWidget {
                 ),
                 // GestureDetector(),
               ),
-              // QuizCard(quiz:  , press: (){}),
+              // QuizCard(
+              //     quiz: Quiz(
+              //         visibility: visibility,
+              //         description: description,
+              //         creationDate: creationDate,
+              //         category: category,
+              //         quizId: quizId,
+              //         title: title,
+              //         nbQuestion: nbQuestion,
+              //         imageUrl: imageUrl,
+              //         user: user),
+              //     press: () {}),
 
               const SizedBox(height: 490),
               Container(

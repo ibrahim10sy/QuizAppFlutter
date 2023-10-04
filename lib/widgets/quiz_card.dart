@@ -8,11 +8,11 @@ class QuizCard extends StatelessWidget {
     Key? key,
     required this.quiz,
     required this.press,
-    this.isSeller=false
+    this.useBaseUrl=true,
   }) : super(key: key);
   final Quiz quiz;
   final Function press;
-  final bool isSeller;
+  final bool useBaseUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,9 @@ class QuizCard extends StatelessWidget {
       onTap: press as void Function(),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image: NetworkImage(kBaseUrlForImage+"background-quiz-card.jpg"),
+              image: NetworkImage((useBaseUrl)?kBaseUrlForImage+"background-quiz-card.jpg":quiz.imageUrl),
             fit: BoxFit.cover,
           ),
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -40,7 +40,7 @@ class QuizCard extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       image: NetworkImage(
-                        kBaseUrlForImage+quiz.category+"/"+quiz.imageUrl,
+                        (useBaseUrl)?kBaseUrlForImage+quiz.category+"/"+quiz.imageUrl:quiz.imageUrl,
                       ),
                       fit: BoxFit.cover,
                     )
@@ -72,7 +72,7 @@ class QuizCard extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 13,
-                          backgroundImage: NetworkImage(kBaseUrlForImage+"user/"+quiz.user.imageUrl),
+                          backgroundImage: NetworkImage((useBaseUrl)?kBaseUrlForImage+"user/"+quiz.user.imageUrl:quiz.imageUrl),
                         ),
                         const SizedBox(width: 5,),
                         Text(quiz.user.login, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)

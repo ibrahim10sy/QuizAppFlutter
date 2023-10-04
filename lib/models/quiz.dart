@@ -6,7 +6,7 @@ class  Quiz {
   final int nbQuestion;
   final String visibility;
   final String description;
-  final String creationDate;
+  final String? creationDate;
   final String category; // il répresente le domain dans spring boot
   final String imageUrl;
   final User user;
@@ -43,7 +43,7 @@ class  Quiz {
       "nbMaxQuestion": nbQuestion,
       "visibility": visibility,
       "description": description,
-      "creationDate": DateTime.parse(creationDate),
+      "creationDate": creationDate,
       "domain": category,
       "imageUrl": imageUrl,
       "user": user.toJson(),

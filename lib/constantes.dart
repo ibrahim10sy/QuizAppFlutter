@@ -8,5 +8,6 @@ const List<String> kCategories = [
   "anime", "science", "histoire", "informatique",
   "culture general", "geographie", "mecanique"
 ];
-const baseUrl = "http://10.175.48.150";
+// const baseUrl = "http://10.175.48.150";
+const baseUrl = "http://localhost:9000";
 const kBaseUrlForImage = "${baseUrl}/quizmasterimg/";

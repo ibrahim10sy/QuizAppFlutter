@@ -23,30 +23,56 @@ class  Quiz {
     required this.user
   });
 
-  factory Quiz.fromJson(Map<String, dynamic> json) {
-    return Quiz(
-        quizId: json['quizId'],
-        title: json['title'],
-        nbQuestion: json['nbMaxQuestion'],
-        visibility: json['visibility'],
-        description: json['description'],
-        creationDate: json['creationDate'],
-        category: json['domain'],
-        imageUrl: json['imageUrl'],
-        user: User.fromJson(json['user'])
-    );
-  }
+  // factory Quiz.fromJson(Map<String, dynamic> json) {
+  //   return Quiz(
+  //       quizId: json['quizId'],
+  //       title: json['title'],
+  //       nbQuestion: json['nbMaxQuestion'],
+  //       visibility: json['visibility'],
+  //       description: json['description'],
+  //       creationDate: json['creationDate'],
+  //       category: json['domain'],
+  //       imageUrl: json['imageUrl'],
+  //       user: User.fromJson(json['user'])
+  //   );
+  // }
 
-    Map<String, dynamic> toJson() => {
-      "quizId": quizId,
-      "title": title,
-      "nbMaxQuestion": nbQuestion,
-      "visibility": visibility,
-      "description": description,
-      "creationDate": DateTime.parse(creationDate),
-      "domain": category,
-      "imageUrl": imageUrl,
-      "user": user.toJson(),
-    };
+  //   Map<String, dynamic> toJson() => {
+  //     "quizId": quizId,
+  //     "title": title,
+  //     "nbMaxQuestion": nbQuestion,
+  //     "visibility": visibility,
+  //     "description": description,
+  //     "creationDate": DateTime.parse(creationDate),
+  //     "domain": category,
+  //     "imageUrl": imageUrl,
+  //     "user": user.toJson(),
+  //   };
+  Map<String, dynamic> toJson() => {
+  "quizId": quizId,
+  "title": title,
+  "nbMaxQuestion": nbQuestion,
+  "visibility": visibility,
+  "description": description,
+  "creationDate": DateTime.parse(creationDate),
+  "domain": category,
+  "imageUrl": imageUrl,
+  "user": user.toJson(),
+};
+
+factory Quiz.fromJson(Map<String, dynamic> json) {
+  return Quiz(
+    quizId: json['quizId'],
+    title: json['title'],
+    nbQuestion: json['nbMaxQuestion'],
+    visibility: json['visibility'],
+    description: json['description'],
+    creationDate: json['creationDate'],
+    category: json['domain'],
+    imageUrl: json['imageUrl'],
+    user: User.fromJson(json['user']),
+  );
+}
+
 
 }

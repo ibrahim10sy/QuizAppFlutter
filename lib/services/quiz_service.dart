@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class QuizService {
-  static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
-  static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
+  static const baseQuizUrl = "${baseUrl}/api/quizzes";
+  static const baseQuizUrlForUser = "${baseUrl}/api/users";
+  // static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
+  // static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
 
   Future<List<Quiz>?> getQuizzes(String category) async{
     final response = await http.get(Uri.parse(baseQuizUrl+"?domain="+category));
@@ -77,7 +79,7 @@ class QuizService {
   }
 
   Future<Quiz?> createQuiz(int userId, Quiz quiz) async{
-    print(quiz.category);
+    print(quiz);
     final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'), body: quiz.toJson());
     if(response.statusCode == 200) {
       var responseDate = json.decode(response.body);

@@ -81,6 +81,7 @@ class _QuizDetailState extends State<QuizDetail> {
         appBar: AppBar(
             backgroundColor: d_color1,
             centerTitle: true,
+            // theme: theme(),
             title: Padding(
               padding: EdgeInsets.all(100),
               child: Text(
@@ -134,64 +135,78 @@ class _QuizDetailState extends State<QuizDetail> {
               SizedBox(
                 height: 20,
               ),
-              // Container(
-              //   child: ElevatedButton(
-              //     onPressed: pickImages,
-              //     child: Text('Ajouter une image'),
-              //   ),
-              // ),
-              SizedBox(
-                height: 20,
-              ),
+             
               Container(
                   margin: EdgeInsets.all(3),
                   padding: EdgeInsets.all(10),
                   child: Form(
-                    key : _formKey,
-                    child: Column(
-                      children:<Widget> [
-                        TextFormField(
-                          controller: titleController ,
-                          validator: (value) {
-                            if( value == null || value.isEmpty){
-                              return 'Veuillez renseigné le titre';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              hintText: 'Entrer le nom du quiz',
-                              border: OutlineInputBorder()),
-                              
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            onPressed: () async{
-                             if(_formKey.currentState!.validate()){
-                              Quiz quizz = Quiz(quizId: 1, visibility: 'public', description: 'description', creationDate: '2023-10-03', category:widget.categorie, title: titleController.text, nbQuestion: 10, imageUrl: "informatique1.jpg", user: User(userId: 1, firstName: "firstName", lastName: "lastName", email: "email", password: "password", login: "login", imageUrl: "imageUrl"));
-                              QuizService service = QuizService();
-                              await service.createQuiz(1, quizz);
-                             } else{
-                              print('Quiz non crée');
-                             }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              side: BorderSide.none,
-                              backgroundColor: Color(0xFF031B49),
-                            ),
-                            child: Text(
-                              'Suivant',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              controller: titleController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Veuillez renseigner le titre';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                hintText: 'Entrer le nom du quiz',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    // Créez une instance de Quiz avec les données du formulaire
+                    Quiz quiz = Quiz(
+                      quizId: 1,
+                      visibility: "public",
+                      description: "description",
+                      creationDate: "2023-10-03",
+                      category: widget.categorie, // Utilisez la propriété passée depuis le widget
+                      title: titleController.text,
+                      nbQuestion: 10,
+                      imageUrl: "informatique1.jpg",
+                      user: User(
+                        userId: 1,
+                        firstName: "firstName",
+                        lastName: "lastName",
+                        email: "email",
+                        password: "password",
+                        login: "login",
+                        imageUrl: "imageUrl",
+                      ),
+                    );
+
+                    // Créez une instance de QuizService et appelez createQuiz
+                    QuizService service = QuizService();
+                    await service.createQuiz(1, quiz);
+                    
+                    print('Quiz créé avec succès');
+                  } else {
+                    print('Quiz non créé');
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  side: BorderSide.none,
+                  backgroundColor: Color(0xFF031B49),
+                ),
+                child: Text(
+                  'Suivant',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),],
                     ),
                   ))
             ],

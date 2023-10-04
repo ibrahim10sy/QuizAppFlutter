@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/theme.dart';
 
-import 'package:quiz_app/pages/categories.dart';
-
 
 void main(){
   runApp(Myapp());

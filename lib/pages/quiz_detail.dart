@@ -16,8 +16,6 @@ class QuizDetail extends StatefulWidget {
   static String routeName = "/quiz_detail";
   String categorie = "";
 
-  
-
   QuizDetail({super.key, required this.categorie});
 
   @override
@@ -27,12 +25,12 @@ class QuizDetail extends StatefulWidget {
 class _QuizDetailState extends State<QuizDetail> {
   File? image;
 
- @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(widget.categorie);
   }
+
   // Fonction pour créer un bouton
   Widget buildButton({
     required String title,
@@ -50,7 +48,6 @@ class _QuizDetailState extends State<QuizDetail> {
     final directory = await getApplicationDocumentsDirectory();
     final name = basename(imagePath);
     final image = File('${directory.path}/$name');
-  
 
     return File(imagePath).copy(image.path);
   }
@@ -135,78 +132,70 @@ class _QuizDetailState extends State<QuizDetail> {
               SizedBox(
                 height: 20,
               ),
-             
+    
+              const SizedBox( height: 20),
               Container(
-                  margin: EdgeInsets.all(3),
-                  padding: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(3),
+                  padding: const EdgeInsets.all(10),
                   child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: titleController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Veuillez renseigner le titre';
-                }
-                return null;
-              },
-              decoration: InputDecoration(
-                hintText: 'Entrer le nom du quiz',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    // Créez une instance de Quiz avec les données du formulaire
-                    Quiz quiz = Quiz(
-                      quizId: 1,
-                      visibility: "public",
-                      description: "description",
-                      creationDate: "2023-10-03",
-                      category: widget.categorie, // Utilisez la propriété passée depuis le widget
-                      title: titleController.text,
-                      nbQuestion: 10,
-                      imageUrl: "informatique1.jpg",
-                      user: User(
-                        userId: 1,
-                        firstName: "firstName",
-                        lastName: "lastName",
-                        email: "email",
-                        password: "password",
-                        login: "login",
-                        imageUrl: "imageUrl",
-                      ),
-                    );
-
-                    // Créez une instance de QuizService et appelez createQuiz
-                    QuizService service = QuizService();
-                    await service.createQuiz(1, quiz);
-                    
-                    print('Quiz créé avec succès');
-                  } else {
-                    print('Quiz non créé');
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide.none,
-                  backgroundColor: Color(0xFF031B49),
-                ),
-                child: Text(
-                  'Suivant',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),],
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          controller: titleController,
+                          validator: (value) {
+                            if (value!.length<10 || value.length>50) {
+                              return 'Le titre doit avoir entre 10 et 50 caracteres';
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                              hintText: 'Entrer le nom du quiz',
+                              border: OutlineInputBorder()),
+                        ),
+                        const SizedBox( height: 5),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                Quiz quizz = Quiz(
+                                    quizId: null,
+                                    visibility: 'public',
+                                    description: 'description',
+                                    creationDate: '2023-10-03',
+                                    category: widget.categorie,
+                                    title: titleController.text,
+                                    nbQuestion: 2,
+                                    imageUrl: "informatique1.jpg",
+                                    user: User(
+                                        userId: 1,
+                                        firstName: "firstName",
+                                        lastName: "lastName",
+                                        email: "email",
+                                        password: "password",
+                                        login: "login",
+                                        imageUrl: "imageUrl"));
+                                QuizService service = QuizService();
+                                await service.createQuiz(1, quizz);
+                              } else {
+                                print('Quiz non crée');
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide.none,
+                              backgroundColor: Color(0xFF031B49),
+                            ),
+                            child: Text(
+                              'Suivant',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ))
             ],
@@ -218,7 +207,6 @@ class _QuizDetailState extends State<QuizDetail> {
 }
 
 //page question *******************
-
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({super.key});

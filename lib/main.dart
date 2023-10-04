@@ -24,7 +24,6 @@ class Myapp extends StatelessWidget {
 
 
 /*
-
 import 'package:flutter/material.dart';import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/theme.dart';
@@ -52,7 +51,4 @@ class Myapp extends StatelessWidget {
       home: Compte(),
     );
   }
-}
-
-
- */
+} */

@@ -1,7 +1,7 @@
 import 'package:quiz_app/models/user.dart';
 
 class  Quiz {
-  final int quizId;
+  final int? quizId;
   final String title;
   final int nbQuestion;
   final String visibility;

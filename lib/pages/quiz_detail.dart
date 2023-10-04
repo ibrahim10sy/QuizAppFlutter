@@ -164,13 +164,13 @@ class _QuizDetailState extends State<QuizDetail> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 Quiz quizz = Quiz(
-                                    quizId: 1,
+                                    quizId: null,
                                     visibility: 'public',
                                     description: 'description',
                                     creationDate: '2023-10-03',
                                     category: widget.categorie,
                                     title: titleController.text,
-                                    nbQuestion: 1,
+                                    nbQuestion: 2,
                                     imageUrl: "informatique1.jpg",
                                     user: User(
                                         userId: 1,

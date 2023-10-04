@@ -64,7 +64,7 @@ class QuizService {
     // Mise à jour complete des données d'un quiz pour un utilisateur
     final response = await http.put(
         Uri.parse('$baseQuizUrlForUser/$userId/quizzes/$quizId'),
-        body: updateQuiz.toJson());
+        body: json.encode(updateQuiz),);
     if (response.statusCode == 200) {
       var responseDate = json.decode(response.body);
       Quiz quiz = Quiz.fromJson(responseDate);

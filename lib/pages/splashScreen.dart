@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/home/home.dart';
 
 class spalshScreen extends StatefulWidget {
   const spalshScreen({super.key});
@@ -18,11 +19,11 @@ class _spalshScreenState extends State<spalshScreen> {
     super.initState();
 
     Timer(
-     const  Duration(seconds:5), 
+     const  Duration(seconds:7), 
       () =>
       Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-      builder: (_) => const Nav(),),),
+      builder: (_) => const Home(),),),
      );
     
     

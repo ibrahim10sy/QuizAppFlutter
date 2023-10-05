@@ -165,11 +165,15 @@ class _QuestionChooseState extends State<QuestionChoose> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //Question 2
-                   const Padding(padding:EdgeInsets.only(left: 10),),
-                    Text( "#"+_numQues[1].toString(), style: TextStyle(
+                  //  const Padding(padding:EdgeInsets.only(left: 2),),
+                    // Text( "#"+_numQues[1].toString(), style: TextStyle(
+                    //   color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
+                      
+                    //   ),
+                    TextButton(onPressed: null, child: Text( "#"+_numQues[1].toString(), style: TextStyle(
                       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
                       
-                      ),
+                      ), ),
 
                       Expanded(child: Center(
                         child: 
@@ -197,6 +201,7 @@ class _QuestionChooseState extends State<QuestionChoose> {
                   children: [
                     //Question 3
                    const Padding(padding:EdgeInsets.only(left: 10),),
+                   
                     Text( "#"+_numQues[2].toString(), style: TextStyle(
                       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
 

@@ -19,24 +19,22 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   int selectedIndex = 0;
   QuizService quizService = QuizService();
-  UserService userService = UserService();
 
   late Future<List<Quiz>?> futureQuizzes;
-  late Future<List<User>?> futureUsers;
   late String defaultCategory;
+  late int userId;
 
   @override
   void initState() {
     defaultCategory = kCategories[0];
     super.initState();
-
-    futureUsers = userService.getUsers();
-    futureQuizzes = quizService.getQuizzes(defaultCategory);
+    userId = 1;
+    futureQuizzes = quizService.getQuizzesPlayedByUserAndDomain(userId, defaultCategory);
   }
 
   void onItemTapped(int index) {
     setState(() {
-      futureQuizzes = quizService.getQuizzes(kCategories[index]);
+      futureQuizzes = quizService.getQuizzesPlayedByUserAndDomain(userId, kCategories[index]);
       selectedIndex = index;
     });
   }

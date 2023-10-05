@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -23,21 +24,51 @@ class _IncriptionState extends State<Incription>
   TextEditingController passwordConfirmController = TextEditingController();
 
   String value = "";
-  String name = "";
-  String mail = "";
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+  String pseudo = "";
   String password = "";
   String passwordConfirm = "";
   bool _obscureText = true;
 
-  void validationForm() {
+  void validationForm() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       _formKey.currentState?.reset();
+      debugPrint("$firstName");
+      debugPrint("$lastName");
+      debugPrint("$pseudo");
+      debugPrint("$email");
+      debugPrint("$password");
+      debugPrint("ok");
+      Navigator.pushNamed(context, '/connexion');
+      Map<String, dynamic> userData = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "email": email,
+        "login": pseudo,
+        "password": password,
+        // Ajoutez d'autres champs si nécessaire
+      };
+      // Envoi des données à votre API
+    var response = await http.post(
+      Uri.parse('https://10.0.2.2/api/users'), // Remplacez ceci par l'URL de votre endpoint d'API
+      body: userData,
+    );
+      if (response.statusCode == 200) {
+      // Succès : les données ont été envoyées avec succès à votre API
+      debugPrint("Données envoyées avec succès !");
       Navigator.pushNamed(context, '/connexion');
     } else {
-      debugPrint("error");
+      // Échec : les données n'ont pas pu être envoyées à votre API
+      debugPrint("Erreur lors de l'envoi des données à l'API");
     }
+  } else {
+    debugPrint("Erreur : veuillez corriger les champs");
   }
+    }
+  
 
   void affichage(nom) {
     setState(() {
@@ -93,8 +124,8 @@ class _IncriptionState extends State<Incription>
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    labelText: "Nom d'utilisteur",
-                    hintText: "Entrez votre nom d'utilisateur",
+                    labelText: "Prenom",
+                    hintText: "Entrez votre prenom",
                     icon: Icon(
                       Icons.person,
                       color: Color(0xFF031B49),
@@ -102,12 +133,70 @@ class _IncriptionState extends State<Incription>
                     )),
                 validator: (val) {
                   if (val == null || val.isEmpty) {
-                    return "Veillez entrez votre nom d'utilisateur";
+                    return "Veillez entrez votre prenom";
                   } else {
                     return null;
                   }
                 },
-                onSaved: (val) => name = val!,
+                onSaved: (val) => firstName = val!,
+                keyboardType: TextInputType.text,
+                autocorrect: true,
+                autofocus: true,
+                onChanged: affichage,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)
+                        ),
+                    labelText: "Nom",
+                    hintText: "Entrez votre nom",
+                    icon: Icon(
+                      Icons.person,
+                      color: Color(0xFF031B49),
+                      size: 20,
+                    )
+                    ),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Veillez entrez votre nom";
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (val) => lastName = val!,
+                keyboardType: TextInputType.text,
+                autocorrect: true,
+                autofocus: true,
+                onChanged: affichage,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)
+                        ),
+                    labelText: "Pseudo",
+                    hintText: "Entrez votre pseudo",
+                    icon: Icon(
+                      Icons.person,
+                      color: Color(0xFF031B49),
+                      size: 20,
+                    )
+                    ),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return "Veillez entrez votre pseudo";
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (val) => pseudo = val!,
                 keyboardType: TextInputType.text,
                 autocorrect: true,
                 autofocus: true,
@@ -120,8 +209,8 @@ class _IncriptionState extends State<Incription>
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    labelText: "Mail",
-                    hintText: "Entrez votre mail",
+                    labelText: "Email",
+                    hintText: "Entrez votre email",
                     icon: Icon(
                       Icons.mail,
                       color: Color(0xFF031B49),
@@ -130,12 +219,12 @@ class _IncriptionState extends State<Incription>
                 keyboardType: TextInputType.emailAddress,
                 validator: (val) {
                   if (val == null || val.isEmpty) {
-                    return "Veillez entrez votre mail";
+                    return "Veillez entrez votre email";
                   } else {
                     return null;
                   }
                 },
-                onSaved: (val) => mail = val!,
+                onSaved: (val) => email = val!,
               ),
               // fin  adresse email
               const SizedBox(
@@ -165,7 +254,7 @@ class _IncriptionState extends State<Incription>
                       ),
                     ),
                     icon: Icon(
-                      Icons.lock,
+                      Icons.lock_outline,
                       color: Color(0xFF031B49),
                       size: 20,
                     )),
@@ -210,7 +299,7 @@ class _IncriptionState extends State<Incription>
                       ),
                     ),
                     icon: Icon(
-                      Icons.password,
+                      Icons.lock,
                       color: Color(0xFF031B49),
                       size: 20,
                     )),
@@ -248,6 +337,7 @@ class _IncriptionState extends State<Incription>
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                     minimumSize: Size(300, 40)),
+                    
               ),
             ],
           )),

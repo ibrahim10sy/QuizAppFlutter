@@ -58,6 +58,9 @@ class _ConnexionState extends State<Connexion>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Image.asset(
                     'assets/union.png',
                     height: 150,

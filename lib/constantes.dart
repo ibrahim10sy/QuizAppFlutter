@@ -9,7 +9,7 @@ const List<String> kCategories = [
   "culture general", "geographie", "mecanique"
 ];
 // const baseUrl = "http://10.175.48.150";
-const baseUrl = "http://localhost:9000";
+const baseUrl = "http://10.0.2.2:9000";
 // const baseUrl = "http://192.168.1.113";
 //const baseUrl = "http://10.0.2.2";
 const kBaseUrlForImage = "${baseUrl}/quizmasterimg/";

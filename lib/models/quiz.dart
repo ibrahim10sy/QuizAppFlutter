@@ -1,3 +1,4 @@
+
 import 'package:quiz_app/models/user.dart';
 
 class  Quiz {
@@ -22,7 +23,7 @@ class  Quiz {
     required this.imageUrl,
     required this.user
   });
-
+  
     Map<String, dynamic> toJson() => {
       "quizId": quizId,
       "title": title,

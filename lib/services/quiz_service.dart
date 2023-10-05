@@ -92,8 +92,7 @@ class QuizService {
   //     Quiz quiz = Quiz.fromJson(responseDate);
   //     return quiz;
   Future<Quiz?> createQuiz(int userId, Quiz quiz) async {
-    final response = await http.post(
-      Uri.parse('$baseQuizUrlForUser/$userId/quizzes'),
+    final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'),
       body: json.encode(quiz),
       headers: {
         // Je m'assure que le type de média est défini sur JSON

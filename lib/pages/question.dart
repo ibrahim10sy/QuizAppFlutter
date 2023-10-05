@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class QuestionPage extends StatefulWidget {
-   static String routeName = "/question";
+  static String routeName = "/question";
   const QuestionPage({super.key});
 
   @override
@@ -51,6 +51,8 @@ class _QuestionPageState extends State<QuestionPage> {
     }
   }
 
+  final _formKey = GlobalKey<FormState>();
+  final titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,30 +111,45 @@ class _QuestionPageState extends State<QuestionPage> {
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.all(3),
-              padding: EdgeInsets.all(10),
-              child: Column(
+                margin: EdgeInsets.all(3),
+                padding: EdgeInsets.all(10),
+                child: Form(
+                    key: _formKey,
+                    child: Column(children: <Widget>[
+                     Column(
                   crossAxisAlignment:
                       CrossAxisAlignment.start, // Align children to the left
                   children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Ajouter une question',
-                        border: OutlineInputBorder(),
+                    TextFormField(
+                        controller: titleController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Champ obligatoire';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la question',
+                            border: OutlineInputBorder()),
                       ),
-                    ),
                     SizedBox(
                       height: 15,
                     ),
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Ajouter une réponse 1',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
+                         child: TextFormField(
+                        controller: titleController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Entrer une reponse ';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la reponse 1',
+                            border: OutlineInputBorder()),
+                      ),
                         ),
                         SizedBox(width: 8),
                         Transform.scale(
@@ -151,12 +168,18 @@ class _QuestionPageState extends State<QuestionPage> {
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Ajouter une réponse 2',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
+                          child: TextFormField(
+                        controller: titleController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Entrer une reponse ';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la reponse 2',
+                            border: OutlineInputBorder()),
+                      ),
                         ),
                         SizedBox(width: 8),
                         Transform.scale(
@@ -175,12 +198,18 @@ class _QuestionPageState extends State<QuestionPage> {
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Ajouter une réponse 3',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
+                          child: TextFormField(
+                        controller: titleController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Entrer une reponse ';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la reponse 3',
+                            border: OutlineInputBorder()),
+                      ),
                         ),
                         SizedBox(width: 8),
                         Transform.scale(
@@ -199,12 +228,18 @@ class _QuestionPageState extends State<QuestionPage> {
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Ajouter une réponse 4',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
+                          child: TextFormField(
+                        controller: titleController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Entrer une reponse ';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la reponse 4',
+                            border: OutlineInputBorder()),
+                      ),
                         ),
                         SizedBox(width: 8),
                         Transform.scale(
@@ -223,12 +258,18 @@ class _QuestionPageState extends State<QuestionPage> {
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Ajouter une réponse 5',
-                              border: OutlineInputBorder(),
-                            ),
-                          ),
+                          child: TextFormField(
+                        controller: titleController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Entrer une reponse ';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la reponse 5',
+                            border: OutlineInputBorder()),
+                      ),
                         ),
                         SizedBox(width: 8),
                         Transform.scale(
@@ -262,7 +303,10 @@ class _QuestionPageState extends State<QuestionPage> {
                           ),
                         ))
                   ]),
-            ),
+                    ]
+                    )
+                    )
+                    ),
           ],
         ),
       ),

@@ -13,6 +13,7 @@ import 'package:quiz_app/services/quiz_service.dart';
 
 /**************Home***************************** */
 class QuizDetail extends StatefulWidget {
+
   static String routeName = "/quiz_detail";
   String categorie = "";
 
@@ -24,6 +25,7 @@ class QuizDetail extends StatefulWidget {
 
 class _QuizDetailState extends State<QuizDetail> {
   File? image;
+  String? imageSrc; // Variable pour stocker le chemin de notre l'image upload
 
   @override
   void initState() {
@@ -59,12 +61,53 @@ class _QuizDetailState extends State<QuizDetail> {
 
       // final ImageTemporary = File(images.path);
       final imagePermanent = await saveImagePermanently(image.path);
-      setState(() => this.image = imagePermanent);
+      setState(() {
+      this.image = imagePermanent;
+      imageSrc = imagePermanent.path; 
+    });
     } on PlatformException catch (e) {
       print('Impossible de télécharger l\'image $e');
     }
   }
-
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Basic dialog title'),
+          content: const Text(
+            'Quiz créer avec succèss'
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Fermer'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              QuestionPage(),
+                        ),
+                      );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
 
@@ -159,15 +202,17 @@ class _QuizDetailState extends State<QuizDetail> {
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
+                                 _dialogBuilder(context);
+                                print(widget.categorie);
                                 Quiz quizz = Quiz(
                                     quizId: null,
                                     visibility: 'public',
                                     description: 'description',
-                                    creationDate: '2023-10-03',
+                                    creationDate: '2023-10-03', 
                                     category: widget.categorie,
                                     title: titleController.text,
                                     nbQuestion: 2,
-                                    imageUrl: "informatique1.jpg",
+                                    imageUrl: imageSrc ?? "",
                                     user: User(
                                         userId: 1,
                                         firstName: "firstName",
@@ -178,9 +223,11 @@ class _QuizDetailState extends State<QuizDetail> {
                                         imageUrl: "imageUrl"));
                                 QuizService service = QuizService();
                                 await service.createQuiz(1, quizz);
+                                 titleController.clear();
                               } else {
                                 print('Quiz non crée');
                               }
+                            
                             },
                             style: ElevatedButton.styleFrom(
                               side: BorderSide.none,

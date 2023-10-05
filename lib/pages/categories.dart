@@ -5,14 +5,14 @@ import 'package:quiz_app/pages/quiz_detail.dart';
 class Categorie extends StatelessWidget {
   
   final List<Category> categories = [
-    Category(id: 1, nom: "Animaux", imageUrl:'images/animal.png'),
-    Category(id: 2, nom: "Music", imageUrl:'images/casque.png'),
-    Category(id: 3, nom: "Maths", imageUrl:'images/maths.png'),
-    Category(id: 4, nom: "Jeux", imageUrl:'images/jeux.png'),
+    Category(id: 1, nom: "religion", imageUrl:'images/Religious.svg'),
+    Category(id: 2, nom: "histoire", imageUrl:'images/histoire.png'),
+    Category(id: 3, nom: "science", imageUrl:'images/science.png'),
+    Category(id: 4, nom: "culture general", imageUrl:'images/culture.jpg'),
     Category(id: 5, nom: "Espace", imageUrl:'images/espace.png'),
     Category(id: 6, nom: "Sport", imageUrl:'images/sport.png'),
     Category(id: 7, nom: "Hacking", imageUrl:'images/haching.png'),
-    Category(id: 8, nom: "Informatique", imageUrl:'images/java.png'),
+    Category(id: 8, nom: "informatique", imageUrl:'images/java.png'),
   ];
 
   @override

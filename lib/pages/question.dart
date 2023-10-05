@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quiz_app/models/question.dart';
+import 'package:quiz_app/models/quiz.dart';
+import 'package:quiz_app/models/user.dart';
 
 class QuestionPage extends StatefulWidget {
   static String routeName = "/question";
@@ -15,7 +18,8 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
-  File? image;
+  File? image; 
+  String? imageSrc;
 
   // Fonction pour créer un bouton
   Widget buildButton({
@@ -45,7 +49,10 @@ class _QuestionPageState extends State<QuestionPage> {
 
       // final ImageTemporary = File(images.path);
       final imagePermanent = await saveImagePermanently(image.path);
-      setState(() => this.image = imagePermanent);
+      setState((){
+         this.image = imagePermanent;
+         imageSrc = imagePermanent.path;
+      });
     } on PlatformException catch (e) {
       print('Impossible de télécharger l\'image $e');
     }
@@ -53,6 +60,13 @@ class _QuestionPageState extends State<QuestionPage> {
 
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
+  final typeController = TextEditingController();
+  final pointController = TextEditingController();
+  final rangReponseController = TextEditingController();
+  final rangController = TextEditingController();
+  final choixController = TextEditingController();
+  final quizController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,159 +149,82 @@ class _QuestionPageState extends State<QuestionPage> {
                     SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                         child: TextFormField(
-                        controller: titleController,
+                    TextFormField(
+                        controller: typeController,
                         validator: (value) {
                           if (value!.length < 10 || value.length > 50) {
-                            return 'Entrer une reponse ';
+                            return 'Champ obligatoire';
                           }
                           return null;
                         },
                         decoration: const InputDecoration(
-                            hintText: 'Entrer la reponse 1',
+                            hintText: 'Entrer le type du quiz',
                             border: OutlineInputBorder()),
                       ),
-                        ),
-                        SizedBox(width: 8),
-                        Transform.scale(
-                          scale: 2,
-                          child: Checkbox(
-                            value: true,
-                            onChanged: (bool? newValue) {},
-                            activeColor: Color(0xFF031B49),
-                          ),
-                        )
-                      ],
+                    SizedBox(
+                      height: 8,
+                    ),
+                   TextFormField(
+                    controller: pointController,
+                     validator: (value) {
+                            if (value!.length<10 || value.length>50) {
+                              return 'Veuillez saisir des chiffres uniquement';
+                            }
+                            return null;
+                          },
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                    ],
+                    decoration: InputDecoration(
+                    hintText: "Entrer le nombre de point",
+                     ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 8,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                        controller: titleController,
-                        validator: (value) {
-                          if (value!.length < 10 || value.length > 50) {
-                            return 'Entrer une reponse ';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                            hintText: 'Entrer la reponse 2',
-                            border: OutlineInputBorder()),
-                      ),
-                        ),
-                        SizedBox(width: 8),
-                        Transform.scale(
-                          scale: 2,
-                          child: Checkbox(
-                            value: true,
-                            onChanged: (bool? newValue) {},
-                            activeColor: Color(0xFF031B49),
-                          ),
-                        )
-                      ],
+                   TextFormField(
+                    controller: rangController,
+                     validator: (value) {
+                            if (value!.length<10 || value.length>50) {
+                              return 'Veuillez saisir des chiffres uniquement';
+                            }
+                            return null;
+                          },
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                    ],
+                    decoration: InputDecoration(
+                    labelText: "Champ",
+                    hintText: "Entrer le rang",
+                     ),
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 8,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                        controller: titleController,
-                        validator: (value) {
-                          if (value!.length < 10 || value.length > 50) {
-                            return 'Entrer une reponse ';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                            hintText: 'Entrer la reponse 3',
-                            border: OutlineInputBorder()),
-                      ),
-                        ),
-                        SizedBox(width: 8),
-                        Transform.scale(
-                          scale: 2,
-                          child: Checkbox(
-                            value: true,
-                            onChanged: (bool? newValue) {},
-                            activeColor: Color(0xFF031B49),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                        controller: titleController,
-                        validator: (value) {
-                          if (value!.length < 10 || value.length > 50) {
-                            return 'Entrer une reponse ';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                            hintText: 'Entrer la reponse 4',
-                            border: OutlineInputBorder()),
-                      ),
-                        ),
-                        SizedBox(width: 8),
-                        Transform.scale(
-                          scale: 2,
-                          child: Checkbox(
-                            value: true,
-                            onChanged: (bool? newValue) {},
-                            activeColor: Color(0xFF031B49),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                        controller: titleController,
-                        validator: (value) {
-                          if (value!.length < 10 || value.length > 50) {
-                            return 'Entrer une reponse ';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                            hintText: 'Entrer la reponse 5',
-                            border: OutlineInputBorder()),
-                      ),
-                        ),
-                        SizedBox(width: 8),
-                        Transform.scale(
-                          scale: 2,
-                          child: Checkbox(
-                            value: true,
-                            onChanged: (bool? newValue) {},
-                            activeColor: Color(0xFF031B49),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
+                   TextFormField(
+                    controller: rangReponseController,
+                    validator: (value) {
+                            if (value!.length<10 || value.length>50) {
+                              return 'Veuillez saisir des chiffres uniquement';
+                            }
+                            return null;
+                          },
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                    ],
+                    decoration: InputDecoration(
+                    // labelText: "Champ",
+                    hintText: "Rang de la reponse",
+                     ),
                     ),
                     ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/success');
+                        onPressed: () async {
+                         if(_formKey.currentState!.validate()){
+                          
+                         }
                         },
                         child: Text('Valider'),
                         style: ElevatedButton.styleFrom(

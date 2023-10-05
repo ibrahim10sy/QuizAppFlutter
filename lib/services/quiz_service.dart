@@ -33,7 +33,7 @@ class QuizService {
     }
     return null;
   }
-
+     
   Future<List<Quiz>> getQuizzesByUser(int userId) async {
     // Obtenir les quiz pour un utilisateur
     final response =

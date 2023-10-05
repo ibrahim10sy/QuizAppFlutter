@@ -9,7 +9,7 @@ class QuizService {
 
   Future<List<Quiz>?> getQuizzes(String category) async {
     final response =
-        await http.get(Uri.parse(baseQuizUrl + "?domain=" + category));
+        await http.get(Uri.parse(baseQuizUrl + "?domain=" + category), headers: {});
 
     if (response.statusCode == 200) {
       var responseData = json.decode(response.body);
@@ -19,7 +19,7 @@ class QuizService {
       }
       return quizzes;
     }
-    return null;
+    return [];
   }
 
   Future<Quiz?> getQuiz(int quizId) async {
@@ -88,7 +88,7 @@ class QuizService {
       body: json.encode(quiz),
       headers: {
         // Je m'assure que le type de média est défini sur JSON
-        'Content-Type':'application/json',
+        'Content-Type':'application/json'
       },
     );
 

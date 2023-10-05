@@ -20,7 +20,7 @@ class Myapp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home:  Lost() ,
+      home:  QuestionChoose(),
       // home:  BeforeStartQuiz() ,
     );
   }

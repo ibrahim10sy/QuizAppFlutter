@@ -1,5 +1,5 @@
 
-  import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 
@@ -12,21 +12,38 @@ class QuestionChoose extends StatefulWidget {
 
 class _QuestionChooseState extends State<QuestionChoose> {
 
-    var _time = 05;
+    int _time = 5;
     final _numQues =  [1, 2, 3, 4, 5];
     final _results = [5,10,30,-8,20];
- 
+     late Timer timere;
+
+    void startTimer(){
+      timere = Timer.periodic(const Duration(seconds: 1), (timer) { 
+      setState(() {
+
+      if(_time>0){
+        _time--;
+      }else{
+        timere.cancel();
+      }
+      });
+      });
+    }
+
     @override
   void initState() {
+   startTimer();
     super.initState();
-    // Timer(
-    //  const  Duration(seconds:3), 
-    //   () =>
-    //   Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(
-    //   builder: (_) => const Nav(),),),
-    //  );
+    
   }
+    @override
+  void dispose() {
+    timere.cancel();
+    super.dispose();
+  }
+   
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +64,7 @@ class _QuestionChooseState extends State<QuestionChoose> {
                   Positioned(
                   // top: 20,
                   child: Text( 
-                  _time.toString(), style: TextStyle(
+                  '$_time', style: TextStyle(
                   color: Colors.white,
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
@@ -66,15 +83,25 @@ class _QuestionChooseState extends State<QuestionChoose> {
             ],
           ),
           Container(
-            margin: const EdgeInsets.only(right:10),
+            margin: const EdgeInsets.all(10),
+            // margin: const EdgeInsets.only(right:10),
             padding:const EdgeInsets.only(left: 10),
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 SizedBox(
+                    
+                   SizedBox(
                   height: 15,
                 ), 
+                // Column(
+                  
+                //   children: [
+                    
+                //   ],
+                // ),
+                
                  Text("Question " + "1" + "/" + "5", style: TextStyle(fontWeight: FontWeight.bold,
+                 
                 color: Colors.white , fontSize: 20,),),
                 SizedBox(
                   height: 10,
@@ -86,11 +113,16 @@ class _QuestionChooseState extends State<QuestionChoose> {
           Column(
             children: [
              const  SizedBox(height: 15,),
-             Padding(padding: EdgeInsets.all(10),),
+             Padding(padding: EdgeInsets.fromLTRB(10,0,10,0),),
+             Container(
+              margin: EdgeInsets.all(20),
+              child: 
+
               const Text('Quelle est somme de A + B = ?, A ayant 3 et b 17', style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 20,
                  color: Colors.white),),
-                const SizedBox(height: 40,),
+             ),
+                const SizedBox(height: 30,),
                 // question 1
                Container(
                  decoration: BoxDecoration(
@@ -135,7 +167,9 @@ class _QuestionChooseState extends State<QuestionChoose> {
                     //Question 2
                    const Padding(padding:EdgeInsets.only(left: 10),),
                     Text( "#"+_numQues[1].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
+                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
+                      
+                      ),
 
                       Expanded(child: Center(
                         child: 
@@ -227,7 +261,8 @@ class _QuestionChooseState extends State<QuestionChoose> {
                         child: 
                     Text(_results[4].toString(), style: TextStyle(
                       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-                      ),),
+                      ),
+                      ),
                       // fin question 5
                   
                   ],

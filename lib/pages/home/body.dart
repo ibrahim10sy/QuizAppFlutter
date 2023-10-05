@@ -19,7 +19,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  late List<String> categories;
   int selectedIndex = 0;
   QuizService quizService = QuizService();
   UserService userService = UserService();
@@ -31,15 +30,6 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     defaultCategory = kCategories[0];
-    categories = [
-      "Animé",
-      "Science",
-      "Histoire",
-      "Informatique",
-      "Culture générale",
-      "Géographie",
-      "Mécanique"
-    ];
     super.initState();
 
     futureUsers = userService.getUsers();
@@ -48,7 +38,7 @@ class _BodyState extends State<Body> {
 
   void onItemTapped(int index) {
     setState(() {
-      futureQuizzes = quizService.getQuizzes(categories[index]);
+      futureQuizzes = quizService.getQuizzes(kCategories[index]);
       selectedIndex = index;
     });
   }
@@ -73,7 +63,7 @@ class _BodyState extends State<Body> {
                         press: () {
                           onItemTapped(index);
                         },
-                        text: categories[index].toCapitalize(),
+                        text: kCategories[index].toCapitalize(),
                       )),
                 ),
               ),

@@ -51,7 +51,7 @@ class Categorie extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              QuizDetail(categorie: category.nom),
+                            QuizDetail(categorie: category.nom),
                         ),
                       );
                     },

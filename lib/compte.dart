@@ -1,42 +1,45 @@
-// ignore_for_file: recursive_getters
+// ignore_for_file: avoid_print, depend_on_referenced_packages
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-// import 'package:quiz_app/models/quiz.dart';
-// import 'package:quiz_app/widgets/quiz_card.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-        // home: FinQuiz(),
-        );
-  }
-}
-
-class Compte extends StatelessWidget {
+class Compte extends StatefulWidget {
   const Compte({super.key});
 
-  // get visibility => visibility;
+  @override
+  State<Compte> createState() => _CompteState();
+}
 
-  // get description => description;
+class _CompteState extends State<Compte> {
+  File? _image;
+  String? imageSrc;
 
-  // get creationDate => creationDate;
+  Future<File> saveImage(String imagePath) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final name = basename(imagePath);
+    final image = File('${directory.path}/$name');
+    return File(imagePath).copy(image.path);
+  }
 
-  // get category => category;
-
-  // get quizId => quizId;
-
-  // get title => title;
-
-  // get nbQuestion => nbQuestion;
-
-  // get imageUrl => imageUrl;
-
-  // get user => user;
+  Future piquerImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imagePermanente = await saveImage(image.path);
+      setState(() {
+        // ignore: unnecessary_this
+        this._image = imagePermanente;
+        imageSrc = imagePermanente.path;
+      });
+    } on PlatformException catch (e) {
+      print('image introuvable $e');
+    }
+  }
 
   @override
   // ignore: dead_code
@@ -49,21 +52,28 @@ class Compte extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const Stack(
+              Stack(
                 alignment: Alignment.bottomRight,
                 children: <Widget>[
                   CircleAvatar(
                     radius: 60,
-                    backgroundImage: AssetImage('assets/images/finishQuiz.png'),
+                    child:
+                        (_image != null) ? Image.file(_image!) : Text('Photo'),
                   ),
-                  Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 32,
-                    weight: 40,
+                  IconButton(
+                    onPressed: piquerImage,
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 32,
+                    ),
                   ),
                 ],
               ),
+               const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(),
               const SizedBox(
                 height: 20,
               ),
@@ -125,21 +135,7 @@ class Compte extends StatelessWidget {
                         child: const Text('Actualité')),
                   ],
                 ),
-                // GestureDetector(),
               ),
-              // QuizCard(
-              //     quiz: Quiz(
-              //         visibility: visibility,
-              //         description: description,
-              //         creationDate: creationDate,
-              //         category: category,
-              //         quizId: quizId,
-              //         title: title,
-              //         nbQuestion: nbQuestion,
-              //         imageUrl: imageUrl,
-              //         user: user),
-              //     press: () {}),
-
               const SizedBox(height: 490),
               Container(
                 width: 800,

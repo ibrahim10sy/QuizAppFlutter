@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/pages/home/home.dart';
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 
@@ -112,6 +113,7 @@ class _QuizDetailState extends State<QuizDetail> {
 
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
+  final descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +198,21 @@ class _QuizDetailState extends State<QuizDetail> {
                           },
                           decoration: const InputDecoration(
                               hintText: 'Entrer le nom du quiz',
+                              labelText: 'Titre',
+                              border: OutlineInputBorder()),
+                        ),
+                        const SizedBox(height: 5),
+                        TextFormField(
+                          controller: descController,
+                          validator: (value) {
+                            if (value!.length < 10 || value.length > 50) {
+                              return 'Le titre doit avoir entre 10 et 50 caracteres';
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                              hintText: 'Description du quiz',
+                              labelText: 'Description',
                               border: OutlineInputBorder()),
                         ),
                         const SizedBox(height: 5),
@@ -204,34 +221,28 @@ class _QuizDetailState extends State<QuizDetail> {
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                print(widget.categorie);
                                 Quiz quizz = Quiz(
-                                    quizId: null,
-                                    visibility: 'public',
-                                    description: 'description',
-                                    creationDate: '2023-10-03',
-                                    category: widget.categorie,
-                                    title: titleController.text,
-                                    nbQuestion: 2,
-                                    imageUrl: imageSrc ?? "image.png",
-                                    user: User(
-                                        userId: 1,
-                                        firstName: "firstName",
-                                        lastName: "lastName",
-                                        email: "email",
-                                        password: "password",
-                                        login: "login",
-                                        imageUrl: "imageUrl"));
-                                QuizService service = QuizService();
-                                await service.createQuiz(1, quizz);                                
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => QuestionPage(
-                                        quizz: quizz
-                                        ), 
-                                  ),
-                                );
+                                        quizId: null,
+                                        visibility: 'public',
+                                        description: descController.text,
+                                        creationDate: '2023-10-03',
+                                        category: widget.categorie,
+                                        title: titleController.text,
+                                        nbQuestion: 2,
+                                        imageUrl: "informatique1.jpg",
+                                        user: User(
+                                            userId: 1,
+                                            firstName: "firstName",
+                                            lastName: "lastName",
+                                            email: "email",
+                                            password: "password",
+                                            login: "login",
+                                            imageUrl: "imageUrl"));
+                                    QuizService service = QuizService();
+                                    await service.createQuiz(1, quizz);
+                                    descController.clear();
+                                    titleController.clear();
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(quizz:quizz)));
                                 
                               } else {
                                 print('Quiz non crée');

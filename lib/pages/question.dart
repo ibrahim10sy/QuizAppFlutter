@@ -10,10 +10,12 @@ import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/user.dart';
 
 class QuestionPage extends StatefulWidget {
-  static String routeName = "/question_page";
+  static String routeName = "/QuestionPage";
   
   final Quiz quizz;
+  
   QuestionPage({super.key, required this.quizz});
+
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -22,6 +24,7 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   File? image;
   String? imageSrc;
+    
 
   // Fonction pour créer un bouton
   Widget buildButton({
@@ -69,6 +72,11 @@ class _QuestionPageState extends State<QuestionPage> {
   // final choixController = TextEditingController();
   // final quizController = TextEditingController();
 
+  @override
+  void initState() {
+    print(widget.quizz);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -307,8 +315,10 @@ class _QuestionPageState extends State<QuestionPage> {
                               height: 5,
                             ),
                             ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                 if(_formKey.currentState!.validate()){
                                  
+                                 }
                                 },
                                 child: Text('Valider'),
                                 style: ElevatedButton.styleFrom(

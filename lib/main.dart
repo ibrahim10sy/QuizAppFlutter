@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/quizzes.dart';
+import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/theme.dart';
 
 
@@ -15,6 +18,7 @@ class Myapp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
       home:Nav() ,
+     
     );
   }
 }

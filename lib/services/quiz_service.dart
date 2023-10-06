@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class QuizService {
-  //static const baseQuizUrl = "${baseUrl}/api/quizzes";
-  //static const baseQuizUrlForUser = "${baseUrl}/api/users";
-   static const baseQuizUrl = "${baseUrl}/api/quizzes";
-   static const baseQuizUrlForUser = "${baseUrl}/api/users";
+  static const baseQuizUrl = "${baseUrl}/api/quizzes";
+  static const baseQuizUrlForUser = "${baseUrl}/api/users";
+  // static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
+  // static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
 
   Future<List<Quiz>?> getQuizzes(String category) async {
     final response =
@@ -48,7 +48,7 @@ class QuizService {
     }
     return null;
   }
-     
+
   Future<List<Quiz>> getQuizzesByUser(int userId) async {
     // Obtenir les quiz pour un utilisateur
     final response =
@@ -99,15 +99,9 @@ class QuizService {
     return "error";
   }
 
-  // Future<Quiz?> createQuiz(int userId, Quiz quiz) async{
-  //   print(quiz);
-  //   final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'), body: quiz.toJson());
-  //   if(response.statusCode == 200) {
-  //     var responseDate = json.decode(response.body);
-  //     Quiz quiz = Quiz.fromJson(responseDate);
-  //     return quiz;
   Future<Quiz?> createQuiz(int userId, Quiz quiz) async {
-    final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'),
+    final response = await http.post(
+      Uri.parse('$baseQuizUrlForUser/$userId/quizzes'),
       body: json.encode(quiz),
       headers: {
         // Je m'assure que le type de média est défini sur JSON

@@ -1,19 +1,44 @@
-// class Question{
-//   final int questionId;
-//   final String text;
-//   final String type;
-//   final String point;
-//   final String login;
-//   final String password;
-//   final String imageUrl;
+import 'package:quiz_app/models/choix.dart';
+import 'package:quiz_app/models/quiz.dart'; 
 
-//   User({
-//     required this.userId,
-//     required this.firstName,
-//     required this.lastName,
-//     required this.email,
-//     required this.password,
-//     required this.login,
-//     required this.imageUrl
-//   });
-// }
+class Question {
+  final int? questionId;
+  final String text;
+  final String type;
+  final int point = 5;
+  final int? rang;
+  final int? rangReponse;
+  final List<Choix> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
+  final Quiz quiz;
+
+  Question({
+    this.questionId,
+    required this.text,
+    required this.type,
+    this.rang,
+    this.rangReponse,
+    required this.choix,
+    required this.quiz,
+  });
+
+  Map<String, dynamic> toJson() => {
+    'questionId': questionId,
+    'text': text,
+    'type': type,
+    'point': point,
+    'rang': rang,
+    'rangReponse': rangReponse,
+    'choix': choix.map((e) => e.toJson).toList(),
+    'quiz': quiz.toJson,
+  };
+
+  factory Question.fromJson(Map<String, dynamic> json) => Question(
+    questionId: json['questionId'],
+    text: json['text'],
+    type: json['type'],
+    rang: json['rang'],
+    rangReponse: json['rangReponse'],
+    choix: List<Choix>.from(json['choix'].map((e) => Choix.fromJson(e))),
+    quiz: Quiz.fromJson(json['quiz']),
+  );
+}

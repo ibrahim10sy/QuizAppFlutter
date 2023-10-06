@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:quiz_app/compte.dart';
-import 'package:quiz_app/finQuiz.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/theme.dart';
-
-import 'package:quiz_app/pages/categories.dart';
 
 void main() {
   runApp(Myapp());
@@ -18,7 +14,7 @@ class Myapp extends StatelessWidget {
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home: const Compte(),
+      home:Nav() ,
     );
   }
 }

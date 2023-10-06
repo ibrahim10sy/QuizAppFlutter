@@ -23,7 +23,7 @@ class Myapp extends StatelessWidget {
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home: spalshScreen(),
+      home: QuestionChoose(),
     );
   }
 }

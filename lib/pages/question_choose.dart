@@ -13,7 +13,7 @@ class QuestionChoose extends StatefulWidget {
 class _QuestionChooseState extends State<QuestionChoose> {
 
     int _time = 5;
-    final _numQues =  [1, 2, 3, 4, 5];
+    // final _numQues =  [1, 2, 3, 4, 5];
     final _results = [5,10,30,-8,20];
      late Timer timere;
 
@@ -114,6 +114,7 @@ class _QuestionChooseState extends State<QuestionChoose> {
             children: [
              const  SizedBox(height: 15,),
              Padding(padding: EdgeInsets.fromLTRB(10,0,10,0),),
+             
              Container(
               margin: EdgeInsets.all(20),
               child: 
@@ -123,10 +124,18 @@ class _QuestionChooseState extends State<QuestionChoose> {
                  color: Colors.white),),
              ),
                 const SizedBox(height: 30,),
+                Wrap(
+                  children: [
+
+              for (int i = 1; i <= 5; i++)
                 // question 1
-               Container(
-                 decoration: BoxDecoration(
-                color: Colors.red,
+                GestureDetector(
+                   
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    
+                decoration: BoxDecoration(
+                color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                   
                   ),
@@ -137,7 +146,7 @@ class _QuestionChooseState extends State<QuestionChoose> {
                   children: <Widget> [
                     //Question 1
                    const Padding(padding:EdgeInsets.only(left: 10),),
-                    Text( "#"+_numQues[0].toString(), style: TextStyle(
+                    Text( "#"+ "$i", style: TextStyle(
                       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
 
                       Expanded(child: Center(
@@ -149,131 +158,18 @@ class _QuestionChooseState extends State<QuestionChoose> {
                   
                   ],
                  ), 
-               ),
+                  ),
+                ),
+                // SizedBox(height: 20),
+                
               //  fin question 1
-                const SizedBox(height: 40,),
-                // question 2
-               Container(
-                 decoration: BoxDecoration(
-                color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  ),
-                    height: 35,
-                    width: 300,
-                    
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //Question 2
-                  //  const Padding(padding:EdgeInsets.only(left: 2),),
-                    // Text( "#"+_numQues[1].toString(), style: TextStyle(
-                    //   color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
-                      
-                    //   ),
-                    TextButton(onPressed: null, child: Text( "#"+_numQues[1].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),
-                      
-                      ), ),
-
-                      Expanded(child: Center(
-                        child: 
-                    Text(_results[1].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-                      ),),
-                      // fin question 2
-                  
+                
                   ],
-                 ), 
-               ),
-              //  fin question 2
-                const SizedBox(height: 40,),
-                // question 3
-               Container(
-                 decoration: BoxDecoration(
-                color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  ),
-                    height: 35,
-                    width: 300,
-                    
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //Question 3
-                   const Padding(padding:EdgeInsets.only(left: 10),),
-                   
-                    Text( "#"+_numQues[2].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-
-                      Expanded(child: Center(
-                        child: 
-                    Text(_results[2].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-                      ),),
-                      // fin question 3
-                  
-                  ],
-                 ), 
-               ),
-              //  fin question 3
-                const SizedBox(height: 40,),
-                // question 4
-               Container(
-                 decoration: BoxDecoration(
-                color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  ),
-                    height: 35,
-                    width: 300,
-                    
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //Question 4
-                   const Padding(padding:EdgeInsets.only(left: 10),),
-                    Text( "#"+_numQues[3].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-
-                      Expanded(child: Center(
-                        child: 
-                    Text(_results[3].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-                      ),),
-                      // fin question 4
-                  
-                  ],
-                 ), 
-               ),
-              //  fin question 4
-                const SizedBox(height: 40,),
-                // question 5
-               Container(
-                 decoration: BoxDecoration(
-                color: Colors.green,
-                  borderRadius: BorderRadius.circular(20),
-                  ),
-                    height: 35,
-                    width: 300,
-                    
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    //Question 5
-                   const Padding(padding:EdgeInsets.only(left: 10),),
-                    Text( "#"+_numQues[4].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-                      Expanded(child: Center(
-                        child: 
-                    Text(_results[4].toString(), style: TextStyle(
-                      color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold,),),
-                      ),
-                      ),
-                      // fin question 5
-                  
-                  ],
-                 ), 
-               ),
-              //  fin question 5
+                ),
+               
+              
+              
+              
             ],
           )
         ],

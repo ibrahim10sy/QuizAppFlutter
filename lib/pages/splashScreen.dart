@@ -23,7 +23,9 @@ class _spalshScreenState extends State<spalshScreen> {
       () =>
       Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-      builder: (_) => const Home(),),),
+      builder: (_) => const Nav(),
+      ),
+      ),
      );
     
     

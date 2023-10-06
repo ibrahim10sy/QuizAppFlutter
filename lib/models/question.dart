@@ -1,5 +1,6 @@
-import 'package:quiz_app/models/choix.dart';
+
 import 'package:quiz_app/models/quiz.dart'; 
+import '../models/choise.dart';
 
 class Question {
   final int? questionId;
@@ -8,7 +9,7 @@ class Question {
   final int point = 5;
   final int? rang;
   final int? rangReponse;
-  final List<Choix> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
+final List<Choises> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
   final Quiz quiz;
 
   Question({
@@ -38,7 +39,7 @@ class Question {
     type: json['type'],
     rang: json['rang'],
     rangReponse: json['rangReponse'],
-    choix: List<Choix>.from(json['choix'].map((e) => Choix.fromJson(e))),
+    choix: List<Choises>.from(json['choix'].map((e) => Choises.fromJson(e))),
     quiz: Quiz.fromJson(json['quiz']),
   );
 }

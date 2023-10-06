@@ -1,7 +1,7 @@
 import '../constantes.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http ;
-import '../models/choix.dart';
+import '../models/choise.dart';
 
 
 class Choix{
@@ -14,23 +14,23 @@ class Choix{
 
   ///création
   
-  // Future<Choix?> createChoix(int userId, int quizId, int questionId , Choix choix) async {
-  //   final response = await http.post(Uri.parse('$baseUrlChoix/$userId/quizzes/$quizId/questions/$questionId/choices'),
-  //   body : json.encode(choix),
-  //   headers : {
-  //     'Content-Type': 'application/json; charset=UTF-8',
-  //   });
+  Future<Choises?> createChoix(int userId, int quizId, int questionId , Choises choise) async {
+    final response = await http.post(Uri.parse('$baseUrlChoix/$userId/quizzes/$quizId/questions/$questionId/choices'),
+    body : json.encode(choise),
+    headers : {
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
     
-  //    if(response.statusCode == 200) {
-  //     print("Succèss");
-  //     var responseData = json.decode(response.body);
-  //     Choix createChoix = Choix.fromJson(responseData);
-  //     return createChoix;
-  //    }else{
-  //     print("Erreur");
-  //     return null;
-  //    }
-  // }
+     if(response.statusCode == 200) {
+      print("Succèss");
+      var responseData = json.decode(response.body);
+      Choises createChoix = Choises.fromJson(responseData);
+      return createChoix;
+     }else{
+      print("Erreur");
+      return null;
+     }
+  }
   
  
 }

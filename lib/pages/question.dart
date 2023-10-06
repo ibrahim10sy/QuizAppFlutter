@@ -194,7 +194,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               children: [
                                 Expanded(
                                   child: TextFormField(
-                                    controller: titleController,
+                                    controller: reponseController,
                                     validator: (value) {
                                       if (value!.length < 10 ||
                                           value.length > 50) {
@@ -225,7 +225,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               children: [
                                 Expanded(
                                   child: TextFormField(
-                                    controller: titleController,
+                                    controller: reponseController,
                                     validator: (value) {
                                       if (value!.length < 10 ||
                                           value.length > 50) {
@@ -256,7 +256,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               children: [
                                 Expanded(
                                   child: TextFormField(
-                                    controller: titleController,
+                                    controller: reponseController,
                                     validator: (value) {
                                       if (value!.length < 10 ||
                                           value.length > 50) {
@@ -287,7 +287,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               children: [
                                 Expanded(
                                   child: TextFormField(
-                                    controller: titleController,
+                                    controller: reponseController,
                                     validator: (value) {
                                       if (value!.length < 10 ||
                                           value.length > 50) {
@@ -317,7 +317,8 @@ class _QuestionPageState extends State<QuestionPage> {
                             ElevatedButton(
                                 onPressed: () async {
                                  if(_formKey.currentState!.validate()){
-                                 
+                                  
+                                //  Question question = Question(text: titleController.text, type: 'Choix multiple, choix: List<Choix> desChoix = [...], quiz: widget.quizz);
                                  }
                                 },
                                 child: Text('Valider'),

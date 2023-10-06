@@ -70,10 +70,9 @@ class _CompteState extends State<Compte> {
                   ),
                 ],
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              GestureDetector(),
               const SizedBox(
                 height: 20,
               ),

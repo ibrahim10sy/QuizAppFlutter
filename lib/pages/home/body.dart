@@ -29,11 +29,13 @@ class _BodyState extends State<Body> {
 
   @override
   void initState() {
+
     defaultCategory = kCategories[0];
     super.initState();
 
     futureUsers = userService.getUsers();
     futureQuizzes = quizService.getQuizzes(defaultCategory);
+
   }
 
   void onItemTapped(int index) {

@@ -27,7 +27,7 @@ class  Quiz {
     return Quiz(
         quizId: json['quizId'],
         title: json['title'],
-        nbQuestion: json['nbMaxQuestion'],
+        nbQuestion: json['nbQuestion'],
         visibility: json['visibility'],
         description: json['description'],
         creationDate: json['creationDate'],
@@ -40,7 +40,7 @@ class  Quiz {
     Map<String, dynamic> toJson() => {
       "quizId": quizId,
       "title": title,
-      "nbMaxQuestion": nbQuestion,
+      "nbQuestion": nbQuestion,
       "visibility": visibility,
       "description": description,
       "creationDate": creationDate,

@@ -5,8 +5,21 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Compte(), // Utilisez la classe Compte comme écran d'accueil
+    );
+  }
+}
 
 class Compte extends StatefulWidget {
   const Compte({super.key});
@@ -40,6 +53,15 @@ class _CompteState extends State<Compte> {
       print('image introuvable $e');
     }
   }
+
+  List<String> quizNames = [
+    "Quiz 1",
+    "Quiz 2",
+    "Quiz 3",
+    "Quiz 4",
+    "Quiz 5",
+    "Quiz 6",
+  ];
 
   @override
   // ignore: dead_code
@@ -135,11 +157,228 @@ class _CompteState extends State<Compte> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              // Wrap(
+              //   children: [
+              //     SizedBox(
+              //       width: 300,
+              //       height: 300,
+              //       child: QuizCard(
+              //         useBaseUrl: true,
+              //           quiz: Quiz(
+              //               visibility: "visibility",
+              //               description: "description",
+              //               creationDate: "creationDate",
+              //               category: "category",
+              //               quizId: 1,
+              //               title: "title",
+              //               nbQuestion: 3,
+              //               imageUrl: "informatique1.jpg",
+              //               user: User(
+              //                   userId: 1,
+              //                   firstName: "firstName",
+              //                   lastName: "lastName",
+              //                   email: "email",
+              //                   password: "password",
+              //                   login: "login",
+              //                   imageUrl: "informatique1.jpg")),
+              //           press: () {}),
+              //     )
+              //   ],
+              // ),
+              Wrap(spacing: 20, runSpacing: 20, children: [
+                Stack(
+                  children: [
+                    InkWell(
+                      // onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    InkWell(
+                      onTap: piquerImage,
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 50,
+                      child: Center(
+                        child: TextButton(
+                            onPressed: () {},
+                            child: const Center(child: Text('QUIZ1'))),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
               const SizedBox(height: 490),
               Container(
                 width: 800,
                 height: 30,
-                color: const Color.fromARGB(255, 43, 27, 114),
+                color: Colors.blue,
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

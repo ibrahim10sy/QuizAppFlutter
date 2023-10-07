@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/inscription.dart';
+import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/services/user_service.dart';
+import 'package:http/http.dart' as http;
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -25,13 +28,46 @@ class _ConnexionState extends State<Connexion>
 
   String name = "";
   String password = "";
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+  String pseudo = "";
   bool _obscureText = true;
 
-  void validationForm() {
+  dynamic validationForm() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       _formKey.currentState?.reset();
-      Navigator.pushNamed(context, '/nav');
+
+      Map<String, String> userData = {
+        "login": pseudo.toString(),
+        "password": password.toString(),
+        // Ajoutez d'autres champs si nécessaire
+      };
+      print(userData);
+      UserService userService = UserService();
+      User? currentUser = await userService.loginUser(pseudo, password);
+      if (currentUser != null) {
+        print(currentUser);
+        Navigator.pushNamed(context, '/nav');
+      } else {
+        return "Cet utilisateur n'existe pas";
+      }
+
+      /*var response = await http.post(
+        Uri.parse(
+            'https://10.0.2.2/api/users/connect'), // Remplacez ceci par l'URL de votre endpoint d'API
+        body: userData,
+      );*/
+      /*if (response.statusCode == 200) {
+        Navigator.pushNamed(context, '/nav');
+
+        // Succès : les données ont été envoyées avec succès à votre API
+        debugPrint("Données envoyées avec succès !");
+      } else {
+        // Échec : les données n'ont pas pu être envoyées à votre API
+        debugPrint("Erreur lors de l'envoi des données à l'API");
+      }*/
     } else {
       debugPrint("error");
     }
@@ -94,7 +130,7 @@ class _ConnexionState extends State<Connexion>
                         return null;
                       }
                     },
-                    onSaved: (val) => name = val!,
+                    onSaved: (val) => pseudo = val!,
                     keyboardType: TextInputType.text,
                     autocorrect: true,
                     autofocus: true,
@@ -131,7 +167,8 @@ class _ConnexionState extends State<Connexion>
                     validator: (val) {
                       if (val == null || val.isEmpty) {
                         return "Veillez entrez votre Mot de passe";
-                      } else {
+                      }
+                      else {
                         return null;
                       }
                     },
@@ -166,18 +203,16 @@ class _ConnexionState extends State<Connexion>
                   ),
                   Text("si vous n'avez pas de compte ?"),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUp()
-                          )
-                      );
-                    },
-                    child: Text(
-                      "inscrivez vous",
-                      style: TextStyle( color:Colors.blue, decoration: TextDecoration.underline),
-                    )
-                  )
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => SignUp()));
+                      },
+                      child: Text(
+                        "inscrivez vous",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      ))
                 ],
               ))),
     );

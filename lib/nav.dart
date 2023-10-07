@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'pages/accueil.dart';
-import 'pages/liste.dart';
-import 'pages/quiz.dart';
+import 'package:quiz_app/constantes.dart';
+import 'package:quiz_app/pages/categories.dart';
+import 'pages/home/home.dart';
+import 'pages/played/played.dart';
+import 'pages/quiz_detail.dart';
 import 'pages/profile.dart';
 
 
@@ -12,16 +14,16 @@ class Nav extends StatefulWidget {
   @override
   State<Nav> createState() => _NavState();
 }
-const d_color = Color(0xFF031B49);
+final bottomNavigationBackgroundColor = kAppBarColor;
 
 class _NavState extends State<Nav> {
   int _selectedIndex = 0;
 
 List<Widget> _listTab = <Widget>[
-    Accueil(),
-    Liste(),
-    Quiz(),
-    Profile()
+   Home(),
+   Played(),
+   Categorie(),
+   Profile()
 
 ];
 
@@ -38,30 +40,30 @@ List<Widget> _listTab = <Widget>[
         child: _listTab.elementAt(_selectedIndex),
       ),
       
-      bottomNavigationBar: BottomNavigationBar(
-      backgroundColor : d_color,
+     bottomNavigationBar: BottomNavigationBar(
+      backgroundColor : bottomNavigationBackgroundColor,
   
-      items: const <BottomNavigationBarItem> [
+      items: <BottomNavigationBarItem> [
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor : d_color,
+            icon: const Icon(Icons.home),
+            label: 'Accueil',
+            backgroundColor : bottomNavigationBackgroundColor,
           ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.list),
-          label: 'Liste',
-          backgroundColor : d_color,
+          icon: const Icon(Icons.play_arrow),
+          label: 'Play',
+          backgroundColor : bottomNavigationBackgroundColor,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.quiz),
+          icon: const Icon(Icons.add_box_outlined),
           label: 'Quiz',
-          backgroundColor : d_color,
+          backgroundColor : bottomNavigationBackgroundColor,
         ),
         
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: const Icon(Icons.person),
           label: 'Profile',
-          backgroundColor : d_color,
+          backgroundColor : bottomNavigationBackgroundColor,
         ),
         
       ],

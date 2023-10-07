@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/categories.dart';
+import 'package:quiz_app/pages/profile/profile_screen.dart';
 import 'pages/home/home.dart';
 import 'pages/played/played.dart';
 import 'pages/quiz_detail.dart';
 import 'pages/profile.dart';
-import 'pages/comptepublic.dart';
-import 'pages/categorie.dart';
 
 
 
@@ -24,8 +23,8 @@ class _NavState extends State<Nav> {
 List<Widget> _listTab = <Widget>[
    Home(),
    Played(),
-  //  Categorie(),
-   Profile()
+   Categorie(),
+  Profile()
 
 ];
 
@@ -67,7 +66,6 @@ List<Widget> _listTab = <Widget>[
           label: 'Profile',
           backgroundColor : bottomNavigationBackgroundColor,
         ),
-         
         
       ],
       currentIndex: _selectedIndex,

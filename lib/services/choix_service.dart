@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http ;
 import '../models/choise.dart';
 
 
-class Choix{
+class ChoixService{
   static const baseUrlChoix = "${baseUrl}/api/users/";
   // /api/users/{userId}/quizzes/{quizId}/questions/{questionId}/choises
 
-  static Future<List<Choix>?> getChoix(int userId, int quizId, int questionId) async {
+  static Future<List<Choises>?> getChoix(int userId, int quizId, int questionId) async {
     
   }
 

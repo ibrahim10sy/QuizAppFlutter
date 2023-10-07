@@ -9,11 +9,11 @@ class Question {
   final int point = 5;
   final int? rang;
   final int? rangReponse;
-final List<Choises> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
+  final List<Choises> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
   final Quiz quiz;
 
   Question({
-    this.questionId,
+     this.questionId,
     required this.text,
     required this.type,
     this.rang,

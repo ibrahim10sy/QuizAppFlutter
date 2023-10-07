@@ -7,7 +7,9 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quiz_app/models/question.dart';
 import 'package:quiz_app/models/quiz.dart';
-import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/models/choise.dart';
+import 'package:quiz_app/services/choix_service.dart';
+import 'package:quiz_app/services/question_service.dart';
 
 class QuestionPage extends StatefulWidget {
   static String routeName = "/QuestionPage";
@@ -24,6 +26,7 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   File? image;
   String? imageSrc;
+   List<Choises> Choix_List = [];
     
 
   // Fonction pour créer un bouton
@@ -141,8 +144,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     key: _formKey,
                     child: Column(children: <Widget>[
                       Column(
-                          crossAxisAlignment: CrossAxisAlignment
-                              .start, // Align children to the left
+                          crossAxisAlignment: CrossAxisAlignment.start, 
                           children: [
                             TextFormField(
                               controller: titleController,
@@ -298,7 +300,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                     decoration: const InputDecoration(
                                         hintText: 'Entrer la reponse 5',
                                         border: OutlineInputBorder()),
-                                  ),
+                                  ), 
                                 ),
                                 SizedBox(width: 8),
                                 Transform.scale(
@@ -317,9 +319,22 @@ class _QuestionPageState extends State<QuestionPage> {
                             ElevatedButton(
                                 onPressed: () async {
                                  if(_formKey.currentState!.validate()){
-                                  
-                                //  Question question = Question(text: titleController.text, type: 'Choix multiple, choix: List<Choix> desChoix = [...], quiz: widget.quizz);
+                               
+                                Question question =  Question(questionId:1, text: titleController.text, type: 'choix multiple', choix: Choix_List , quiz: widget.quizz);
+                                Choises choices = Choises(text: reponseController.text, rank: 1, question: question);
+                                if(choices !=null){
+                                  Choix_List.add(choices);
+                                }
+
+                                QuestionService Q_service = QuestionService();
+                                ChoixService choiseService = ChoixService();
+                                await Q_service.createQuestion(1, 1, question);
+                                await choiseService.createChoix(1, 1, 1, choices);
                                  }
+
+                                 Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessPage()));
+
+                                //  Navigator.routeName(context,) => SuccessPage(
                                 },
                                 child: Text('Valider'),
                                 style: ElevatedButton.styleFrom(
@@ -339,6 +354,70 @@ class _QuestionPageState extends State<QuestionPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+/////success page
+class SuccessPage extends StatelessWidget {
+  const SuccessPage({super.key});
+  static String routeName = "/success";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF031B49),
+      body: Column(
+        children: [
+          // Padding(padding: EdgeInsets.only(left: 40,),),:
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Icon(
+                  Icons.clear,
+                  size: 40,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 200,
+          ),
+          Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Quiz créé avec succès !',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        fontFamily: 'Poppins',
+                      )),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.green,
+                    size: 120,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+
+      //  ),
     );
   }
 }

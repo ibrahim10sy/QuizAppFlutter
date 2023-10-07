@@ -242,6 +242,7 @@ class _QuizDetailState extends State<QuizDetail> {
                                     await service.createQuiz(1, quizz);
                                     descController.clear();
                                     titleController.clear();
+                                    print('Quiz créé avec succès.');
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(quizz:quizz)));
                                 
                               } else {
@@ -274,63 +275,3 @@ class _QuizDetailState extends State<QuizDetail> {
 
 //page question *******************
 
-class SuccessPage extends StatelessWidget {
-  const SuccessPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFF031B49),
-      body: Column(
-        children: [
-          // Padding(padding: EdgeInsets.only(left: 40,),),:
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Icon(
-                  Icons.clear,
-                  size: 40,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 200,
-          ),
-          Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Quiz créé avec succès !',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28,
-                        fontFamily: 'Poppins',
-                      )),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.green,
-                    size: 120,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-
-      //  ),
-    );
-  }
-}

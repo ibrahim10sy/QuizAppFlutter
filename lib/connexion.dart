@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/inscription.dart';
 import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/services/auth_service.dart';
 import 'package:quiz_app/services/user_service.dart';
-import 'package:http/http.dart' as http;
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -33,6 +33,10 @@ class _ConnexionState extends State<Connexion>
   String email = "";
   String pseudo = "";
   bool _obscureText = true;
+
+  signIn() {
+    AuthService().signInWithGoogle();
+  }
 
   dynamic validationForm() async {
     if (_formKey.currentState?.validate() ?? false) {
@@ -167,8 +171,7 @@ class _ConnexionState extends State<Connexion>
                     validator: (val) {
                       if (val == null || val.isEmpty) {
                         return "Veillez entrez votre Mot de passe";
-                      }
-                      else {
+                      } else {
                         return null;
                       }
                     },
@@ -194,6 +197,26 @@ class _ConnexionState extends State<Connexion>
                     onPressed: validationForm,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF031B49),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        minimumSize: Size(300, 40)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    child: Text(
+                      "Continuer avec Google",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    onPressed: () => signIn() ,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 236, 133, 14),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
                         minimumSize: Size(300, 40)),

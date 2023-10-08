@@ -3,7 +3,6 @@ import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/categories.dart';
 import 'pages/home/home.dart';
 import 'pages/played/played.dart';
-import 'pages/quiz_detail.dart';
 import 'pages/profile.dart';
 
 
@@ -23,7 +22,7 @@ List<Widget> _listTab = <Widget>[
    Home(),
    Played(),
    Categorie(),
-   Profile()
+  Profile()
 
 ];
 

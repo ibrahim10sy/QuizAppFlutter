@@ -5,10 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
+import 'package:multiselect/multiselect.dart';
 import 'package:quiz_app/models/user.dart';
-import 'package:quiz_app/pages/home/home.dart';
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 
@@ -26,7 +25,7 @@ class QuizDetail extends StatefulWidget {
 class _QuizDetailState extends State<QuizDetail> {
   File? image;
   String? imageSrc; // Variable pour stocker le chemin de notre l'image upload
-
+ 
   @override
   void initState() {
     // TODO: implement initState
@@ -78,43 +77,14 @@ class _QuizDetailState extends State<QuizDetail> {
     });
   }
 
-  // Future<void> _dialogBuilder(BuildContext context) {
-  //   return showDialog<void>(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: const Text('Basic dialog title'),
-  //         content: const Text('Quiz créer avec succèss'),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             style: TextButton.styleFrom(
-  //               textStyle: Theme.of(context).textTheme.labelLarge,
-  //             ),
-  //             child: const Text('Fermer'),
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //           ),
-  //           TextButton(
-  //             style: TextButton.styleFrom(
-  //               textStyle: Theme.of(context).textTheme.labelLarge,
-  //             ),
-  //             child: const Text('Ok'),
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //               // Navigator.pushNamed(context, QuestionPage());     
-  //                        },
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
 
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descController = TextEditingController();
-
+  final categorieController = TextEditingController();
+  final dateController = TextEditingController();
+  
+  List<String> visibilite = [];
   @override
   Widget build(BuildContext context) {
     const d_color1 = Color(0xFF031B49);
@@ -179,7 +149,7 @@ class _QuizDetailState extends State<QuizDetail> {
               SizedBox(
                 height: 20,
               ),
-              Text('Quiz categorie : ' +widget.categorie),
+              Text('Quiz categorie : ' + widget.categorie),
               const SizedBox(height: 20),
               Container(
                   margin: const EdgeInsets.all(3),
@@ -215,6 +185,18 @@ class _QuizDetailState extends State<QuizDetail> {
                               labelText: 'Description',
                               border: OutlineInputBorder()),
                         ),
+                       
+                        const SizedBox(height: 5),
+                        DropDownMultiSelect(
+                          onChanged: (List<String> x){
+                            setState(() {
+                              visibilite = x;
+                            });
+                          },
+                          options : ['public','private'],
+                          selectedValues: visibilite,
+                          whenEmpty : 'Type de visibilité'
+                        ),
                         const SizedBox(height: 5),
                         Align(
                           alignment: Alignment.centerRight,
@@ -222,29 +204,32 @@ class _QuizDetailState extends State<QuizDetail> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 Quiz quizz = Quiz(
-                                        quizId: null,
-                                        visibility: 'public',
-                                        description: descController.text,
-                                        creationDate: '2023-10-03',
-                                        category: widget.categorie,
-                                        title: titleController.text,
-                                        nbQuestion: 2,
-                                        imageUrl: "informatique1.jpg",
-                                        user: User(
-                                            userId: 1,
-                                            firstName: "firstName",
-                                            lastName: "lastName",
-                                            email: "email",
-                                            password: "password",
-                                            login: "login",
-                                            imageUrl: "imageUrl"));
-                                    QuizService service = QuizService();
-                                    await service.createQuiz(1, quizz);
-                                    descController.clear();
-                                    titleController.clear();
-                                    print('Quiz créé avec succès.');
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(quizz:quizz)));
-                                
+                                    quizId: null,
+                                    visibility: visibilite.first,
+                                    description: descController.text,
+                                    creationDate: "",
+                                    category: widget.categorie,
+                                    title: titleController.text,
+                                    nbQuestion: 2,
+                                    imageUrl: "informatique1.jpg",
+                                    user: User(
+                                        userId: 1,
+                                        firstName: "firstName",
+                                        lastName: "lastName",
+                                        email: "email",
+                                        password: "password",
+                                        login: "login",
+                                        imageUrl: "imageUrl"));
+                                QuizService service = QuizService();
+                                await service.createQuiz(1, quizz);
+                                descController.clear();
+                                titleController.clear();
+                                print('Quiz créé avec succès.');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            QuestionPage(quizz: quizz)));
                               } else {
                                 print('Quiz non crée');
                               }

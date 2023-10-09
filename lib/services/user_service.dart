@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:quiz_app/models/user_notification.dart';
+
 import '../constantes.dart';
 import '../models/notification_model.dart';
 import '../models/user.dart';
@@ -67,15 +69,15 @@ class UserService {
     return null;
   }
 
-  Future<List<NotificationModel>> getNotificationsForUser(int userId) async {
-    final response = await http.get(Uri.parse("$baseUserUrl/$userId/notifications"));
+  Future<List<UserNotification>> getNotificationsForUser(int userId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$userId/usernotifications"));
     if(response.statusCode == 200) {
       var responseData = json.decode(utf8.decode(response.bodyBytes));
-      List<NotificationModel> notifications = [];
+      List<UserNotification> userNotifications = [];
       for (var notification in responseData) {
-        notifications.add(NotificationModel.fromJson(notification));
+        userNotifications.add(UserNotification.fromJson(notification));
       }
-      return notifications;
+      return userNotifications;
     }
     return [];
   }
@@ -89,6 +91,12 @@ class UserService {
       return notification;
     }
     return null;
+  }
+
+  Future<int> getNbNotificationUnreadByUser(int userId) async {
+    List<UserNotification> userNotifications = await getNotificationsForUser(userId);
+    return userNotifications.length;
+
   }
 
 

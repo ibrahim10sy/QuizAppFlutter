@@ -41,7 +41,7 @@ class NotificationBubble extends StatelessWidget {
 
           onExpansionChanged: onExpansionChanged,
           leading: getLeadingIcon(notificationType),
-          title: Text(title, style: const TextStyle(fontSize: 18, color: Colors.red, fontWeight: FontWeight.bold),),
+          title: Text(title, style: const TextStyle(fontSize: 18, color: kPrimaryColor, fontWeight: FontWeight.bold),),
           subtitle: (isSelected)?null:Text(content, style: const TextStyle(color: kTextColor),overflow: TextOverflow.ellipsis,),
           trailing: Padding(
             padding: const EdgeInsets.only(top: 0,right: 10,),

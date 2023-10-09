@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/user_notification.dart';
 import '../../constantes.dart';
 import '../../models/notification_model.dart';
 import '../../services/user_service.dart';
@@ -20,15 +21,15 @@ class _NotificationPageState extends State<NotificationPage> {
   Function(bool)? falseFunc;
 
   UserService userService = UserService();
-  late Future<List<NotificationModel>?> futureNotifications;
-  List<NotificationModel> notifications = [];
+  late Future<List<UserNotification>?> futureUserNotifications;
+  List<NotificationModel> userNotifications = [];
   int currentUserId = 1;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureNotifications = userService.getNotificationsForUser(currentUserId);
+    futureUserNotifications = userService.getNotificationsForUser(currentUserId);
   }
 
 
@@ -58,7 +59,7 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10,),
         child: FutureBuilder(
-          future: futureNotifications,
+          future: futureUserNotifications,
           builder: (context, snapshot){
             return ListView.builder(
               itemCount: (snapshot.hasData)? snapshot.data?.length: 0,
@@ -73,14 +74,14 @@ class _NotificationPageState extends State<NotificationPage> {
                         onTapExpanded(value, index);
                       },
                       isSelected: selectedNotificationIndex.contains(index),
-                      title: snapshot.data![index].title,
-                      content: snapshot.data![index].body,
-                      isRead: notificationsRead.contains(index),
+                      title: (snapshot.data![index].read)?snapshot.data![index].notification.title:snapshot.data![index].notification.title+' (New)',
+                      content: snapshot.data![index].notification.body,
+                      isRead: snapshot.data![index].read,
                     ),
                   );
                 }
                 else{
-                  return Center(child: CircularProgressIndicator(),);
+                  return const Center(child: CircularProgressIndicator(),);
                 }
               },
             );

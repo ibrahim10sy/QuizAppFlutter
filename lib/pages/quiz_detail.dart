@@ -8,12 +8,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/pages/home/home.dart';
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 
 /**************Home***************************** */
 class QuizDetail extends StatefulWidget {
-
   static String routeName = "/quiz_detail";
   String categorie = "";
 
@@ -62,54 +62,58 @@ class _QuizDetailState extends State<QuizDetail> {
       // final ImageTemporary = File(images.path);
       final imagePermanent = await saveImagePermanently(image.path);
       setState(() {
-      this.image = imagePermanent;
-      imageSrc = imagePermanent.path; 
-    });
+        this.image = imagePermanent;
+        imageSrc = imagePermanent.path;
+      });
     } on PlatformException catch (e) {
       print('Impossible de télécharger l\'image $e');
     }
   }
-  Future<void> _dialogBuilder(BuildContext context) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Basic dialog title'),
-          content: const Text(
-            'Quiz créer avec succèss'
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Fermer'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              QuestionPage(),
-                        ),
-                      );
-              },
-            ),
-          ],
-        );
-      },
-    );
+
+  // Fonction pour supprimer l'image
+  void deleteImage() {
+    setState(() {
+      image = null;
+      imageSrc = null;
+    });
   }
+
+  // Future<void> _dialogBuilder(BuildContext context) {
+  //   return showDialog<void>(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: const Text('Basic dialog title'),
+  //         content: const Text('Quiz créer avec succèss'),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             style: TextButton.styleFrom(
+  //               textStyle: Theme.of(context).textTheme.labelLarge,
+  //             ),
+  //             child: const Text('Fermer'),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //           TextButton(
+  //             style: TextButton.styleFrom(
+  //               textStyle: Theme.of(context).textTheme.labelLarge,
+  //             ),
+  //             child: const Text('Ok'),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //               // Navigator.pushNamed(context, QuestionPage());     
+  //                        },
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
+  final descController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +129,7 @@ class _QuizDetailState extends State<QuizDetail> {
             title: Padding(
               padding: EdgeInsets.all(100),
               child: Text(
-                'Créer un quiz',
+                'Créer un quiz de categorie ',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'Poppins',
@@ -175,8 +179,8 @@ class _QuizDetailState extends State<QuizDetail> {
               SizedBox(
                 height: 20,
               ),
-    
-              const SizedBox( height: 20),
+              Text('Quiz categorie : ' +widget.categorie),
+              const SizedBox(height: 20),
               Container(
                   margin: const EdgeInsets.all(3),
                   padding: const EdgeInsets.all(10),
@@ -187,47 +191,62 @@ class _QuizDetailState extends State<QuizDetail> {
                         TextFormField(
                           controller: titleController,
                           validator: (value) {
-                            if (value!.length<10 || value.length>50) {
+                            if (value!.length < 10 || value.length > 50) {
                               return 'Le titre doit avoir entre 10 et 50 caracteres';
                             }
                             return null;
                           },
                           decoration: const InputDecoration(
                               hintText: 'Entrer le nom du quiz',
+                              labelText: 'Titre',
                               border: OutlineInputBorder()),
                         ),
-                        const SizedBox( height: 5),
+                        const SizedBox(height: 5),
+                        TextFormField(
+                          controller: descController,
+                          validator: (value) {
+                            if (value!.length < 10 || value.length > 50) {
+                              return 'Le titre doit avoir entre 10 et 50 caracteres';
+                            }
+                            return null;
+                          },
+                          decoration: const InputDecoration(
+                              hintText: 'Description du quiz',
+                              labelText: 'Description',
+                              border: OutlineInputBorder()),
+                        ),
+                        const SizedBox(height: 5),
                         Align(
                           alignment: Alignment.centerRight,
                           child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                 _dialogBuilder(context);
-                                print(widget.categorie);
                                 Quiz quizz = Quiz(
-                                    quizId: null,
-                                    visibility: 'public',
-                                    description: 'description',
-                                    creationDate: '2023-10-03', 
-                                    category: widget.categorie,
-                                    title: titleController.text,
-                                    nbQuestion: 2,
-                                    imageUrl: imageSrc ?? "",
-                                    user: User(
-                                        userId: 1,
-                                        firstName: "firstName",
-                                        lastName: "lastName",
-                                        email: "email",
-                                        password: "password",
-                                        login: "login",
-                                        imageUrl: "imageUrl"));
-                                QuizService service = QuizService();
-                                await service.createQuiz(1, quizz);
-                                 titleController.clear();
+                                        quizId: null,
+                                        visibility: 'public',
+                                        description: descController.text,
+                                        creationDate: '2023-10-03',
+                                        category: widget.categorie,
+                                        title: titleController.text,
+                                        nbQuestion: 2,
+                                        imageUrl: "informatique1.jpg",
+                                        user: User(
+                                            userId: 1,
+                                            firstName: "firstName",
+                                            lastName: "lastName",
+                                            email: "email",
+                                            password: "password",
+                                            login: "login",
+                                            imageUrl: "imageUrl"));
+                                    QuizService service = QuizService();
+                                    await service.createQuiz(1, quizz);
+                                    descController.clear();
+                                    titleController.clear();
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => QuestionPage(quizz:quizz)));
+                                
                               } else {
                                 print('Quiz non crée');
                               }
-                            
                             },
                             style: ElevatedButton.styleFrom(
                               side: BorderSide.none,

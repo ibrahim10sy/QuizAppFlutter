@@ -93,12 +93,7 @@ class _QuestionChooseState extends State<QuestionChoose> {
                    SizedBox(
                   height: 15,
                 ), 
-                // Column(
-                  
-                //   children: [
-                    
-                //   ],
-                // ),
+                
                 
                  Text("Question " + "1" + "/" + "5", style: TextStyle(fontWeight: FontWeight.bold,
                  

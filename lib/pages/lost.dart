@@ -1,6 +1,9 @@
 
 
   import 'package:flutter/material.dart';
+import 'package:quiz_app/models/category.dart';
+import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/categories.dart';
 
 class Lost extends StatefulWidget {
   const Lost({super.key});
@@ -84,7 +87,14 @@ class _LostState extends State<Lost> {
               
               child: Text('Terminer', textAlign: TextAlign.center,
                style: TextStyle(fontSize:20 , fontWeight:  FontWeight.bold),),
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Nav(),
+        ),
+      );
+              },
               style:  ElevatedButton.styleFrom(
                 
                 shape: RoundedRectangleBorder(

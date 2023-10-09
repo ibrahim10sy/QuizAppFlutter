@@ -1,5 +1,5 @@
 import 'package:quiz_app/models/choix.dart';
-import 'package:quiz_app/models/quiz.dart'; // Assumant que vous avez importé la classe Quiz
+import 'package:quiz_app/models/quiz.dart'; 
 
 class Question {
   final int? questionId;
@@ -8,7 +8,7 @@ class Question {
   final int point = 5;
   final int? rang;
   final int? rangReponse;
-  final List<Choix> choix; // Utilisez List<Choix> pour définir une liste de choix
+  final List<Choix> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
   final Quiz quiz;
 
   Question({

@@ -1,19 +1,38 @@
 
 
  import 'package:flutter/material.dart';
+import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/played/played.dart';
 
 class Bravo extends StatefulWidget {
-  const Bravo({super.key});
+  
+
+  //  Bravo({super.key , required scoreFinal , required this.totalQuestions});
+    Bravo({Key? key,  scoreFinal,  totalQuestions})
+      : super(key: key);
+
 
   @override
   State<Bravo> createState() => _BravoState();
 }
 
 class _BravoState extends State<Bravo> {
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
      Color myColor = const Color(0xFF3F489C);
      Color score = const Color(0xFF6C90EF);
+
+         // Calculer le score en pourcentage
+    // double scoreEnPourcentage = (widget.scoreFinal / (widget.totalQuestions * 10)) * 100;
+
+
 
     return Scaffold(
       backgroundColor:(myColor) ,
@@ -25,15 +44,11 @@ class _BravoState extends State<Bravo> {
           mainAxisAlignment: MainAxisAlignment.start,
            children: [
              const SizedBox(height: 20),
-            //  const Text('QUIZMASTER', style: TextStyle(
-            //     color: Colors.white, fontWeight: FontWeight.bold, 
-            //     fontFamily: "poppins", fontSize: 40),),
-            // Padding(padding: EdgeInsets.only(left: 30)),
+            
             Container(
-              padding: EdgeInsets.only(left: 350),
+              padding:const EdgeInsets.only(left: 350),
               child: 
-            Icon(Icons.clear, size: 40, color: Colors.white,),
-              
+           const  Icon(Icons.clear, size: 40, color: Colors.white,),
               
             ),
 
@@ -50,22 +65,22 @@ class _BravoState extends State<Bravo> {
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
               Container(
-      padding: EdgeInsets.only(left: 70), // Ajoutez une marge à droite du premier texte
-      child: Text(
-        '18/20',
+      padding: const EdgeInsets.only(left: 60), // Ajoutez une marge à droite du premier texte
+      child: const Text(
+        '40 points',
         textAlign: TextAlign.start, // Alignez le texte à gauche
-        style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white),
+        style:   TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white),
 
       ),
     ),
-    SizedBox(height: 40,),
+     const SizedBox(height: 40,),
     Container(
-      padding: EdgeInsets.only(left: 120), // Ajoutez une marge à gauche du deuxième texte
-      child: Text(
-        '+90 points',
+      padding: const EdgeInsets.only(left: 120), // Ajoutez une marge à gauche du deuxième texte
+      child: const Text(
+        '100 points',
         textAlign: TextAlign.end, 
         // Alignez le texte à droite
-        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white),
+        style:  TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white),
       ),
     ),
 
@@ -81,16 +96,23 @@ class _BravoState extends State<Bravo> {
             const SizedBox(height: 120,),
             ElevatedButton(
               
-              child: Text('Suivant', textAlign: TextAlign.center,
-               style: TextStyle(fontSize:20 , fontWeight:  FontWeight.bold),),
-              onPressed: () {},
+               child: Text('Suivant', textAlign: TextAlign.center,
+               style:   TextStyle(fontSize:20 , fontWeight:  FontWeight.bold),),
+              onPressed: () {
+                 Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Nav(),
+        ),
+      );
+              },
               style:  ElevatedButton.styleFrom(
                 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 //  minimumSize: const Size(80, 45),
-                fixedSize: Size(200, 40)
+                fixedSize: const Size(200, 40)
               ),
               ), 
               // ),
@@ -102,12 +124,3 @@ class _BravoState extends State<Bravo> {
  }
 
 }
- //  const SizedBox(height: 10,),
-           
-        //   IconButton(
-        //     color: Colors.white,
-        //     icon:const Icon(Icons.clear, size: 20, color: Colors.white,),
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //   ),

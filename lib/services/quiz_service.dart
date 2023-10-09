@@ -14,14 +14,29 @@ class QuizService {
         await http.get(Uri.parse(baseQuizUrl + "?domain=" + category));
 
     if (response.statusCode == 200) {
-      var responseData = json.decode(response.body);
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
       List<Quiz> quizzes = [];
       for (var quiz in responseData) {
         quizzes.add(Quiz.fromJson(quiz));
       }
       return quizzes;
     }
-    return null;
+    return [];
+  }
+
+  Future<List<Quiz>?> getQuizzesPlayedByUserAndDomain(int userId, String category) async {
+    final response =
+    await http.get(Uri.parse(baseQuizUrl + "/users/$userId/played?domain=" + category));
+
+    if (response.statusCode == 200) {
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
+      List<Quiz> quizzes = [];
+      for (var quiz in responseData) {
+        quizzes.add(Quiz.fromJson(quiz));
+      }
+      return quizzes;
+    }
+    return [];
   }
 
   Future<Quiz?> getQuiz(int quizId) async {
@@ -68,7 +83,7 @@ class QuizService {
         Uri.parse('$baseQuizUrlForUser/$userId/quizzes/$quizId'),
         body: json.encode(updateQuiz),);
     if (response.statusCode == 200) {
-      var responseDate = json.decode(response.body);
+      var responseDate = json.decode(utf8.decode(response.bodyBytes));
       Quiz quiz = Quiz.fromJson(responseDate);
       return quiz;
     }
@@ -84,25 +99,19 @@ class QuizService {
     return "error";
   }
 
-  // Future<Quiz?> createQuiz(int userId, Quiz quiz) async{
-  //   print(quiz);
-  //   final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'), body: quiz.toJson());
-  //   if(response.statusCode == 200) {
-  //     var responseDate = json.decode(response.body);
-  //     Quiz quiz = Quiz.fromJson(responseDate);
-  //     return quiz;
   Future<Quiz?> createQuiz(int userId, Quiz quiz) async {
-    final response = await http.post(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'),
+    final response = await http.post(
+      Uri.parse('$baseQuizUrlForUser/$userId/quizzes'),
       body: json.encode(quiz),
       headers: {
         // Je m'assure que le type de média est défini sur JSON
-        'Content-Type':'application/json',
+        'Content-Type':'application/json'
       },
     );
 
     if (response.statusCode == 200) {
       print("Success");
-      var responseData = json.decode(response.body);
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
       Quiz createdQuiz = Quiz.fromJson(responseData);
       return createdQuiz;
     } else if (response.statusCode == 400) {

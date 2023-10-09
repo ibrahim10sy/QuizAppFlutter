@@ -51,14 +51,13 @@ class Categorie extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              QuizDetail(categorie: category.nom),
+                            QuizDetail(categorie: category.nom),
                         ),
                       );
                     },
                     child: Container(
-                      // width: MediaQuery.of(context).size.width / 2 - 10,
-                      width:180,
-                      height: 140,
+                      width:165,
+                      height: 165,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,

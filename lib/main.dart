@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/quizzes.dart';
+import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/nav.dart';
+
 import 'package:quiz_app/pages/before_start_quiz.dart';
 import 'package:quiz_app/pages/bravo.dart';
 import 'package:quiz_app/pages/load_animated.dart';
 import 'package:quiz_app/pages/lost.dart';
 import 'package:quiz_app/pages/question_choose.dart';
 import 'package:quiz_app/pages/splashScreen.dart';
+
+import 'package:quiz_app/pages/question.dart';
+import 'package:quiz_app/pages/test.dart';
 import 'package:quiz_app/theme.dart';
+
 
 
 
@@ -23,7 +30,7 @@ class Myapp extends StatelessWidget {
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home: QuestionChoose(),
+      home: Nav(),
     );
   }
 }

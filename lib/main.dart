@@ -1,12 +1,51 @@
+import 'dart:convert';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
-import 'package:quiz_app/services/local_notification_service.dart';
+import 'package:quiz_app/services/push_notifications.dart';
 import 'package:quiz_app/theme.dart';
+import 'firebase_options.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 
-void main() {
-  //FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+// function to lisen to background changes
+Future _firebaseBackgroundMessage(RemoteMessage message) async {
+  if (message.notification != null) {
+    print("Some notification Received");
+  }
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // on background notification tapped
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    if (message.notification != null) {
+      print("Background Notification Tapped");
+      navigatorKey.currentState!.pushNamed("/message", arguments: message);
+    }
+  });
+
+  PushNotifications.init();
+  PushNotifications.localNotiInit();
+  // Listen to background notifications
+  FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundMessage);
+
+  // to handle foreground notifications
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    String payloadData = jsonEncode(message.data);
+    print("Got a message in foreground");
+    if (message.notification != null) {
+      PushNotifications.showSimpleNotification(
+          title: message.notification!.title!,
+          body: message.notification!.body!,
+          payload: payloadData);
+    }
+  });
   runApp(const MyApp());
 }
 
@@ -29,6 +68,15 @@ class _MyAppState extends State<MyApp> {
     /*messaging = FirebaseMessaging.instance;
     messaging.getToken().then((value){
       print(value);
+    });
+
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage event) {
+      print("message réçus");
+      print(event.notification!.body);
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print('Message cliqué!');
     });*/
 
     /*LocalNotificationService.initialize();
@@ -54,6 +102,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
@@ -93,6 +142,4 @@ class Myapp extends StatelessWidget {
     );
   }
 }
-
-
  */

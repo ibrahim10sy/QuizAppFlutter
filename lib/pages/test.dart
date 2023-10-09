@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 import 'package:quiz_app/pages/bravo.dart';
 import 'package:quiz_app/pages/lost.dart';
 
@@ -23,6 +25,31 @@ class Question {
 }
 
 class _QuestionsChooseState extends State<QuestionsChoose> {
+
+  
+
+  // var sequenceAnimation =  SequenceAnimationBuilder()
+  //     .addA nimatable(
+  //         animatable:  ColorTween(begin: Colors.red, end: Colors.yellow),
+  //         from:  const Duration(seconds: 0),
+  //         to: const Duration(seconds: 2),
+  //         tag: "color"
+  //       ).addAnimatable(
+  //         animatable:  ColorTween(begin: Colors.yellow, end: Colors.blueAccent),
+  //         from:  const Duration(seconds: 2),
+  //         to: const Duration(seconds: 4),
+  //         tag: "color",
+  //         curve: Curves.easeOut
+  //       ).addAnimatable(
+  //         animatable: new ColorTween(begin: Colors.blueAccent, end: Colors.pink),
+  //         //  animatable: new Tween<double>(begin: 200.0, end: 40.0),
+  //         from:  const Duration(seconds: 5),
+  //         to: const Duration(seconds: 6),
+  //         tag: "color",
+  //         curve: Curves.fastOutSlowIn
+  //       ).animate(controller);
+   
+
   int _time = 5;
   int score = 0;
   late Timer timer;
@@ -171,7 +198,10 @@ class _QuestionsChooseState extends State<QuestionsChoose> {
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
-      ),
+      ).animate()
+  .fadeIn() // uses `Animate.defaultDuration`
+  .scale() // inherits duration from fadeIn
+  .move(delay: 300.ms, duration: 600.ms) // runs after the above w/new duration
     ),
           const SizedBox(height: 10,),
           Row(
@@ -194,7 +224,11 @@ class _QuestionsChooseState extends State<QuestionsChoose> {
                     child: Image.asset('assets/image/rond.png'),
                   )
                 ],
-              ),
+              ).animate()
+  .fadeIn() // uses `Animate.defaultDuration`
+  .scale() // inherits duration from fadeIn
+  .move(delay: 300.ms, duration: 600.ms) // runs after the above w/new duration
+
             ],
           ),
           Container(
@@ -285,6 +319,7 @@ class _QuestionsChooseState extends State<QuestionsChoose> {
                         ),
                       ),
                     ),
+  
                 ],
               ),
             ],

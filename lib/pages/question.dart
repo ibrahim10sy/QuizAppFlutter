@@ -67,6 +67,8 @@ class _QuestionPageState extends State<QuestionPage> {
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
   final reponseController = TextEditingController();
+  List<TextEditingController> reponseControllers = List.generate(5, (index) => TextEditingController());
+
   List<String> type = [];
   List<String> choix = [];
   @override
@@ -193,12 +195,12 @@ class _QuestionPageState extends State<QuestionPage> {
                             
                                   Question question = Question(questionId: null, point: 50, text: textController.text, type: type.first, rank: 1, rankResponse: 1, choises: Choix_List);
                                   Choise choise1 = Choise(choiseId: null, text: reponseController.text, rank: 1);
-                                  Choise choise2 = Choise(choiseId: null, text: reponseController.text, rank: 1);
+                                  // Choise choise2 = Choise(choiseId: null, text: reponseController.text, rank: 1);
                                   debugPrint(choise1.text);
-                                  if(choise1 != null && choise2 != null){
+                                  if(choise1 != null ){
                                     
                                     Choix_List.add(choise1);
-                                    Choix_List.add(choise2);
+                                    // Choix_List.add(choise2);
                                     debugPrint("Nombre éléments : ${Choix_List.length}");
 
                                     QuestionService Q_service = QuestionService();
@@ -206,10 +208,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                   }
                                   
                                   debugPrint(question.toJson().toString());
-                                  
-                                  // ChoixService choixService = ChoixService();
-                                  // await choixService.createChoix(1, 1, 1, choises);
-
                                   print("Question ajoutée avec succès");
                                 } else {
                                   print("Question non ajoutée");

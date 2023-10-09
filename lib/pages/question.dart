@@ -10,14 +10,13 @@ import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/choise.dart';
 import 'package:quiz_app/services/choix_service.dart';
 import 'package:quiz_app/services/question_service.dart';
+import 'package:multiselect/multiselect.dart';
 
 class QuestionPage extends StatefulWidget {
   static String routeName = "/QuestionPage";
-  
   final Quiz quizz;
-  
-  QuestionPage({super.key, required this.quizz});
 
+  QuestionPage({Key? key, required this.quizz}) : super(key: key);
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -26,9 +25,24 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   File? image;
   String? imageSrc;
-   List<Choises> Choix_List = [];
-    
+  List<Choise> Choix_List = [];
 
+  final _reponseController = TextEditingController();
+  List<TextEditingController> _reponseControllers = [];
+
+ bool isAddingResponse = false;
+  int _textFieldCount = 0;
+
+  void generateTextField() {
+    if (_textFieldCount < 5) {
+      setState(() {
+        _textFieldCount++;
+        _reponseControllers.add(TextEditingController()); // Ajoutez un nouveau contrôleur
+
+      });
+      
+    }
+  }
   // Fonction pour créer un bouton
   Widget buildButton({
     required String title,
@@ -67,19 +81,17 @@ class _QuestionPageState extends State<QuestionPage> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
+  final textController = TextEditingController();
   final reponseController = TextEditingController();
-  // final pointController = TextEditingController();
-  // final rangReponseController = TextEditingController();
-  // final rangController = TextEditingController();
-  // final choixController = TextEditingController();
-  // final quizController = TextEditingController();
-
+  List<String> type = [];
+  List<String> choix = [];
   @override
   void initState() {
-    print(widget.quizz);
+    Choix_List = [];
+    _reponseControllers = []; 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,10 +156,10 @@ class _QuestionPageState extends State<QuestionPage> {
                     key: _formKey,
                     child: Column(children: <Widget>[
                       Column(
-                          crossAxisAlignment: CrossAxisAlignment.start, 
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextFormField(
-                              controller: titleController,
+                              controller: textController,
                               validator: (value) {
                                 if (value!.length < 10 || value.length > 50) {
                                   return 'Champ obligatoire';
@@ -156,199 +168,167 @@ class _QuestionPageState extends State<QuestionPage> {
                               },
                               decoration: const InputDecoration(
                                   hintText: 'Entrer la question',
+                                  labelText: 'Question',
                                   border: OutlineInputBorder()),
                             ),
                             SizedBox(
                               height: 15,
                             ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: reponseController,
-                                    validator: (value) {
-                                      if (value!.length < 10 ||
-                                          value.length > 50) {
-                                        return 'Entrer la reponse 1';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                        hintText: 'Reponse 1',
-                                        border: OutlineInputBorder()),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    value: true,
-                                    onChanged: (bool? newValue) {},
-                                    activeColor: Color(0xFF031B49),
-                                  ),
-                                )
-                              ],
+                             DropDownMultiSelect(
+                          onChanged: (List<String> x){
+                            setState(() {
+                              type = x;
+                            });
+                          },
+                          options : ['vrai-faux','choix-multiple'],
+                          selectedValues: type,
+                          whenEmpty : 'Type de question'
+                        ),
+                        SizedBox(
+                              height: 15,
                             ),
+                            // TextFormField(
+                            //   controller: reponseController,
+                            //   validator: (value) {
+                            //     if (value!.length < 10 || value.length > 50) {
+                            //       return 'Champ obligatoire';
+                            //     }
+                            //     return null;
+                            //   },
+                            //   decoration: const InputDecoration(
+                            //       hintText: 'Reponse',
+                            //       labelText: 'Reponse',
+                            //       border: OutlineInputBorder()),
+                            // ),
+
+        //                        TextFormField(
+        //   controller: _reponseController,
+        //   validator: (value) {
+        //     if (value!.length < 10 || value.length > 50) {
+        //       return 'Champ obligatoire';
+        //     }
+        //     return null;
+        //   },
+        //   decoration: const InputDecoration(
+        //     hintText: 'Reponse',
+        //     labelText: 'Reponse',
+        //     border: OutlineInputBorder()),
+        // ),
+        //   TextFormField(
+        //     decoration: const InputDecoration(
+        //       hintText: 'Reponse',
+        //       labelText: 'Reponse',
+        //       border: OutlineInputBorder()),
+        //   ),
+        //  for (int i = 0; i < _textFieldCount; i++)
+        // SizedBox(
+        //   height: 15,
+        // ),
+        // ElevatedButton(
+        //   onPressed: generateTextField,
+        //   child: Text('Ajouter reponse'),
+        // ),
+        SizedBox(height: 10,),
+        Column(
+          
+          children: [
+             
+          for (int i = 0; i < _textFieldCount; i++)
+          TextFormField(
+             controller: _reponseControllers[i],
+            decoration: const InputDecoration(
+              hintText: 'Reponse',
+              labelText: 'Reponse',
+              border: OutlineInputBorder()),
+          ),
+          SizedBox(height: 5,),
+           ElevatedButton(
+          onPressed: generateTextField,
+          child: Text('Ajouter reponse'),
+        ),
+          ],
+        ),
+    
+     
+       
+
                             SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: reponseController,
-                                    validator: (value) {
-                                      if (value!.length < 10 ||
-                                          value.length > 50) {
-                                        return 'Entrer une reponse ';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                        hintText: 'Entrer la reponse 2',
-                                        border: OutlineInputBorder()),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    value: true,
-                                    onChanged: (bool? newValue) {},
-                                    activeColor: Color(0xFF031B49),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: reponseController,
-                                    validator: (value) {
-                                      if (value!.length < 10 ||
-                                          value.length > 50) {
-                                        return 'Entrer une reponse ';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                        hintText: 'Entrer la reponse 3',
-                                        border: OutlineInputBorder()),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    value: true,
-                                    onChanged: (bool? newValue) {},
-                                    activeColor: Color(0xFF031B49),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: reponseController,
-                                    validator: (value) {
-                                      if (value!.length < 10 ||
-                                          value.length > 50) {
-                                        return 'Entrer une reponse ';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                        hintText: 'Entrer la reponse 4',
-                                        border: OutlineInputBorder()),
-                                  ),
-                                ),
-                                SizedBox(width: 8),
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    value: true,
-                                    onChanged: (bool? newValue) {},
-                                    activeColor: Color(0xFF031B49),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: reponseController,
-                                    validator: (value) {
-                                      if (value!.length < 10 ||
-                                          value.length > 50) {
-                                        return 'Entrer une reponse ';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
-                                        hintText: 'Entrer la reponse 5',
-                                        border: OutlineInputBorder()),
-                                  ), 
-                                ),
-                                SizedBox(width: 8),
-                                Transform.scale(
-                                  scale: 2,
-                                  child: Checkbox(
-                                    value: true,
-                                    onChanged: (bool? newValue) {},
-                                    activeColor: Color(0xFF031B49),
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
+                              height: 15,
                             ),
                             ElevatedButton(
-                                onPressed: () async {
-                                 if(_formKey.currentState!.validate()){
-                               
-                                Question question =  Question(questionId:1, text: titleController.text, type: 'choix multiple', choix: Choix_List , quiz: widget.quizz);
-                                Choises choices = Choises(text: reponseController.text, rank: 1, question: question);
-                                if(choices !=null){
-                                  Choix_List.add(choices);
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                debugPrint('Début validation ');
+                                
+                          //          List<Choise> choisesList = [];
+                          //          for (int i = 0; i < _textFieldCount; i++) {
+                          //   String choiseText = _reponseControllers[i].text; // Récupérez le texte du contrôleur
+                          //   Choise choise = Choise(choiseId: null, text: choiseText, rank: 1);
+                          //   choisesList.add(choise); // Ajoutez l'objet Choise à la liste
+                          // }
+                          //         Question question = Question(questionId: null, point: 50, text: textController.text, type: type.first, rank: 1, rankResponse: 1, choises: Choix_List);
+                          //         Choise choise1 = Choise(choiseId: null, text: _reponseControllers[i].text, rank: 1);
+                          //         // Choise choise2 = Choise(choiseId: null, text: _reponseController.text, rank: 1);
+                          //         debugPrint(choise1.text);
+                          //         if(choise1 != null){
+                                    
+                          //           Choix_List.add(choise1);
+                          //           // Choix_List.add(choise2);
+                          //           debugPrint("Nombre éléments : ${Choix_List.length}");
+
+                          //           QuestionService Q_service = QuestionService();
+                          //           Question? q = await Q_service.createQuestion(1, 1, question);
+                          //         }
+                                  
+                          //         debugPrint(question.toJson().toString());
+
+                           List<Choise> choisesList = [];
+
+for (int i = 0; i < _textFieldCount; i++) {
+  String choiseText = _reponseControllers[i].text; // Récupérez le texte du contrôleur
+  Choise choise = Choise(choiseId: null, text: choiseText, rank: 1);
+  choisesList.add(choise); // Ajoutez l'objet Choise à la liste
+}
+
+Question question = Question(
+  questionId: null,
+  point: 50,
+  text: textController.text,
+  type: type.first,
+  rank: 1,
+  rankResponse: 1,
+  choises: choisesList, // Utilisez la liste de Choise créée précédemment
+);
+
+// Vous pouvez ensuite ajouter cette question à votre base de données, par exemple, en utilisant votre service QuestionService.
+QuestionService Q_service = QuestionService();
+Question? q = await Q_service.createQuestion(1, 1, question);
+
+// Affichez les informations de la question et de ses choix
+debugPrint(question.toJson().toString());
+                                  
+                                  // ChoixService choixService = ChoixService();
+                                  // await choixService.createChoix(1, 1, 1, choises);
+
+                                  print("Question ajoutée avec succès");
+                                } else {
+                                  print("Question non ajoutée");
                                 }
-
-                                QuestionService Q_service = QuestionService();
-                                ChoixService choiseService = ChoixService();
-                                await Q_service.createQuestion(1, 1, question);
-                                await choiseService.createChoix(1, 1, 1, choices);
-                                 }
-
-                                 Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessPage()));
-
-                                //  Navigator.routeName(context,) => SuccessPage(
-                                },
-                                child: Text('Valider'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(
-                                      0xFF031B49), // Couleur de fond du bouton
-                                  onPrimary: Colors.white, // Couleur du texte
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 20, // Espacement vertical
-                                    horizontal: 30, // Espacement horizontal
-                                  ),
-                                ))
+                              },
+                              child: Text('Valider'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(
+                                    0xFF031B49), // Couleur de fond du bouton
+                                onPrimary: Colors.white, // Couleur du texte
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 20, // Espacement vertical
+                                  horizontal: 30, // Espacement horizontal
+                                ),
+                              ),
+                            )
                           ]),
                     ]))),
           ],
@@ -358,6 +338,23 @@ class _QuestionPageState extends State<QuestionPage> {
   }
 }
 
+class ChoixPage extends StatefulWidget {
+  const ChoixPage({super.key});
+
+  @override
+  State<ChoixPage> createState() => _ChoixPageState();
+}
+
+class _ChoixPageState extends State<ChoixPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Choix page'),
+      ),
+    );
+  }
+}
 
 /////success page
 class SuccessPage extends StatelessWidget {

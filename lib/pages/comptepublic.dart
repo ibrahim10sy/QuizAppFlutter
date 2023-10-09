@@ -37,7 +37,7 @@ class Comptepublic extends StatelessWidget {
             // DataRow(),
             DataRow(
            nQuizs: 50,
-              initialNJoueurs: 100,
+              initialNJoueurs: 4,
              ),
 
              Tapbar(),
@@ -204,7 +204,7 @@ class _DataRowState extends State<DataRow> {
             ],
           ),
         ),
-        ElevatedButton(
+  ElevatedButton(
   style: ButtonStyle(
     backgroundColor: MaterialStateProperty.resolveWith<Color>(
       (Set<MaterialState> states) {

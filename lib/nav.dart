@@ -5,7 +5,7 @@ import 'pages/liste.dart';
 import 'pages/quiz.dart';
 import 'pages/profile.dart';
 import 'pages/comptepublic.dart';
-
+import 'pages/categorie.dart';
 
 
 
@@ -24,7 +24,8 @@ List<Widget> _listTab = <Widget>[
    Home(),
    Liste(),
    Quiz(),
-  Comptepublic(),
+  Profile(),
+ 
 
 ];
 
@@ -63,9 +64,10 @@ List<Widget> _listTab = <Widget>[
         
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
-          label: 'comptepublic',
+          label: 'profile',
           backgroundColor : bottomNavigationBackgroundColor,
         ),
+         
         
       ],
       currentIndex: _selectedIndex,

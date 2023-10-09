@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/pages/home/home.dart';
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 
@@ -182,6 +183,7 @@ class _QuizDetailState extends State<QuizDetail> {
                                         imageUrl: "imageUrl"));
                                 QuizService service = QuizService();
                                 await service.createQuiz(1, quizz);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
                               } else {
                                 print('Quiz non crée');
                               }

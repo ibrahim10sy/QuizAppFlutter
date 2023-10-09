@@ -1,51 +1,42 @@
-
-import 'package:quiz_app/models/quiz.dart'; 
+import 'package:quiz_app/models/quiz.dart';
 import '../models/choise.dart';
 
 class Question {
-  final int? questionId;
-  final String text;
-  final String type;
-  final int point = 5;
-  final int? rang;
-  final int? rangReponse;
-  // final List<Choises> choix; // Utilisez List<Choix> pour définir une liste de choix de question 
-  final Quiz quiz;
+    final int? questionId;
+    final String text;
+    final String type;
+    final int point;
+    final int rank;
+    final int rankResponse;
+    final List<Choise> choises;
 
-  Question({
-   this.questionId,
-    required this.text,
-    required this.type,
-    this.rang,
-    this.rangReponse,
-    // required this.choix,
-    required this.quiz,
-  });
+    Question({
+        required this.questionId,
+        required this.text,
+        required this.type,
+        required this.point,
+        required this.rank,
+        required this.rankResponse,
+        required this.choises,
+    });
 
-  
-Map<String, dynamic> toJson() {
-  // List<Map<String, dynamic>> choixListJson = choix.map((choix) => choix.toJson()).toList();
+    factory Question.fromJson(Map<String, dynamic> json) => Question(
+        questionId: json["questionId"],
+        text: json["text"],
+        type: json["type"],
+        point: json["point"],
+        rank: json["rank"],
+        rankResponse: json["rankResponse"],
+        choises: List<Choise>.from(json["choises"].map((x) => Choise.fromJson(x))),
+    );
 
-  return {
-    'questionId': questionId,
-    'text': text,
-    'type': type,
-    'point': point,
-    'rang': rang,
-    'rangReponse': rangReponse,
-    // 'choix': choixListJson, 
-    'quiz': quiz.toJson(),
-  };
-}
-
-
-  factory Question.fromJson(Map<String, dynamic> json) => Question(
-    questionId: json['questionId'],
-    text: json['text'],
-    type: json['type'],
-    rang: json['rang'],
-    rangReponse: json['rangReponse'],
-    // choix: List<Choises>.from(json['choix'].map((e) => Choises.fromJson(e))),
-    quiz: Quiz.fromJson(json['quiz']),
-  );
+    Map<String, dynamic> toJson() => {
+        "questionId": questionId,
+        "text": text,
+        "type": type,
+        "point": point,
+        "rank": rank,
+        "rankResponse": rankResponse,
+        "choises": List<dynamic>.from(choises.map((x) => x.toJson())),
+    };
 }

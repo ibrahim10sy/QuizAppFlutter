@@ -18,7 +18,6 @@ class Myapp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
       home:Nav() ,
-     
     );
   }
 }

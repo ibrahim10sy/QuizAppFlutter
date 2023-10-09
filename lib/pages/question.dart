@@ -10,6 +10,7 @@ import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/choise.dart';
 import 'package:quiz_app/services/choix_service.dart';
 import 'package:quiz_app/services/question_service.dart';
+import 'package:multiselect/multiselect.dart';
 
 class QuestionPage extends StatefulWidget {
   static String routeName = "/QuestionPage";
@@ -24,7 +25,7 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   File? image;
   String? imageSrc;
-  List<Choises> Choix_List = [];
+  List<Choise> Choix_List = [];
 
   // Fonction pour créer un bouton
   Widget buildButton({
@@ -65,8 +66,9 @@ class _QuestionPageState extends State<QuestionPage> {
 
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
-  final typeController = TextEditingController();
-
+  final reponseController = TextEditingController();
+  List<String> type = [];
+  List<String> choix = [];
   @override
   void initState() {
     Choix_List = [];
@@ -155,17 +157,30 @@ class _QuestionPageState extends State<QuestionPage> {
                             SizedBox(
                               height: 15,
                             ),
+                             DropDownMultiSelect(
+                          onChanged: (List<String> x){
+                            setState(() {
+                              type = x;
+                            });
+                          },
+                          options : ['vrai-faux','choix-multiple'],
+                          selectedValues: type,
+                          whenEmpty : 'Type de question'
+                        ),
+                        SizedBox(
+                              height: 15,
+                            ),
                             TextFormField(
-                              controller: typeController,
+                              controller: reponseController,
                               validator: (value) {
-                                if (value!=null) { 
+                                if (value!.length < 10 || value.length > 50) {
                                   return 'Champ obligatoire';
                                 }
                                 return null;
                               },
                               decoration: const InputDecoration(
-                                  hintText: 'Entrer le type',
-                                  labelText: 'Type',
+                                  hintText: 'Reponse',
+                                  labelText: 'Reponse',
                                   border: OutlineInputBorder()),
                             ),
                             SizedBox(
@@ -174,14 +189,26 @@ class _QuestionPageState extends State<QuestionPage> {
                             ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  // Créez une nouvelle question en utilisant les contrôleurs de texte
-                                  Question question = Question(
-                                    text: textController.text,
-                                    type: typeController.text,
-                                    quiz: widget.quizz, 
-                                  );
-                                  QuestionService Q_service = QuestionService();
-                                  await Q_service.createQuestion(1, 1, question);
+                                debugPrint('Début validation ');
+                            
+                                  Question question = Question(questionId: null, point: 50, text: textController.text, type: type.first, rank: 1, rankResponse: 1, choises: Choix_List);
+                                  Choise choise1 = Choise(choiseId: null, text: reponseController.text, rank: 1);
+                                  Choise choise2 = Choise(choiseId: null, text: reponseController.text, rank: 1);
+                                  debugPrint(choise1.text);
+                                  if(choise1 != null && choise2 != null){
+                                    
+                                    Choix_List.add(choise1);
+                                    Choix_List.add(choise2);
+                                    debugPrint("Nombre éléments : ${Choix_List.length}");
+
+                                    QuestionService Q_service = QuestionService();
+                                    Question? q = await Q_service.createQuestion(1, 1, question);
+                                  }
+                                  
+                                  debugPrint(question.toJson().toString());
+                                  
+                                  // ChoixService choixService = ChoixService();
+                                  // await choixService.createChoix(1, 1, 1, choises);
 
                                   print("Question ajoutée avec succès");
                                 } else {

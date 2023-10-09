@@ -7,11 +7,12 @@ const kSecondaryColor = Colors.deepPurple;
 const kBackgroundColor = Color(0xFFEAEAFF); // Couleur par défaut du background de chaque Scaffold
 const kTextColor = Colors.black; // Couleur par defaut des texte
 const kButtonRoundedColor = Colors.black54;
+const kFourColor = Color(0xFFF5F6F9);
 const List<String> kCategories = [
   "anime", "science", "histoire", "informatique",
   "culture general", "geographie", "mecanique", "culture"
 ];
-const baseUrl = "http://10.175.48.73";
+const baseUrl = "http://10.175.48.40";
 //const baseUrl = "http://10.0.2.2";
 const kBaseUrlForImage = "${baseUrl}/quizmasterimg/";
 
@@ -22,4 +23,8 @@ class ProfileDataType {
   static const String dateDeNaissance = "Date de naissance";
   static const String identifiant = "Identifiant";
   static const String motDePasse = "Mot de passe";
+}
+
+enum NotificationType {
+  newQuiz
 }

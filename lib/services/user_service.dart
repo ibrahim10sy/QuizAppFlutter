@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../constantes.dart';
+import '../models/notification_model.dart';
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,7 +33,7 @@ class UserService {
     return null;
   }
 
-  Future<User?> createQuiz(User user) async {
+  Future<User?> createUser(User user) async {
     final response = await http.post(
       Uri.parse(baseUserUrl),
       body: json.encode(user),
@@ -43,7 +44,6 @@ class UserService {
     );
 
     if (response.statusCode == 200) {
-      print("Success");
       var responseData = json.decode(utf8.decode(response.bodyBytes));
       User createdUser = User.fromJson(responseData);
       return createdUser;
@@ -63,6 +63,30 @@ class UserService {
       print("ERROR: $errorMessage");
     } else {
       print("Unexpected Error");
+    }
+    return null;
+  }
+
+  Future<List<NotificationModel>> getNotificationsForUser(int userId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$userId/notifications"));
+    if(response.statusCode == 200) {
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
+      List<NotificationModel> notifications = [];
+      for (var notification in responseData) {
+        notifications.add(NotificationModel.fromJson(notification));
+      }
+      return notifications;
+    }
+    return [];
+  }
+
+  Future<NotificationModel?> getOneNotificationForUser(int userId, int notificationId) async{
+    final response = await http.get(Uri.parse("$baseUserUrl/$userId/notifications/$notificationId"));
+
+    if(response.statusCode == 200) {
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
+      NotificationModel? notification = NotificationModel.fromJson(responseData);
+      return notification;
     }
     return null;
   }

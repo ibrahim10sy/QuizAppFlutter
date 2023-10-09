@@ -2,7 +2,7 @@ class NotificationModel {
   final int? notificationId;
   final String title;
   final String body;
-  final String creationDate;
+  DateTime creationDate;
 
   NotificationModel({
     required this.notificationId,
@@ -16,7 +16,7 @@ class NotificationModel {
         notificationId: json['notificationId'],
         title: json['title'],
         body: json['body'],
-        creationDate: json['creationDate']
+        creationDate: DateTime.parse(json["creationDate"]),
     );
   }
 
@@ -24,7 +24,7 @@ class NotificationModel {
     "notificationId": notificationId,
     "title": title,
     "body": body,
-    "creationDate": creationDate
+    "creationDate": creationDate.toIso8601String()
   };
 
 }

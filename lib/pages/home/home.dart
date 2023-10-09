@@ -16,12 +16,23 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int nbNotification = 0;
   UserService userService = UserService();
+  int nbNotificationUnread = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+    getNbNotificationsUnread().then((int result) {
+      setState(() {
+        nbNotificationUnread = result;
+      });
+    });
+  }
+
+  Future<int> getNbNotificationsUnread() async {
+    int nb = await userService.getNbNotificationUnreadByUser(1);
+    return nb;
   }
 
   @override
@@ -35,7 +46,7 @@ class _HomeState extends State<Home> {
               badgeStyle: const badges.BadgeStyle(
                   padding: EdgeInsets.all(5)
               ),
-              badgeContent: Text('3', style: TextStyle(color: Colors.white),),
+              badgeContent: Text('$nbNotificationUnread', style: const TextStyle(color: Colors.white),),
               child: IconButton(
                   onPressed: (){
                     Navigator.push(

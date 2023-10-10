@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/compte.dart';
 import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/categories.dart';
 import 'pages/home/home.dart';
@@ -23,7 +24,7 @@ List<Widget> _listTab = <Widget>[
    Home(),
    Played(),
    Categorie(),
-   Profile()
+   UserProfile()
 
 ];
 

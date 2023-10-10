@@ -17,7 +17,7 @@ const List<String> kCategories = [
   "culture"
 ];
 
-const baseUrl = "http://10.175.48.73";
+const baseUrl = "http://10.0.2.2";
 // const baseUrl = "http://10.175.48.128";
 // const baseUrl = "http://10.0.2.2:9000";
 const kBaseUrlForImage = "${baseUrl}/quizmasterimg/";

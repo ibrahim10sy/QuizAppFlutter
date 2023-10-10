@@ -227,8 +227,7 @@ class _QuizDetailState extends State<QuizDetail> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            QuestionPage(quizz: quizz)));
+                                        builder: (context) => QuestionPage(quizz: quizz)));
                               } else {
                                 print('Quiz non crée');
                               }

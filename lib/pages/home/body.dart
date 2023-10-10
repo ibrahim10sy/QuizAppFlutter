@@ -118,7 +118,9 @@ class _BodyState extends State<Body> {
                                   imageUrl: "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
                                   title: "",
                                   useBaseUrl: false,
-                                  press: () {},
+                                  press: () {
+
+                                  },
                                 ),
                               );
                             },

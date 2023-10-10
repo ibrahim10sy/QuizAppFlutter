@@ -66,11 +66,6 @@ class _NotificationPageState extends State<NotificationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>Home())); },
-          icon: Icon(Icons.arrow_back),
-
-        ),
         title: const Text("Notifications"),
       ),
       body: Container(

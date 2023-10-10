@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:quiz_app/models/user_notification.dart';
-
 import '../constantes.dart';
 import '../models/notification_model.dart';
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
+
 
 class UserService {
   static const baseUserUrl = "${baseUrl}:9000/api/users";
@@ -82,6 +81,19 @@ class UserService {
     return [];
   }
 
+  Future<List<NotificationModel>> getNotificationsUnReadByUser(int userId) async {
+    final response = await http.get(Uri.parse('$baseUserUrl/$userId/notifications/unread'));
+    if(response.statusCode == 200) {
+      final responseData = json.decode(utf8.decode(response.bodyBytes));
+      List<NotificationModel> notificationsUnread = [];
+      for(var notification in responseData){
+        notificationsUnread.add(NotificationModel.fromJson(notification));
+      }
+      return notificationsUnread;
+    }
+    return [];
+  }
+
   Future<NotificationModel?> getOneNotificationForUser(int userId, int notificationId) async{
     final response = await http.get(Uri.parse("$baseUserUrl/$userId/notifications/$notificationId"));
 
@@ -94,10 +106,26 @@ class UserService {
   }
 
   Future<int> getNbNotificationUnreadByUser(int userId) async {
-    List<UserNotification> userNotifications = await getNotificationsForUser(userId);
+    List<NotificationModel> userNotifications = await getNotificationsUnReadByUser(userId);
     return userNotifications.length;
-
   }
 
+  void confirmNotificationRead(int userId, int notificationId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$userId/notifications/$notificationId/read"));
+    if(response.statusCode != 200){
+      print(response.body);
+    }
+  }
+
+  Future<UserNotification?> deleteNotificationForUser(int userId, int notificationId) async{
+    final response = await http.delete(Uri.parse("$baseUserUrl/$userId/notifications/$notificationId"));
+    if(response.statusCode == 200) {
+      final responseDate = json.decode(utf8.decode(response.bodyBytes));
+      UserNotification userNotification = UserNotification.fromJson(responseDate);
+      return userNotification;
+    }
+    print(response.statusCode);
+    return null;
+  }
 
 }

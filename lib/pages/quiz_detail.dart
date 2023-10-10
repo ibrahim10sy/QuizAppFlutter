@@ -79,7 +79,7 @@ class _QuizDetailState extends State<QuizDetail> {
         appBar: AppBar(
             backgroundColor: d_color1,
             centerTitle: true,
-            title: Padding(
+            title: const Padding(
               padding: EdgeInsets.all(100),
               child: Text(
                 'Créer un quiz',
@@ -105,7 +105,7 @@ class _QuizDetailState extends State<QuizDetail> {
                         fit: BoxFit.cover,
                       )
                     : Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                           image: AssetImage('images/background-quiz-card.jpg'),
                           fit: BoxFit.cover,
@@ -114,7 +114,7 @@ class _QuizDetailState extends State<QuizDetail> {
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'Ajouter une image',
                               style: TextStyle(
                                 fontSize: 20,
@@ -192,7 +192,7 @@ class _QuizDetailState extends State<QuizDetail> {
                               side: BorderSide.none,
                               backgroundColor: Color(0xFF031B49),
                             ),
-                            child: Text(
+                            child: const Text(
                               'Suivant',
                               style: TextStyle(
                                 color: Colors.white,
@@ -224,7 +224,7 @@ class SuccessPage extends StatelessWidget {
       body: Column(
         children: [
           // Padding(padding: EdgeInsets.only(left: 40,),),:
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
@@ -232,7 +232,7 @@ class SuccessPage extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.all(10),
-                child: Icon(
+                child: const Icon(
                   Icons.clear,
                   size: 40,
                   color: Colors.white,
@@ -240,31 +240,29 @@ class SuccessPage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 200,
           ),
-          Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Quiz créé avec succès !',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28,
-                        fontFamily: 'Poppins',
-                      )),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Icon(
-                    Icons.check_circle_outline,
-                    color: Colors.green,
-                    size: 120,
-                  ),
-                ],
-              ),
+          const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Quiz créé avec succès !',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      fontFamily: 'Poppins',
+                    )),
+                SizedBox(
+                  height: 25,
+                ),
+                Icon(
+                  Icons.check_circle_outline,
+                  color: Colors.green,
+                  size: 120,
+                ),
+              ],
             ),
           ),
         ],

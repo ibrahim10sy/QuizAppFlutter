@@ -75,19 +75,19 @@ class _QuestionPageState extends State<QuestionPage> {
               width: double.infinity,
               child: (image != null)
                   ? Image.file(
-                      image!,
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.cover,
-                    )
+                image!,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              )
                   : Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
                         image: AssetImage('images/background-quiz-card.jpg'),
                         fit: BoxFit.cover,
                       )),
-                      child: Center(
-                          child: Column(
+                  child: Center(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -113,7 +113,7 @@ class _QuestionPageState extends State<QuestionPage> {
               padding: EdgeInsets.all(10),
               child: Column(
                   crossAxisAlignment:
-                      CrossAxisAlignment.start, // Align children to the left
+                  CrossAxisAlignment.start, // Align children to the left
                   children: [
                     TextField(
                       decoration: InputDecoration(
@@ -251,7 +251,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         child: Text('Valider'),
                         style: ElevatedButton.styleFrom(
                           primary:
-                              Color(0xFF031B49), // Couleur de fond du bouton
+                          Color(0xFF031B49), // Couleur de fond du bouton
                           onPrimary: Colors.white, // Couleur du texte
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),

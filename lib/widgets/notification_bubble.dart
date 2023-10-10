@@ -29,19 +29,28 @@ class NotificationBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
-      color: (isRead)?Colors.white:kFourColor,
+      color: Colors.white,
       borderRadius: BorderRadius.circular(10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: ExpansionTile(
-          backgroundColor: (isRead)?kFourColor:Colors.white,
+          backgroundColor: Colors.white,
           expandedAlignment: Alignment.topLeft,
           tilePadding: const EdgeInsets.only(left: 20, ),
           childrenPadding: const EdgeInsets.only(left: 77, right: 10, bottom: 10,),
 
           onExpansionChanged: onExpansionChanged,
           leading: getLeadingIcon(notificationType),
-          title: Text(title, style: const TextStyle(fontSize: 18, color: kPrimaryColor, fontWeight: FontWeight.bold),),
+          // Text(title, style: const TextStyle(fontSize: 18, color: kPrimaryColor, fontWeight: FontWeight.bold),)
+          title: Text.rich(
+              TextSpan(
+                  text: title,
+                  style: const TextStyle(fontSize: 18, color: kPrimaryColor, fontWeight: FontWeight.bold),
+                children: (!isRead)?const [
+                  TextSpan(text: " (NEW)", style: TextStyle(fontSize: 18, color: Colors.red, fontWeight: FontWeight.bold))
+                ]:[]
+              ),
+          ),
           subtitle: (isSelected)?null:Text(content, style: const TextStyle(color: kTextColor),overflow: TextOverflow.ellipsis,),
           trailing: Padding(
             padding: const EdgeInsets.only(top: 0,right: 10,),
@@ -67,7 +76,7 @@ class NotificationBubble extends StatelessWidget {
     late final Icon leading;
     switch (notificationType){
       case NotificationType.newQuiz:
-        leading = Icon(Icons.question_mark, color: Colors.blue,);
+        leading = const Icon(Icons.question_mark, color: Colors.blue,);
         break;
     }
     return leading;

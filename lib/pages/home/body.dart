@@ -41,6 +41,7 @@ class _BodyState extends State<Body> {
   void onItemTapped(int index) {
     setState(() {
       futureQuizzes = quizService.getQuizzes(kCategories[index]);
+      defaultCategory = kCategories[index];
       selectedIndex = index;
     });
   }
@@ -127,10 +128,10 @@ class _BodyState extends State<Body> {
                 ),
 
                 // Titre "Quiz sur les Animés"
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Text(
-                    'Quiz sur les Animés',
-                    style: TextStyle(
+                    'Quiz sur les ${defaultCategory.toCapitalize()+"s"}',
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),

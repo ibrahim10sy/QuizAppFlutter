@@ -42,6 +42,7 @@ class _HomeState extends State<Home> {
         title: const AppBarTitle(),
         actions: [
           badges.Badge(
+            showBadge: (nbNotificationUnread>0)?true:false,
               position: badges.BadgePosition.topEnd(top: 3, end: 8),
               badgeStyle: const badges.BadgeStyle(
                   padding: EdgeInsets.all(5)

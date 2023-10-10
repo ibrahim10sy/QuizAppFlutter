@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/models/user_notification.dart';
+import 'package:quiz_app/pages/home/home.dart';
 import '../../constantes.dart';
 import '../../models/notification_model.dart';
 import '../../services/user_service.dart';
@@ -33,8 +34,11 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
 
-  void onTapExpanded(bool value, int notificationIndex){
+  void onTapExpanded(bool value, int notificationIndex, int notificationId){
+    userService.confirmNotificationRead(currentUserId, notificationId);
     setState(() {
+      futureUserNotifications = userService.getNotificationsForUser(currentUserId);
+
       if(!notificationsRead.contains(notificationIndex)){
         notificationsRead.add(notificationIndex);
       }
@@ -48,13 +52,26 @@ class _NotificationPageState extends State<NotificationPage> {
     });
   }
 
+  void deleteNotification(int userId, int notificationId) async {
+    UserNotification? userNotification = await userService.deleteNotificationForUser(userId, notificationId);
+    print(userNotification);
+    setState(() {
+      futureUserNotifications = userService.getNotificationsForUser(currentUserId);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications"),
+        leading: IconButton(
+          onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>Home())); },
+          icon: Icon(Icons.arrow_back),
+
+        ),
+        title: const Text("Notifications"),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10,),
@@ -68,13 +85,13 @@ class _NotificationPageState extends State<NotificationPage> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: NotificationBubble(
-                      onCloseButtonPressed: () {},
+                      onCloseButtonPressed: () => deleteNotification(currentUserId, snapshot.data![index].notification.notificationId!),
                       notificationType: NotificationType.newQuiz,
                       onExpansionChanged: (value){
-                        onTapExpanded(value, index);
+                        onTapExpanded(value, index, snapshot.data![index].notification.notificationId!);
                       },
                       isSelected: selectedNotificationIndex.contains(index),
-                      title: (snapshot.data![index].read)?snapshot.data![index].notification.title:snapshot.data![index].notification.title+' (New)',
+                      title: snapshot.data![index].notification.title,
                       content: snapshot.data![index].notification.body,
                       isRead: snapshot.data![index].read,
                     ),

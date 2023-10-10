@@ -1,5 +1,5 @@
 class User{
-  final int userId;
+  final int? userId;
   final String firstName;
   final String lastName;
   final String email;
@@ -18,16 +18,17 @@ class User{
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      userId: json['userId'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      email: json['email'],
-      login: json['login'],
-      password: json['password'],
-      imageUrl: json['imageUrl'],
-    );
-  }
+  return User(
+    userId: json['userId'] ?? 0, // Utilisation d'une valeur par défaut de 0 si 'userId' est null.
+    firstName: json['firstName'] ?? '',
+    lastName: json['lastName'] ?? '',
+    email: json['email'] ?? '',
+    login: json['login'] ?? '',
+    password: json['password'] ?? '',
+    imageUrl: json['imageUrl'] ?? '',
+  );
+}
+
 
   Map<String, dynamic> toJson() => {
     "userId": userId,

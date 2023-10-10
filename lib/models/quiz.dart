@@ -1,12 +1,12 @@
 import 'package:quiz_app/models/user.dart';
 
 class  Quiz {
-  final int quizId;
+  final int? quizId;
   final String title;
   final int nbQuestion;
   final String visibility;
   final String description;
-  final String creationDate;
+  final String? creationDate;
   final String category; // il répresente le domain dans spring boot
   final String imageUrl;
   final User user;
@@ -25,25 +25,25 @@ class  Quiz {
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
     return Quiz(
-        quizId: json['quizId'],
-        title: json['title'],
-        nbQuestion: json['nbMaxQuestion'],
-        visibility: json['visibility'],
-        description: json['description'],
-        creationDate: json['creationDate'],
-        category: json['domain'],
-        imageUrl: json['imageUrl'],
-        user: User.fromJson(json['user'])
+        quizId: json['quizId'] ?? 0,
+        title: json['title'] ?? '',
+        nbQuestion: json['nbQuestion']?? 0,
+        visibility: json['visibility'] ?? '',
+        description: json['description'] ?? '',
+        creationDate: json['creationDate'] ?? '', 
+        category: json['domain'] ?? '',
+        imageUrl: json['imageUrl'] ?? '',
+        user: User.fromJson(json['user']),
     );
   }
 
     Map<String, dynamic> toJson() => {
       "quizId": quizId,
       "title": title,
-      "nbMaxQuestion": nbQuestion,
+      "nbQuestion": nbQuestion,
       "visibility": visibility,
       "description": description,
-      "creationDate": DateTime.parse(creationDate),
+      "creationDate": creationDate,
       "domain": category,
       "imageUrl": imageUrl,
       "user": user.toJson(),

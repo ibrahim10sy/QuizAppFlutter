@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
+import 'package:quiz_app/pages/categories.dart';
 import 'pages/home/home.dart';
-import 'pages/liste.dart';
-import 'pages/quiz.dart';
+import 'pages/played/played.dart';
+import 'pages/quiz_detail.dart';
 import 'pages/profile.dart';
 import 'pages/comptepublic.dart';
 import 'pages/categorie.dart';
@@ -22,10 +23,9 @@ class _NavState extends State<Nav> {
 
 List<Widget> _listTab = <Widget>[
    Home(),
-   Liste(),
-   Quiz(),
-  Profile(),
- 
+   Played(),
+  //  Categorie(),
+   Profile()
 
 ];
 
@@ -48,23 +48,23 @@ List<Widget> _listTab = <Widget>[
       items: <BottomNavigationBarItem> [
         BottomNavigationBarItem(
             icon: const Icon(Icons.home),
-            label: 'Home',
+            label: 'Accueil',
             backgroundColor : bottomNavigationBackgroundColor,
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.list),
-          label: 'Liste',
+          icon: const Icon(Icons.play_arrow),
+          label: 'Play',
           backgroundColor : bottomNavigationBackgroundColor,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.quiz),
+          icon: const Icon(Icons.add_box_outlined),
           label: 'Quiz',
           backgroundColor : bottomNavigationBackgroundColor,
         ),
         
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),
-          label: 'profile',
+          label: 'Profile',
           backgroundColor : bottomNavigationBackgroundColor,
         ),
          

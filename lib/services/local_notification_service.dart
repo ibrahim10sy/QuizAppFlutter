@@ -15,13 +15,13 @@ class LocalNotificationService {
         iOS: DarwinInitializationSettings()
     );
     _notificationsPlugin.initialize(
-      initializationSettingsAndroid,
-      // to handle event when we receive notification
-      onDidReceiveNotificationResponse: (details) {
-        if (details.input != null) {}
-      },onDidReceiveBackgroundNotificationResponse: (details) {
-        print(details);
-      }
+        initializationSettingsAndroid,
+        // to handle event when we receive notification
+        onDidReceiveNotificationResponse: (details) {
+          if (details.input != null) {}
+        },onDidReceiveBackgroundNotificationResponse: (details) {
+      print(details);
+    }
     );
   }
 

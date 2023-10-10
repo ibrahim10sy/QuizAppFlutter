@@ -73,99 +73,97 @@ class _BodyState extends State<Body> {
             ),
             Expanded(
                 child: CustomScrollView(
-              slivers: <Widget>[
-                // Titre "Les plus populaires"
-                const SliverToBoxAdapter(
-                  child: Text(
-                    'Les plus populaires',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                  slivers: <Widget>[
+                    // Titre "Les plus populaires"
+                    const SliverToBoxAdapter(
+                      child: Text(
+                        'Les plus populaires',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
 
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 10,
-                  ),
-                ),
+                    const SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 10,
+                      ),
+                    ),
 
-                // Liste horizontale de QuizCards pour les plus populaires
-                SliverToBoxAdapter(
-                  child: FutureBuilder(
-                      future: futureUsers,
-                      builder: (context, snapshot) {
-                        return SizedBox(
-                          height: 100, // Ajustez la hauteur en conséquence
-                          child: ListView.builder(
-                            physics: (!snapshot.hasData)?const NeverScrollableScrollPhysics():const AlwaysScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: (snapshot.hasData)
-                                ? snapshot.data?.length
-                                : 10, // Nombre d'éléments pour les plus populaires
-                            itemBuilder: (context, index) {
-                              return (snapshot.hasData)?UserCircleAvatar(
-                                imageUrl: snapshot.data![index].imageUrl,
+                    // Liste horizontale de QuizCards pour les plus populaires
+                    SliverToBoxAdapter(
+                      child: FutureBuilder(
+                          future: futureUsers,
+                          builder: (context, snapshot) {
+                            return SizedBox(
+                              height: 100, // Ajustez la hauteur en conséquence
+                              child: ListView.builder(
+                                physics: (!snapshot.hasData)?const NeverScrollableScrollPhysics():const AlwaysScrollableScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: (snapshot.hasData)
+                                    ? snapshot.data?.length
+                                    : 10, // Nombre d'éléments pour les plus populaires
+                                itemBuilder: (context, index) {
+                                  return (snapshot.hasData)?UserCircleAvatar(
+                                    imageUrl: snapshot.data![index].imageUrl,
                                     title: snapshot.data![index].login,
+                                    press: () {},
+                                  ):
+                                  Shimmer.fromColors(
+                                    baseColor: Colors.grey.withOpacity(0.25),
+                                    highlightColor: Colors.white.withOpacity(0.6),
+                                    enabled: true,
+                                    child: UserCircleAvatar(
+                                      imageUrl: "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
+                                      title: "",
+                                      useBaseUrl: false,
+                                      press: () {},
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }),
+                    ),
+
+                    // Titre "Quiz sur les Animés"
+                    SliverToBoxAdapter(
+                      child: Text(
+                        'Quiz sur les ${defaultCategory.toCapitalize()+"s"}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    // Liste verticale de QuizCards pour les quiz sur les Animés
+                    FutureBuilder(
+                      future: futureQuizzes,
+                      builder: (context, snapshot) {
+                        return SliverGrid(
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, // 2 cartes par ligne
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
+                            childAspectRatio:
+                            1, // Ajustez l'aspect ratio selon vos besoins
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            childCount:
+                            (snapshot.hasData) ? snapshot.data!.length : 10,
+                                (BuildContext context, int index) {
+                              return (snapshot.hasData)
+                                  ? QuizCard(
+                                quiz: snapshot.data![index],
                                 press: () {},
-                              ):
-                              Shimmer.fromColors(
+                              )
+                                  : Shimmer.fromColors(
                                 baseColor: Colors.grey.withOpacity(0.25),
                                 highlightColor: Colors.white.withOpacity(0.6),
                                 enabled: true,
-                                child: UserCircleAvatar(
-                                  imageUrl: "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
-                                  title: "",
-                                  useBaseUrl: false,
-                                  press: () {
-
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      }),
-                ),
-
-                // Titre "Quiz sur les Animés"
-                SliverToBoxAdapter(
-                  child: Text(
-                    'Quiz sur les ${defaultCategory.toCapitalize()+"s"}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-                // Liste verticale de QuizCards pour les quiz sur les Animés
-                FutureBuilder(
-                  future: futureQuizzes,
-                  builder: (context, snapshot) {
-                    return SliverGrid(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 cartes par ligne
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
-                        childAspectRatio:
-                            1, // Ajustez l'aspect ratio selon vos besoins
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                        childCount:
-                            (snapshot.hasData) ? snapshot.data!.length : 10,
-                        (BuildContext context, int index) {
-                          return (snapshot.hasData)
-                              ? QuizCard(
-                            quiz: snapshot.data![index],
-                            press: () {},
-                          )
-                              : Shimmer.fromColors(
-                            baseColor: Colors.grey.withOpacity(0.25),
-                            highlightColor: Colors.white.withOpacity(0.6),
-                            enabled: true,
                                 child: QuizCard(
                                     useBaseUrl: false,
                                     quiz: Quiz(
@@ -177,7 +175,7 @@ class _BodyState extends State<Body> {
                                         title: "title",
                                         nbQuestion: 0,
                                         imageUrl:
-                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
+                                        "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
                                         user: User(
                                             userId: 0,
                                             firstName: "firstName",
@@ -186,16 +184,16 @@ class _BodyState extends State<Body> {
                                             password: "password",
                                             login: "login",
                                             imageUrl:
-                                                "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg")),
+                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg")),
                                     press: () {}),
                               );
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ))
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ))
           ],
         ));
   }

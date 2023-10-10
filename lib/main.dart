@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/splashScreen.dart';
 import 'package:quiz_app/services/push_notifications.dart';
 import 'package:quiz_app/theme.dart';
 import 'firebase_options.dart';
@@ -106,7 +107,7 @@ class _MyAppState extends State<MyApp> {
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home:Nav() ,
+      home:SplashScreen() ,
     );
   }
 }

@@ -96,10 +96,10 @@ class _QuizDetailState extends State<QuizDetail> {
             backgroundColor: d_color1,
             centerTitle: true,
             // theme: theme(),
-            title: Padding(
+            title: const Padding(
               padding: EdgeInsets.all(100),
               child: Text(
-                'Créer un quiz de categorie ',
+                'Créer un quiz de categorie',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'Poppins',

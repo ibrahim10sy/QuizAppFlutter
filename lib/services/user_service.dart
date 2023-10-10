@@ -20,7 +20,7 @@ class UserService {
       }
       return users;
     }
-   return [];
+    return [];
   }
 
   Future<User?> getUser(int userId) async{

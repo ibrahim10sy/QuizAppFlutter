@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
               child: Row(
                 children: List.generate(
                   kCategories.length,
-                  (index) => Container(
+                      (index) => Container(
                       margin: const EdgeInsets.symmetric(horizontal: 5),
                       child: ButtonChip(
                         isBorder: selectedIndex != index,
@@ -66,68 +66,68 @@ class _BodyState extends State<Body> {
             ),
             Expanded(
                 child: CustomScrollView(
-              slivers: <Widget>[
-                // Liste verticale de QuizCards pour les quiz sur les Animés
-                FutureBuilder(
-                  future: futureQuizzes,
-                  builder: (context, snapshot) {
-                    return SliverGrid(
-                      gridDelegate:
+                  slivers: <Widget>[
+                    // Liste verticale de QuizCards pour les quiz sur les Animés
+                    FutureBuilder(
+                      future: futureQuizzes,
+                      builder: (context, snapshot) {
+                        return SliverGrid(
+                          gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 cartes par ligne
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
-                        childAspectRatio:
+                            crossAxisCount: 2, // 2 cartes par ligne
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5,
+                            childAspectRatio:
                             1, // Ajustez l'aspect ratio selon vos besoins
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                        childCount:
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            childCount:
                             (snapshot.hasData) ? snapshot.data!.length : 10,
-                        (BuildContext context, int index) {
-                          return (snapshot.hasData)
-                              ? (snapshot.data!.isNotEmpty)
+                                (BuildContext context, int index) {
+                              return (snapshot.hasData)
+                                  ? (snapshot.data!.isNotEmpty)
                                   ? QuizCard(
-                                      quiz: snapshot.data![index],
-                                      press: () {},
-                                    )
+                                quiz: snapshot.data![index],
+                                press: () {},
+                              )
                                   : Center(
-                                      child: Text(
-                                          "Vous n'avez joué aucun quiz sur ${kCategories[index]}"),
-                                    )
-                              : Shimmer.fromColors(
-                                  baseColor: Colors.grey.withOpacity(0.25),
-                                  highlightColor: Colors.white.withOpacity(0.6),
-                                  enabled: true,
-                                  child: QuizCard(
-                                      useBaseUrl: false,
-                                      quiz: Quiz(
-                                          visibility: "public",
-                                          description: "description",
-                                          creationDate: "creationDate",
-                                          category: "anime",
-                                          quizId: 0,
-                                          title: "title",
-                                          nbQuestion: 0,
-                                          imageUrl:
-                                              "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
-                                          user: User(
-                                              userId: 0,
-                                              firstName: "firstName",
-                                              lastName: "lastName",
-                                              email: "email",
-                                              password: "password",
-                                              login: "login",
-                                              imageUrl:
-                                                  "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg")),
-                                      press: () {}),
-                                );
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ))
+                                child: Text(
+                                    "Vous n'avez joué aucun quiz sur ${kCategories[index]}"),
+                              )
+                                  : Shimmer.fromColors(
+                                baseColor: Colors.grey.withOpacity(0.25),
+                                highlightColor: Colors.white.withOpacity(0.6),
+                                enabled: true,
+                                child: QuizCard(
+                                    useBaseUrl: false,
+                                    quiz: Quiz(
+                                        visibility: "public",
+                                        description: "description",
+                                        creationDate: "creationDate",
+                                        category: "anime",
+                                        quizId: 0,
+                                        title: "title",
+                                        nbQuestion: 0,
+                                        imageUrl:
+                                        "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg",
+                                        user: User(
+                                            userId: 0,
+                                            firstName: "firstName",
+                                            lastName: "lastName",
+                                            email: "email",
+                                            password: "password",
+                                            login: "login",
+                                            imageUrl:
+                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg")),
+                                    press: () {}),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ))
           ],
         ));
   }

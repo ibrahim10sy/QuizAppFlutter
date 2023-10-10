@@ -4,14 +4,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class QuizService {
-  static const baseQuizUrl = "${baseUrl}/api/quizzes";
-  static const baseQuizUrlForUser = "${baseUrl}/api/users";
-  // static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
-  // static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
+  static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
+  static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
 
   Future<List<Quiz>?> getQuizzes(String category) async {
     final response =
-        await http.get(Uri.parse(baseQuizUrl + "?domain=" + category));
+    await http.get(Uri.parse(baseQuizUrl + "?domain=" + category));
 
     if (response.statusCode == 200) {
       var responseData = json.decode(utf8.decode(response.bodyBytes));
@@ -52,7 +50,7 @@ class QuizService {
   Future<List<Quiz>> getQuizzesByUser(int userId) async {
     // Obtenir les quiz pour un utilisateur
     final response =
-        await http.get(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'));
+    await http.get(Uri.parse('$baseQuizUrlForUser/$userId/quizzes'));
     if (response.statusCode == 200) {
       var responseDate = json.decode(response.body);
       List<Quiz> quizzes = [];
@@ -80,8 +78,8 @@ class QuizService {
       int userId, int quizId, Quiz updateQuiz) async {
     // Mise à jour complete des données d'un quiz pour un utilisateur
     final response = await http.put(
-        Uri.parse('$baseQuizUrlForUser/$userId/quizzes/$quizId'),
-        body: json.encode(updateQuiz),);
+      Uri.parse('$baseQuizUrlForUser/$userId/quizzes/$quizId'),
+      body: json.encode(updateQuiz),);
     if (response.statusCode == 200) {
       var responseDate = json.decode(utf8.decode(response.bodyBytes));
       Quiz quiz = Quiz.fromJson(responseDate);

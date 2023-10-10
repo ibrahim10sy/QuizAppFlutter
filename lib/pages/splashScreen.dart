@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/pages/home/home.dart';
 
-class spalshScreen extends StatefulWidget {
-  const spalshScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<spalshScreen> createState() => _spalshScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _spalshScreenState extends State<spalshScreen> {
+class _SplashScreenState extends State<SplashScreen> {
 
 
  @override

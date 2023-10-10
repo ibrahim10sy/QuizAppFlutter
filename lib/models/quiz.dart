@@ -37,16 +37,16 @@ class  Quiz {
     );
   }
 
-    Map<String, dynamic> toJson() => {
-      "quizId": quizId,
-      "title": title,
-      "nbQuestion": nbQuestion,
-      "visibility": visibility,
-      "description": description,
-      "creationDate": creationDate,
-      "domain": category,
-      "imageUrl": imageUrl,
-      "user": user.toJson(),
-    };
+  Map<String, dynamic> toJson() => {
+    "quizId": quizId,
+    "title": title,
+    "nbQuestion": nbQuestion,
+    "visibility": visibility,
+    "description": description,
+    "creationDate": creationDate,
+    "domain": category,
+    "imageUrl": imageUrl,
+    "user": user.toJson(),
+  };
 
 }

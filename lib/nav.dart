@@ -24,7 +24,7 @@ List<Widget> _listTab = <Widget>[
    Home(),
    Played(),
    Categorie(),
-  Profile()
+  ProfileScreen()
 
 ];
 

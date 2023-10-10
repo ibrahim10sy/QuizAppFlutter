@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../constantes.dart';
+
 
 class ProfileImg extends StatelessWidget {
   const ProfileImg({Key? key, required this.profileImg, this.pressShowImg, this.pressModifImg, this.showIconModif=false,}) : super(key: key);
@@ -17,24 +19,26 @@ class ProfileImg extends StatelessWidget {
             onTap: pressShowImg,
             child: CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage(profileImg),
+              backgroundImage: NetworkImage(profileImg),
             ),
           ),
           Positioned(
             bottom: 0,
-            right: 0,
-            child: GestureDetector(
-              onTap: pressModifImg,
-              child: (showIconModif)?Container(
-                padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                  color: Color(0xFFF5F6F9),
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                    'assets/icons/Camera Icon.svg'
-                ),
-              ):null,
+            right: 2,
+            child: SizedBox(
+              width: 30,
+              height: 30,
+              child: GestureDetector(
+                onTap: pressModifImg,
+                child: (showIconModif)?Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                    color: kBackgroundColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.camera_alt),
+                ):null,
+              ),
             ),
           )
         ]

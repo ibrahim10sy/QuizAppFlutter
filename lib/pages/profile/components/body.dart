@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
             //mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const SizedBox(height: 10,),
-              ProfileImg(profileImg: kBaseUrlForImage+"users/Anime_zone.jpg", pressShowImg: (){},),
+              ProfileImg(profileImg: "${kBaseUrlForImage}user/Anime_zone.jpg", pressShowImg: (){}, showIconModif: true,),
               const SizedBox(height: 50,),
               NextInteraction(leading: const Icon(Icons.account_circle, color: kPrimaryColor,), text: 'Mon compte', press: (){},),
               NextInteraction(leading: const Icon(Icons.settings, color: kPrimaryColor,), text: 'Parametres', press: (){},),

@@ -19,6 +19,7 @@ class _LostState extends State<Lost> {
      Color score = const Color(0xFFFFFFFF);
 
     return Scaffold(
+      appBar: AppBar(leading: SizedBox(),),
       backgroundColor:(myColor) ,
       body:  
        Center(
@@ -27,20 +28,10 @@ class _LostState extends State<Lost> {
           
           mainAxisAlignment: MainAxisAlignment.start,
            children: [
-             const SizedBox(height: 20),
             //  const Text('QUIZMASTER', style: TextStyle(
             //     color: Colors.white, fontWeight: FontWeight.bold, 
             //     fontFamily: "poppins", fontSize: 40),),
             // Padding(padding: EdgeInsets.only(left: 30)),
-            Container(
-              padding: EdgeInsets.only(left: 350),
-              child: 
-            Icon(Icons.clear, size: 40, color: Colors.white,),
-              
-              
-            ),
-
-        const SizedBox(height: 30,),
         const Text('Désolé !', style: TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, 
           fontFamily: "poppins", fontSize: 40,),),

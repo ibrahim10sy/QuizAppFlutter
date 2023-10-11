@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/constantes.dart';
+import 'package:quiz_app/extensions/string_extension.dart';
 
-class Comptepublic extends StatelessWidget {
-  Comptepublic({Key? key}) : super(key: key);
+import '../models/user.dart';
+import '../services/user_service.dart';
+import '../widgets/buttom_chip.dart';
+import '../widgets/user_circle_avatar.dart';
+
+class ComptePublic extends StatelessWidget {
+  ComptePublic({Key? key, required this.user}) : super(key: key);
+  final User user;
 
   List<String> imagesQuizs = [
     "images/ori1.jpg",
@@ -13,21 +21,16 @@ class Comptepublic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: false,
-        elevation: 2,
+        backgroundColor: kAppBarColor,
+        centerTitle: true,
         title: //Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Text("DIALLO",
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400)),
+            Text("${user.login}",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
         // ]),
       ),
-   
-     
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,11 +39,12 @@ class Comptepublic extends StatelessWidget {
             // ProfilSection(),
             // DataRow(),
             DataRow(
-           nQuizs: 50,
+              user: user,
+              nQuizs: 50,
               initialNJoueurs: 4,
-             ),
+            ),
 
-             Tapbar(),
+            Tapbar(),
             SizedBox(
               height: 220,
               child: ListView.builder(
@@ -60,9 +64,7 @@ class Comptepublic extends StatelessWidget {
         ),
       ),
     );
-       
   }
-  
 }
 
 class quizImageCard extends StatelessWidget {
@@ -91,12 +93,13 @@ class quizImageCard extends StatelessWidget {
             Expanded(
                 flex: 4,
                 child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(imageUrl ?? "images/ori1.jpg"))),
-                )),
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            //image: NetworkImage('${kBaseUrlForImage}user/${imageUrl!}' ?? "images/ori1.jpg"))),
+                            image:
+                                AssetImage(imageUrl ?? "images/ori1.jpg"))))),
             Expanded(
               flex: 2,
               child: Padding(
@@ -124,15 +127,19 @@ class quizImageCard extends StatelessWidget {
       ),
     );
   }
-
-
 }
+
 class DataRow extends StatefulWidget {
-  DataRow({Key? key, required this.nQuizs, required this.initialNJoueurs})
+  DataRow(
+      {Key? key,
+      required this.nQuizs,
+      required this.initialNJoueurs,
+      required this.user})
       : super(key: key);
 
   final int nQuizs;
   final int initialNJoueurs;
+  final User user;
 
   @override
   _DataRowState createState() => _DataRowState();
@@ -165,76 +172,88 @@ class _DataRowState extends State<DataRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ProfilSection(),
-    // Row(
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '${widget.nQuizs}',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        SizedBox(height: 10,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ProfilSection( user: widget.user),
+            // Row(
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${widget.nQuizs}',
+                    style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    'Quizs',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  ),
+                ],
               ),
-              Text(
-                'Quizs',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$nJoueurs',
+                    style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    'Joueurs',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '$nJoueurs',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'Joueurs',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
-  ElevatedButton(
-  style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return Color.fromARGB(255, 74, 86, 174); // Couleur du bouton lorsque désactivé
-       
-        }
+            ),
+            SizedBox(width: 20,),
+            ElevatedButton(
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width*0.3, 40)),
+                backgroundColor: MaterialStateProperty.all<Color>(kAppBarColor),
+                /*backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return const Color.fromARGB(
+                        255, 74, 86, 174); // Couleur du bouton lorsque désactivé
+                  }
 
-        return isSubscribed ? Colors.green : Colors.grey; // Couleur du bouton lorsque activé
-      },
-    ),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-    ),
-  ),
-  onPressed: () {
-    toggleSubscription();
-  },
-  child: Text(isSubscribed ? 'Se désabonner' : 'S\'abonner'),
-),
+                  return isSubscribed
+                      ? Colors.green
+                      : Colors.grey; // Couleur du bouton lorsque activé
+                },
+              ),*/
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              onPressed: () {
+                toggleSubscription();
+              },
+              child: Text(isSubscribed ? 'Ne plus suivre' : 'Suivre', style: const TextStyle(fontSize: 18)),
+            )
+          ],
+        ),
+
       ],
     );
   }
 }
 
-
-
 class ProfilSection extends StatelessWidget {
+  const ProfilSection({super.key, required this.user});
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -242,11 +261,8 @@ class ProfilSection extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: CircleAvatar(
         radius: 50.0,
-        backgroundColor: Colors.black,
-        child: Icon(
-          Icons.account_circle_rounded,
-          size: 80,
-        ),
+        backgroundImage:
+            NetworkImage('${kBaseUrlForImage}user/${user.imageUrl!}'),
       ),
     );
   }
@@ -261,6 +277,9 @@ class _TapbarState extends State<Tapbar> {
   final kAppBarColor = const Color(0xFF3F489C).withOpacity(0.8);
   final kBackgroundColor = Color(0xFFEAEAFF);
   final kTextColor = Colors.black;
+
+  UserService userService = UserService();
+  late Future<List<User>?> futureUsers;
 
   List<String> categories = [
     "anime",
@@ -280,7 +299,9 @@ class _TapbarState extends State<Tapbar> {
   void initState() {
     super.initState();
     selectedIndex = 0; // Définir l'onglet sélectionné par défaut
-    defaultCategory = categories[0];
+    defaultCategory = kCategories[0];
+
+    //futureUsers = userService.getFollowings();
     // Vous pouvez ajouter ici l'initialisation de vos futures (futureUsers, futureQuizzes, etc.).
   }
 
@@ -300,14 +321,37 @@ class _TapbarState extends State<Tapbar> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(
-                categories.length,
+                kCategories.length,
+                    (index) => Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    child: ButtonChip(
+                      isBorder: selectedIndex != index,
+                      selectedBackground: kAppBarColor,
+                      isSelected: selectedIndex == index,
+                      press: () {
+                        onItemTapped(index);
+                      },
+                      text: kCategories[index].toCapitalize(),
+                    )),
+              ),
+            ),
+          ),
+
+          //  La liste de personnes que l'utilisateur follow
+
+
+          /*SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                kCategories.length,
                 (index) => InkWell(
                   onTap: () {
                     onItemTapped(index);
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 5),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
                         border: selectedIndex == index
                             ? Border.all(color: Colors.blue)
@@ -317,7 +361,7 @@ class _TapbarState extends State<Tapbar> {
                             : kAppBarColor,
                         borderRadius: BorderRadius.circular(15)),
                     child: Text(
-                      categories[index].toUpperCase(),
+                      kCategories[index].toUpperCase(),
                       style: TextStyle(
                         color: selectedIndex == index
                             ? Colors.blue.shade400
@@ -349,7 +393,7 @@ class _TapbarState extends State<Tapbar> {
                 ),
               ),
             ),
-          ),
+          ),*/
           // Ajoutez ici le contenu en fonction de l'onglet sélectionné
         ],
       ),

@@ -4,7 +4,7 @@ import 'package:quiz_app/pages/categories.dart';
 import 'package:quiz_app/pages/profile/profile_screen.dart';
 import 'pages/home/home.dart';
 import 'pages/played/played.dart';
-import 'pages/quiz_detail.dart';
+import 'pages/quiz_creation.dart';
 import 'pages/profile.dart';
 
 

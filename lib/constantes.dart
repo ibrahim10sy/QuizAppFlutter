@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/user.dart';
 
 final kAppBarColor = const Color(0xFF3F489C).withOpacity(0.8); // Couleur par defaut du AppBarr
 const kPrimaryColor = Color(0xFF3F489C);
@@ -28,3 +29,5 @@ class ProfileDataType {
 enum NotificationType {
   newQuiz
 }
+
+User currentUser = User(userId: 1, firstName: "Drissa Sidiki", lastName: "Traore", email: "drissa@gmail.com", password: "1234", login: "ramsey6340", imageUrl: "Anime_zone.jpg");

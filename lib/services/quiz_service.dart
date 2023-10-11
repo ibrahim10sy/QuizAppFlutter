@@ -3,6 +3,8 @@ import '../models/quiz.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../models/rank.dart';
+
 class QuizService {
   static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
   static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
@@ -10,6 +12,21 @@ class QuizService {
   Future<List<Quiz>?> getQuizzes(String category) async {
     final response =
     await http.get(Uri.parse(baseQuizUrl + "?domain=" + category));
+
+    if (response.statusCode == 200) {
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
+      List<Quiz> quizzes = [];
+      for (var quiz in responseData) {
+        quizzes.add(Quiz.fromJson(quiz));
+      }
+      return quizzes;
+    }
+    return [];
+  }
+
+  Future<List<Quiz>?> getQuizzesByUserAndDomain(int userId, String category) async {
+    final response =
+    await http.get(Uri.parse("$baseQuizUrlForUser/$userId/quizzes?domain=$category"));
 
     if (response.statusCode == 200) {
       var responseData = json.decode(utf8.decode(response.bodyBytes));
@@ -130,6 +147,20 @@ class QuizService {
       print("Unexpected Error");
     }
     return null;
+  }
+
+  Future<Map<int, Rank>> getRank(int quizId) async {
+    final response = await http.get(Uri.parse('$baseQuizUrl/$quizId/rank'));
+    if(response.statusCode == 200){
+      var responseDate = json.decode(response.body);
+      Map<int, Rank> rank = {};
+      int length = responseDate.length;
+      for(int i = 1; i <= length; i++){
+        rank[i] = Rank.fromJson(responseDate[i.toString()]);
+      }
+      return rank;
+    }
+    return {};
   }
 
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/models/category.dart';
-import 'package:quiz_app/pages/quiz_detail.dart';
+import 'package:quiz_app/pages/quiz_creation.dart';
 
 class Categorie extends StatelessWidget {
   
@@ -20,6 +20,7 @@ class Categorie extends StatelessWidget {
     Color myColor = Color(0xFF1C1A5E);
     return Scaffold(
       appBar: AppBar(
+        leading: const SizedBox(),
         centerTitle: true,
         title: Text('Choisir une catégorie'),
       ),
@@ -51,7 +52,7 @@ class Categorie extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                            QuizDetail(categorie: category.nom),
+                            QuizCreation(categorie: category.nom),
                         ),
                       );
                     },

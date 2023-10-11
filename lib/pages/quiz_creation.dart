@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:multiselect/multiselect.dart';
@@ -12,17 +13,17 @@ import 'package:quiz_app/models/user.dart';
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 
-class QuizDetail extends StatefulWidget {
+class QuizCreation extends StatefulWidget {
   static String routeName = "/quiz_detail";
   String categorie = "";
 
-  QuizDetail({super.key, required this.categorie});
+  QuizCreation({super.key, required this.categorie});
 
   @override
-  State<QuizDetail> createState() => _QuizDetailState();
+  State<QuizCreation> createState() => _QuizCreationState();
 }
 
-class _QuizDetailState extends State<QuizDetail> {
+class _QuizCreationState extends State<QuizCreation> {
   File? image;
   String? imageSrc; // Variable pour stocker le chemin de notre l'image upload
  
@@ -93,7 +94,8 @@ class _QuizDetailState extends State<QuizDetail> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-            backgroundColor: d_color1,
+          leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context) ,),
+            backgroundColor: kAppBarColor,
             centerTitle: true,
             // theme: theme(),
             title: const Padding(

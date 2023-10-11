@@ -8,6 +8,7 @@ import 'package:quiz_app/widgets/quiz_card.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../models/quiz.dart';
 import '../../models/user.dart';
+import '../quiz_detail/quiz_detail.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -88,7 +89,9 @@ class _BodyState extends State<Body> {
                                   ? (snapshot.data!.isNotEmpty)
                                   ? QuizCard(
                                 quiz: snapshot.data![index],
-                                press: () {},
+                                press: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(quiz: snapshot.data![index])));
+                                },
                               )
                                   : Center(
                                 child: Text(

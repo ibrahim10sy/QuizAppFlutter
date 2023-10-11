@@ -128,4 +128,46 @@ class UserService {
     return null;
   }
 
+  Future<List<User>> getFollowings(int userId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$userId/followings"));
+    if(response.statusCode == 200) {
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
+      List<User> users = [];
+      for (var user in responseData) {
+        users.add(User.fromJson(user));
+      }
+      return users;
+    }
+    return [];
+  }
+
+  Future<List<User>> getFollowers(int userId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$userId/followers"));
+    if(response.statusCode == 200) {
+      var responseData = json.decode(utf8.decode(response.bodyBytes));
+      List<User> users = [];
+      for (var user in responseData) {
+        users.add(User.fromJson(user));
+      }
+      return users;
+    }
+    return [];
+  }
+
+  Future<String> followAnUser(int followerId, int userSecondId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$followerId/follow/$userSecondId"));
+    if(response.statusCode == 200){
+      return "OK";
+    }
+    return "error";
+  }
+
+  Future<String> unFollowAnUser(int followerId, int userSecondId) async {
+    final response = await http.get(Uri.parse("$baseUserUrl/$followerId/unfollow/$userSecondId"));
+    if(response.statusCode == 200){
+      return "OK";
+    }
+    return "error";
+  }
+
 }

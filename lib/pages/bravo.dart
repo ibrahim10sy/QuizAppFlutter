@@ -24,25 +24,12 @@ class _BravoState extends State<Bravo> {
     // double scoreEnPourcentage = (widget.scoreFinal / (widget.totalQuestions * 10)) * 100;
 
     return Scaffold(
-      backgroundColor: (myColor),
+      appBar: AppBar(leading: SizedBox(),),
+      backgroundColor: myColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
-
-            Container(
-              padding: const EdgeInsets.only(left: 350),
-              child: const Icon(
-                Icons.clear,
-                size: 40,
-                color: Colors.white,
-              ),
-            ),
-
-            const SizedBox(
-              height: 30,
-            ),
             const Text(
               'BRAVO !',
               style: TextStyle(
@@ -52,9 +39,7 @@ class _BravoState extends State<Bravo> {
                 fontSize: 40,
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             Text(
               'VOTRE SCORE',
               style: TextStyle(
@@ -67,39 +52,13 @@ class _BravoState extends State<Bravo> {
             const SizedBox(
               height: 15,
             ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 60), // Ajoutez une marge à droite du premier texte
-                  child: const Text(
-                    '40 points',
-                    textAlign: TextAlign.start, // Alignez le texte à gauche
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  padding: const EdgeInsets.only(
-                      left:
-                          120), // Ajoutez une marge à gauche du deuxième texte
-                  child: const Text(
-                    '100 points',
-                    textAlign: TextAlign.end,
-                    // Alignez le texte à droite
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ],
+            const Text(
+              '40 points',
+              textAlign: TextAlign.start, // Alignez le texte à gauche
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             const SizedBox(
               height: 60,

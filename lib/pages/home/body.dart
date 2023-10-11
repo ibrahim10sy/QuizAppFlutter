@@ -9,6 +9,9 @@ import 'package:shimmer/shimmer.dart';
 import '../../models/quiz.dart';
 import '../../models/user.dart';
 import '../../widgets/user_circle_avatar.dart';
+import '../account_public.dart';
+import '../comptepublic.dart';
+import '../quiz_detail/quiz_detail.dart';
 
 
 class Body extends StatefulWidget {
@@ -32,10 +35,8 @@ class _BodyState extends State<Body> {
 
     defaultCategory = kCategories[0];
     super.initState();
-
     futureUsers = userService.getUsers();
     futureQuizzes = quizService.getQuizzes(defaultCategory);
-
   }
 
   void onItemTapped(int index) {
@@ -108,7 +109,9 @@ class _BodyState extends State<Body> {
                                   return (snapshot.hasData)?UserCircleAvatar(
                                     imageUrl: snapshot.data![index].imageUrl,
                                     title: snapshot.data![index].login,
-                                    press: () {},
+                                    press: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AccountPublic(user: snapshot.data![index],)));
+                                    },
                                   ):
                                   Shimmer.fromColors(
                                     baseColor: Colors.grey.withOpacity(0.25),
@@ -158,7 +161,9 @@ class _BodyState extends State<Body> {
                               return (snapshot.hasData)
                                   ? QuizCard(
                                 quiz: snapshot.data![index],
-                                press: () {},
+                                press: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(quiz: snapshot.data![index])));
+                                },
                               )
                                   : Shimmer.fromColors(
                                 baseColor: Colors.grey.withOpacity(0.25),

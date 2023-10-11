@@ -2,6 +2,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/quiz.dart';
+import 'package:quiz_app/models/user.dart';
 
 class QuestionChoose extends StatefulWidget {
   const QuestionChoose({super.key});
@@ -14,8 +16,10 @@ class _QuestionChooseState extends State<QuestionChoose> {
 
     int _time = 5;
     // final _numQues =  [1, 2, 3, 4, 5];
-    final _results = [5,10,30,-8,20];
+     final _results = [5,10,30,-8,20];
      late Timer timere;
+     late Future<List<Quiz>?> futureQuizzes;
+     late Future<List<User>?> futureUsers;
 
     void startTimer(){
       timere = Timer.periodic(const Duration(seconds: 1), (timer) { 

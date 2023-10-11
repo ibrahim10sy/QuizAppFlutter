@@ -45,12 +45,12 @@ class _BravoState extends State<Bravo> {
            children: [
              const SizedBox(height: 20),
             
-            Container(
-              padding:const EdgeInsets.only(left: 350),
-              child: 
-           const  Icon(Icons.clear, size: 40, color: Colors.white,),
+          //   Container(
+          //     padding:const EdgeInsets.only(left: 350),
+          //     child: 
+          //  const  Icon(Icons.clear, size: 40, color: Colors.white,),
               
-            ),
+          //   ),
 
         const SizedBox(height: 30,),
         const Text('BRAVO !', style: TextStyle(
@@ -67,7 +67,7 @@ class _BravoState extends State<Bravo> {
               Container(
       padding: const EdgeInsets.only(left: 60), // Ajoutez une marge à droite du premier texte
       child: const Text(
-        '40 points',
+        '30 / 40',
         textAlign: TextAlign.start, // Alignez le texte à gauche
         style:   TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white),
 
@@ -77,7 +77,7 @@ class _BravoState extends State<Bravo> {
     Container(
       padding: const EdgeInsets.only(left: 120), // Ajoutez une marge à gauche du deuxième texte
       child: const Text(
-        '100 points',
+        '30 points',
         textAlign: TextAlign.end, 
         // Alignez le texte à droite
         style:  TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/categories.dart';
+import 'package:quiz_app/pages/question_choose.dart';
 import 'package:quiz_app/pages/test.dart';
 import 'pages/home/home.dart';
 import 'pages/played/played.dart';
@@ -24,7 +25,9 @@ List<Widget> _listTab = <Widget>[
    Home(),
    Played(),
    Categorie(),
-   QuestionsChoose(),
+  //  QuestionsChoose(),
+  QuestionChoose(),
+   
 
 ];
 

@@ -32,13 +32,13 @@ class _LostState extends State<Lost> {
             //     color: Colors.white, fontWeight: FontWeight.bold, 
             //     fontFamily: "poppins", fontSize: 40),),
             // Padding(padding: EdgeInsets.only(left: 30)),
-            Container(
-              padding: EdgeInsets.only(left: 350),
-              child: 
-            Icon(Icons.clear, size: 40, color: Colors.white,),
+            // Container(
+            //   padding: EdgeInsets.only(left: 350),
+            //   child: 
+            // Icon(Icons.clear, size: 40, color: Colors.white,),
               
               
-            ),
+            // ),
 
         const SizedBox(height: 30,),
         const Text('Désolé !', style: TextStyle(

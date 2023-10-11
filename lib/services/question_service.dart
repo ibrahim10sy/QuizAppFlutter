@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 class QuestionService {
   const QuestionService();
   static const baseQestionUrlForUser = "$baseUrl/api/users";
+  // static const getQuestionByUser = "$baseUrl/api/users";
+      // /api/users/{userId}/quizzes/{quizId}/questions
 
   // Obtenir les questions
   static Future<List<Question>?> getQuestions(int userId, int quizId) async {

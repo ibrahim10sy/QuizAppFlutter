@@ -26,7 +26,7 @@ class QuizDetail extends StatefulWidget {
 class _QuizDetailState extends State<QuizDetail> {
   File? image;
   String? imageSrc; // Variable pour stocker le chemin de notre l'image upload
- 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -78,13 +78,12 @@ class _QuizDetailState extends State<QuizDetail> {
     });
   }
 
-
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descController = TextEditingController();
   final categorieController = TextEditingController();
   final dateController = TextEditingController();
-  
+  // List<String> options = ['public', 'private'];
   List<String> visibilite = [];
   @override
   Widget build(BuildContext context) {
@@ -186,8 +185,27 @@ class _QuizDetailState extends State<QuizDetail> {
                               labelText: 'Description',
                               border: OutlineInputBorder()),
                         ),
-                       
+
                         const SizedBox(height: 5),
+                        // Column(
+                        //   children: options.map((option) {
+                        //     return Row(
+                        //       children: [
+                        //         Radio<String>(
+                        //           value: option,
+                        //           groupValue: option,
+                        //           onChanged: (String? value) {
+                        //             setState(() {
+                        //               options = value;
+                        //             });
+                        //           },
+                        //         ),
+                        //         Text(option),
+                        //       ],
+                        //     );
+                        //   }).toList(),
+                        // ),
+
                         DropDownMultiSelect(
                           onChanged: (List<String> x){
                             setState(() {

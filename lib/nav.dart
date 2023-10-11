@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/categories.dart';
+import 'package:quiz_app/pages/test.dart';
 import 'pages/home/home.dart';
 import 'pages/played/played.dart';
 import 'pages/quiz_detail.dart';
@@ -23,7 +24,7 @@ List<Widget> _listTab = <Widget>[
    Home(),
    Played(),
    Categorie(),
-   Profile()
+   QuestionsChoose(),
 
 ];
 
@@ -32,6 +33,7 @@ List<Widget> _listTab = <Widget>[
       _selectedIndex = index;
     });
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

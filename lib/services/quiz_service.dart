@@ -19,7 +19,7 @@ class QuizService {
       for (var quiz in responseData) {
         quizzes.add(Quiz.fromJson(quiz));
       }
-      return quizzes;
+      return quizzes;          
     }
     return [];
   }

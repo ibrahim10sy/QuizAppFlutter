@@ -5,7 +5,7 @@ import '../models/user.dart';
 import 'package:http/http.dart' as http;
 
 class UserService {
-  static const baseUserUrl = "${baseUrl}:9000/api/users";
+  static const baseUserUrl = "$baseUrl/api/users";
 
   Future<List<User>> getUsers() async{
     final response = await http.get(Uri.parse(baseUserUrl));

@@ -68,7 +68,7 @@ class _QuestionPageState extends State<QuestionPage> {
   final textController = TextEditingController();
   final reponseController = TextEditingController();
   List<TextEditingController> reponseControllers = List.generate(5, (index) => TextEditingController());
-
+  List<String> options = ['vrai-faux', 'choix-multiple'];
   List<String> type = [];
   List<String> choix = [];
   @override

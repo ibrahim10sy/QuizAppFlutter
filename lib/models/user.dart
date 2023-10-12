@@ -17,6 +17,14 @@ class User{
     required this.imageUrl
   });
 
+
+   // Getter for user ID
+  int? get getUserId => userId;
+
+  // Setter for user ID
+  set setUserId(int? userId) => userId = userId;
+    
+
   factory User.fromJson(Map<String, dynamic> json) {
   return User(
     userId: json['userId'] ?? 0, // Utilisation d'une valeur par défaut de 0 si 'userId' est null.

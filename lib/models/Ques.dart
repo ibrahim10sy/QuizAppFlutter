@@ -5,6 +5,7 @@ import 'package:quiz_app/extensions/string_extension.dart';
 import 'package:quiz_app/models/choise.dart';
 import 'package:quiz_app/models/question.dart';
 import 'package:quiz_app/pages/bravo.dart';
+import 'package:quiz_app/pages/lost.dart';
 import 'package:quiz_app/services/question_service.dart';
 
 class QuestionsChooses extends StatefulWidget {
@@ -93,12 +94,21 @@ class _QuestionsChoosesState extends State<QuestionsChooses> {
         _time = 5;
         startTimer();
       } else {
+        if(currentQuestionIndex == questions.length - 1 && score > 0){
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Bravo(),
+            builder: (context) => Bravo( scoreFinal: score),
           ),
-        );
+        ) ;
+        }else{
+          Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Lost(),
+          ),
+        ) ;
+        }
       }
     });
   }

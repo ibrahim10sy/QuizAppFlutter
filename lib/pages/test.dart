@@ -167,7 +167,7 @@ class _QuestionsChooseState extends State<QuestionsChoose> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Bravo(),
+          builder: (context) => Bravo(scoreFinal: score,),
         ),
       );
     } 

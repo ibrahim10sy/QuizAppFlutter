@@ -6,9 +6,9 @@ import 'package:quiz_app/pages/played/played.dart';
 
 class Bravo extends StatefulWidget {
   
-
+      final  int scoreFinal ;
   //  Bravo({super.key , required scoreFinal , required this.totalQuestions});
-    Bravo({Key? key,  scoreFinal,  totalQuestions})
+    Bravo({Key? key,  required this.scoreFinal,  totalQuestions})
       : super(key: key);
 
 
@@ -18,6 +18,7 @@ class Bravo extends StatefulWidget {
 
 class _BravoState extends State<Bravo> {
 
+ 
 
   @override
   void initState() {
@@ -66,10 +67,10 @@ class _BravoState extends State<Bravo> {
               children: [
               Container(
       padding: const EdgeInsets.only(left: 60), // Ajoutez une marge à droite du premier texte
-      child: const Text(
-        '30 / 40',
+      child:  Text(
+        "${widget.scoreFinal} points",
         textAlign: TextAlign.start, // Alignez le texte à gauche
-        style:   TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white),
+        style:  const TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white),
 
       ),
     ),

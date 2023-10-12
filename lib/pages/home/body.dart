@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
+import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/extensions/string_extension.dart';
+import 'package:quiz_app/models/question.dart';
+import 'package:quiz_app/services/question_service.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 import 'package:quiz_app/services/user_service.dart';
 import 'package:quiz_app/widgets/buttom_chip.dart';
@@ -22,9 +25,11 @@ class _BodyState extends State<Body> {
   int selectedIndex = 0;
   QuizService quizService = QuizService();
   UserService userService = UserService();
+  QuestionService questionService = QuestionService();
 
   late Future<List<Quiz>?> futureQuizzes;
   late Future<List<User>?> futureUsers;
+  late Future<List<Question>?> futureQuestions;
   late String defaultCategory;
 
   @override
@@ -35,6 +40,7 @@ class _BodyState extends State<Body> {
 
     futureUsers = userService.getUsers();
     futureQuizzes = quizService.getQuizzes(defaultCategory);
+    // futureQuestions = questionService.getQuestions(userService.getUser(),quizId);
 
   }
 

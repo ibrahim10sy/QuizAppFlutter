@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/user.dart';
 import 'package:quiz_app/pages/question.dart';

@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/connexion.dart';
 import 'package:quiz_app/inscription.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:quiz_app/services/local_notification_service.dart';
 import 'package:quiz_app/theme.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   //FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   runApp(const MyApp());
 }

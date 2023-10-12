@@ -186,7 +186,7 @@ class _ConnexionState extends State<Connexion>
                   ),
                   ElevatedButton(
                     child: Text(
-                      "Conexxion",
+                      "Connexion",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -214,7 +214,7 @@ class _ConnexionState extends State<Connexion>
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    onPressed: () => signIn() ,
+                    onPressed:signIn ,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 236, 133, 14),
                         shape: RoundedRectangleBorder(

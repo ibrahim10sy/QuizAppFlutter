@@ -12,6 +12,8 @@ import 'package:quiz_app/services/choix_service.dart';
 import 'package:quiz_app/services/question_service.dart';
 import 'package:multiselect/multiselect.dart';
 
+enum SingingCharacter { choixMultiple, vraiFaux }
+
 class QuestionPage extends StatefulWidget {
   static String routeName = "/QuestionPage";
   final Quiz quizz;
@@ -86,7 +88,7 @@ class _QuestionPageState extends State<QuestionPage> {
   List<TextEditingController> reponseControllers =
       List.generate(5, (index) => TextEditingController());
   List<bool> checkboxStates = List.generate(5, (index) => false);
-  List<String> options = ['vrai-faux', 'choix-multiple'];
+  SingingCharacter? _character = SingingCharacter.choixMultiple;
   List<String> type = [];
   List<String> choix = [];
   bool? isvalue = false;
@@ -114,229 +116,235 @@ class _QuestionPageState extends State<QuestionPage> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(3),
-              height: 200,
-              width: double.infinity,
-              child: (image != null)
-                  ? Image.file(
-                      image!,
-                      width: double.infinity,
-                      height: double.infinity,
+          child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(3),
+            height: 200,
+            width: double.infinity,
+            child: (image != null)
+                ? Image.file(
+                    image!,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                : Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage('images/background-quiz-card.jpg'),
                       fit: BoxFit.cover,
-                    )
-                  : Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage('images/background-quiz-card.jpg'),
-                        fit: BoxFit.cover,
-                      )),
-                      child: Center(
-                          child: Column(
+                    )),
+                    child: Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Ajouter une image',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                        buildButton(
+                          title: 'Choisir image',
+                          icon: Icons.image,
+                          onClicked: () => pickImages(),
+                        ),
+                      ],
+                    ))),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            margin: EdgeInsets.all(3),
+            padding: EdgeInsets.all(10),
+            child: Form(
+                key: _formKey,
+                child: Column(children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        controller: textController,
+                        validator: (value) {
+                          if (value!.length < 10 || value.length > 50) {
+                            return 'Champ obligatoire';
+                          }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            hintText: 'Entrer la question',
+                            labelText: 'Question',
+                            border: OutlineInputBorder()),
+                      ),
+                      SizedBox(height: 10,),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Ajouter une image',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'Poppins',
-                            ),
+                        children: <Widget>[
+                          Radio<SingingCharacter>(
+                            value: SingingCharacter.choixMultiple,
+                            groupValue: _character,
+                            onChanged: (SingingCharacter? value) {
+                              setState(() {
+                                _character = value;
+                              });
+                            },
                           ),
-                          buildButton(
-                            title: 'Choisir image',
-                            icon: Icons.image,
-                            onClicked: () => pickImages(),
+                          const Text('Choix Multiple'),
+                          Radio<SingingCharacter>(
+                            value: SingingCharacter.vraiFaux,
+                            groupValue: _character,
+                            onChanged: (SingingCharacter? value) {
+                              setState(() {
+                                _character = value;
+                              });
+                            },
                           ),
+                          const Text('Vrai/Faux'),
                         ],
-                      ))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-                margin: EdgeInsets.all(3),
-                padding: EdgeInsets.all(10),
-                child: Form(
-                    key: _formKey,
-                    child: Column(children: <Widget>[
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFormField(
-                              controller: textController,
-                              validator: (value) {
-                                if (value!.length < 10 || value.length > 50) {
-                                  return 'Champ obligatoire';
-                                }
-                                return null;
-                              },
-                              decoration: const InputDecoration(
-                                  hintText: 'Entrer la question',
-                                  labelText: 'Question',
-                                  border: OutlineInputBorder()),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            DropDownMultiSelect(
-                                onChanged: (List<String> x) {
-                                  setState(() {
-                                    type = x;
-                                  });
-                                },
-                                options: ['vrai-faux', 'choix-multiple'],
-                                selectedValues: type,
-                                whenEmpty: 'Type de question'),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Column(
-                              children: [
-                                for (int i = 0; i < _textFieldCount; i++)
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          controller: _reponseControllers[i],
-                                          decoration: const InputDecoration(
-                                              hintText: 'Reponse',
-                                              labelText: 'Reponse',
-                                              border: OutlineInputBorder()),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Transform.scale(
-                                        scale: 2,
-                                        child: Checkbox(
-                                          value: checkboxStates[
-                                              i], // Utilisez l'état de la Checkbox correspondante
-                                          onChanged: (bool? newValue) {
-                                            setState(() {
-                                              checkboxStates[i] = newValue ??
-                                                  false; // Mettez à jour l'état dans la liste
-                                            });
-                                          },
-                                          activeColor: Color(0xFF031B49),
-                                        ),
-                                      )
-                                      // onChanged: (value) {
-                                      // if(isvalue == true){
-                                      //   setState(() {
-                                      //     isvalue == 1;
-                                      //   });
-                                      // } else if(isvalue == false){
-                                      //   setState(() {
-                                      //     isvalue == 0;
-                                      //   });
-                                      // }
+                      ),
+                    ],
+                  ),
+                ])),
+          ),
+          SizedBox( height: 2, ),
 
-                                      //     },
-                                      //   // activeColor: Color(0xFF031B49),
-                                      // ),
-                                    ],
-                                  ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                ElevatedButton(
-                                  onPressed: generateTextField,
-                                  child: Text('Ajouter reponse'),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  debugPrint('Début validation ');
+          // DropDownMultiSelect(
+          //     onChanged: (List<String> x) {
+          //       setState(() {
+          //         type = x;
+          //       });
+          //     },
+          //     options: ['vrai-faux', 'choix-multiple'],
+          //     selectedValues: type,
+          //     whenEmpty: 'Type de question'),
+          // SizedBox(
+          //   height: 15,
+          // ),
+          Column( 
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+           
+            children: [
+              for (int i = 0; i < _textFieldCount; i++)
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.all(8),
+                        child: TextFormField(
+                          controller: _reponseControllers[i],
+                          decoration: const InputDecoration(
+                              hintText: 'Reponse',
+                              labelText: 'Reponse',
+                              border: OutlineInputBorder()),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Transform.scale(
+                      scale: 2,
+                      child: Checkbox(
+                        value: checkboxStates[
+                            i], // Utilisez l'état de la Checkbox correspondante
+                        onChanged: (bool? newValue) {
+                          setState(() {
+                            checkboxStates[i] = newValue ??
+                                false; // Mettez à jour l'état dans la liste
+                          });
+                        },
+                        activeColor: Color(0xFF031B49),
+                      ),
+                    )
+                  ],
+                ),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    debugPrint('Début validation ');
 
-                                  //         debugPrint(question.toJson().toString());
+                    //         debugPrint(question.toJson().toString());
 
-                                  List<Choise> choisesList = [];
+                    List<Choise> choisesList = [];
 
-                                  for (int i = 0; i < _textFieldCount; i++) {
-                                    String choiseText = _reponseControllers[i]
-                                        .text; // Récupérez le texte du contrôleur
-                                    Choise choise = Choise(
-                                        choiseId: null,
-                                        text: choiseText,
-                                        rank: 1);
-                                    choisesList.add(
-                                        choise); // Ajoutez l'objet Choise à la liste
-                                  }
-                                  for (int i = 0; i < _textFieldCount; i++) {
-                                    int currentCheckboxValue =
-                                        checkboxStates[i] ? 1 : 0;
+                    for (int i = 0; i < _textFieldCount; i++) {
+                      String choiseText = _reponseControllers[i]
+                          .text; // Récupérez le texte du contrôleur
+                      Choise choise =
+                          Choise(choiseId: null, text: choiseText, rank: 1);
+                      choisesList
+                          .add(choise); // Ajoutez l'objet Choise à la liste
+                    }
+                    for (int i = 0; i < _textFieldCount; i++) {
+                      int currentCheckboxValue = checkboxStates[i] ? 1 : 0;
 
-                                    Question question = Question(
-                                      questionId: null,
-                                      point: 5,
-                                      text: textController.text,
-                                      type: type.first,
-                                      rank: 1,
-                                      rankResponse: currentCheckboxValue,
-                                      choises: choisesList,
-                                    );
+                      Question question = Question(
+                        questionId: null,
+                        point: 5,
+                        text: textController.text,
+                        type: _character.toString().split('.').last,
+                        rank: 1,
+                        rankResponse: currentCheckboxValue,
+                        choises: choisesList,
+                      );
 
-                                   
-                                    debugPrint(question.toJson().toString());
-                                     QuestionService Q_service = QuestionService();
-                                  Question? q = await Q_service.createQuestion(
-                                      1, 1, question);
-                                  }
-
-                                  // Question question = Question(
-                                  //   questionId: null,
-                                  //   point: 5,
-                                  //   text: textController.text,
-                                  //   type: type.first,
-                                  //   rank: 1,
-                                  //   rankResponse: checkboxStates[i] ? 1 : 0,
-                                  //   choises:  choisesList,
-                                  // );
-
-                                  // Vous pouvez ensuite ajouter cette question à votre base de données, par exemple, en utilisant votre service QuestionService.
-                                 
-
-                                  // Affichez les informations de la question et de ses choix
-                                  // debugPrint(question.toJson().toString());
-
-                                  // ChoixService choixService = ChoixService();
-                                  // await choixService.createChoix(1, 1, 1, choises);
-
-                                  print("Question ajoutée avec succès");
-                                } else {
-                                  print("Question non ajoutée");
-                                }
-                              },
-                              child: Text('Valider'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(
-                                    0xFF031B49), // Couleur de fond du bouton
-                                onPrimary: Colors.white, // Couleur du texte
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 20, // Espacement vertical
-                                  horizontal: 30, // Espacement horizontal
-                                ),
-                              ),
-                            )
-                          ]),
-                    ]))),
-          ],
-        ),
-      ),
+                      debugPrint(question.toJson().toString());
+                      QuestionService Q_service = QuestionService();
+                      Question? q =
+                          await Q_service.createQuestion(1, 1, question);
+                    }
+                    print("Question ajoutée avec succès");
+                  } else {
+                    print("Question non ajoutée");
+                  }
+                },
+                child: Text('Valider'),
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF031B49), // Couleur de fond du bouton
+                  onPrimary: Colors.white, // Couleur du texte
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20, // Espacement vertical
+                    horizontal: 30, // Espacement horizontal
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              ElevatedButton(
+                onPressed: generateTextField,
+                child: Text('Ajouter reponse'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      Colors.green[300], // Couleur de fond du bouton
+                  onPrimary: Colors.white, // Couleur du texte
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 20, // Espacement vertical
+                    horizontal: 30, // Espacement horizontal
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      )),
     );
   }
 }

@@ -9,10 +9,12 @@ class Categorie extends StatelessWidget {
     Category(id: 2, nom: "histoire", imageUrl:'images/histoire.png'),
     Category(id: 3, nom: "science", imageUrl:'images/science.png'),
     Category(id: 4, nom: "culture general", imageUrl:'images/culture.jpg'),
-    Category(id: 5, nom: "Espace", imageUrl:'images/espace.png'),
+    Category(id: 5, nom: "anime", imageUrl:'images/anime.jpg'),
     Category(id: 6, nom: "Sport", imageUrl:'images/sport.png'),
-    Category(id: 7, nom: "Hacking", imageUrl:'images/haching.png'),
-    Category(id: 8, nom: "informatique", imageUrl:'images/java.png'),
+    Category(id: 7, nom: "art", imageUrl:'images/art.jpg'),
+    Category(id: 8, nom: "geographie", imageUrl:'images/geographie.jpg'),
+    Category(id: 9, nom: "mecanique", imageUrl:'images/mecanique.jpg'),
+    Category(id: 10, nom: "informatique", imageUrl:'images/java.png'),
   ];
 
   @override

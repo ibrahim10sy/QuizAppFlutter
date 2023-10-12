@@ -12,6 +12,8 @@ import 'package:quiz_app/models/user.dart';
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 
+enum SingingCharacter { public, private }
+
 /**************Home***************************** */
 class QuizDetail extends StatefulWidget {
   static String routeName = "/quiz_detail";
@@ -83,7 +85,7 @@ class _QuizDetailState extends State<QuizDetail> {
   final descController = TextEditingController();
   final categorieController = TextEditingController();
   final dateController = TextEditingController();
-  // List<String> options = ['public', 'private'];
+  SingingCharacter? _character = SingingCharacter.public;
   List<String> visibilite = [];
   @override
   Widget build(BuildContext context) {
@@ -187,35 +189,42 @@ class _QuizDetailState extends State<QuizDetail> {
                         ),
 
                         const SizedBox(height: 5),
-                        // Column(
-                        //   children: options.map((option) {
-                        //     return Row(
-                        //       children: [
-                        //         Radio<String>(
-                        //           value: option,
-                        //           groupValue: option,
-                        //           onChanged: (String? value) {
-                        //             setState(() {
-                        //               options = value;
-                        //             });
-                        //           },
-                        //         ),
-                        //         Text(option),
-                        //       ],
-                        //     );
-                        //   }).toList(),
+                       
+                        Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Radio<SingingCharacter>(
+                            value: SingingCharacter.public,
+                            groupValue: _character,
+                            onChanged: (SingingCharacter? value) {
+                              setState(() {
+                                _character = value;
+                              });
+                            },
+                          ),
+                          const Text('Public'),
+                          Radio<SingingCharacter>(
+                            value: SingingCharacter.private,
+                            groupValue: _character,
+                            onChanged: (SingingCharacter? value) {
+                              setState(() {
+                                _character = value;
+                              });
+                            },
+                          ),
+                          const Text('Private'),
+                        ],
+                      ),
+                        // DropDownMultiSelect(
+                        //   onChanged: (List<String> x){
+                        //     setState(() {
+                        //       visibilite = x;
+                        //     });
+                        //   },
+                        //   options : ['public','private'],
+                        //   selectedValues: visibilite,
+                        //   whenEmpty : 'Type de visibilité'
                         // ),
-
-                        DropDownMultiSelect(
-                          onChanged: (List<String> x){
-                            setState(() {
-                              visibilite = x;
-                            });
-                          },
-                          options : ['public','private'],
-                          selectedValues: visibilite,
-                          whenEmpty : 'Type de visibilité'
-                        ),
                         const SizedBox(height: 5),
                         Align(
                           alignment: Alignment.centerRight,
@@ -225,7 +234,7 @@ class _QuizDetailState extends State<QuizDetail> {
                                 debugPrint('Debut ');
                                 Quiz quizz = Quiz(
                                     quizId: null,
-                                    visibility: visibilite.first,
+                                    visibility: _character.toString().split('.').last,
                                     description: descController.text,
                                     creationDate: "",
                                     category: widget.categorie,

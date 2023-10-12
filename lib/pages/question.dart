@@ -27,7 +27,7 @@ class _QuestionPageState extends State<QuestionPage> {
   String? imageSrc;
   List<Choise> Choix_List = [];
 
-  final _reponseController = TextEditingController();
+  // final _reponseController = TextEditingController();
   List<TextEditingController> _reponseControllers = [];
 
   bool isAddingResponse = false;

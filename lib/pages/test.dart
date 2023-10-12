@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
+import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/pages/bravo.dart';
 import 'package:quiz_app/pages/lost.dart';
 
@@ -167,7 +168,7 @@ class _QuestionsChooseState extends State<QuestionsChoose> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Bravo(scoreFinal: score,),
+          builder: (context) => Lost(),
         ),
       );
     } 

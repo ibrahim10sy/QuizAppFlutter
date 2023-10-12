@@ -1,14 +1,16 @@
 
 
  import 'package:flutter/material.dart';
+import 'package:quiz_app/models/question.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/pages/played/played.dart';
 
 class Bravo extends StatefulWidget {
   
       final  int scoreFinal ;
+      final List<Question> question;
   //  Bravo({super.key , required scoreFinal , required this.totalQuestions});
-    Bravo({Key? key,  required this.scoreFinal,  totalQuestions})
+    Bravo({Key? key,  required this.scoreFinal,   required this.question})
       : super(key: key);
 
 
@@ -62,28 +64,28 @@ class _BravoState extends State<Bravo> {
           color:(score), fontWeight: FontWeight.bold, 
           fontFamily: "Poppins", fontSize: 25,),),
           const SizedBox(height: 15,),
-          Row(
+          Column(
               // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-              Container(
-      padding: const EdgeInsets.only(left: 60), // Ajoutez une marge à droite du premier texte
+              Center(
+      // padding: const EdgeInsets.only(left: 60), // Ajoutez une marge à droite du premier texte
       child:  Text(
-        "${widget.scoreFinal} points",
+        "${widget.scoreFinal} /${widget.question.length * 5} points",
         textAlign: TextAlign.start, // Alignez le texte à gauche
         style:  const TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white),
 
       ),
     ),
      const SizedBox(height: 40,),
-    Container(
-      padding: const EdgeInsets.only(left: 120), // Ajoutez une marge à gauche du deuxième texte
-      child: const Text(
-        '30 points',
-        textAlign: TextAlign.end, 
-        // Alignez le texte à droite
-        style:  TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white),
-      ),
-    ),
+    // Container(
+    //   padding: const EdgeInsets.only(left: 120), // Ajoutez une marge à gauche du deuxième texte
+    //   child: const Text(
+    //     '30 points',
+    //     textAlign: TextAlign.end, 
+    //     // Alignez le texte à droite
+    //     style:  TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white),
+    //   ),
+    // ),
 
               ],
             ),
@@ -94,7 +96,7 @@ class _BravoState extends State<Bravo> {
               width: 200,
             ),
             
-            const SizedBox(height: 120,),
+            const SizedBox(height: 100,),
             ElevatedButton(
               
                child: Text('Suivant', textAlign: TextAlign.center,

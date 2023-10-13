@@ -22,7 +22,7 @@ class _QuestionsChoosesState extends State<QuestionsChooses> {
   late Timer timer;
   int currentQuestionIndex = 0;
   int selectedAnswerIndex = -1;
-    late Future<List<Question>?> futureQuestions;
+  late Future<List<Question>?> futureQuestions;
   bool showCorrectAnswer = false;
   List<Question> questions = [];
   bool isLoading = true;
@@ -79,7 +79,7 @@ class _QuestionsChoosesState extends State<QuestionsChooses> {
 
         //   ],
         // );
-          goToNextQuestion();
+          // goToNextQuestion();
 
 
     }

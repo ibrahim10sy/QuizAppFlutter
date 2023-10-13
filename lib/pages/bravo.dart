@@ -98,7 +98,6 @@ class _BravoState extends State<Bravo> {
             
             const SizedBox(height: 100,),
             ElevatedButton(
-              
                child: Text('Suivant', textAlign: TextAlign.center,
                style:   TextStyle(fontSize:20 , fontWeight:  FontWeight.bold),),
               onPressed: () {

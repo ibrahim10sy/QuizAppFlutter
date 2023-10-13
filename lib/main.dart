@@ -9,7 +9,6 @@ import 'package:quiz_app/pages/load_animated.dart';
 import 'package:quiz_app/pages/lost.dart';
 import 'package:quiz_app/pages/question_choose.dart';
 import 'package:quiz_app/pages/splashScreen.dart';
-
 import 'package:quiz_app/pages/question.dart';
 import 'package:quiz_app/pages/test.dart';
 import 'package:quiz_app/theme.dart';
@@ -22,7 +21,6 @@ void main(){
 }
 
 class Myapp extends StatelessWidget {
-  
 
   @override
   Widget build(BuildContext context) {

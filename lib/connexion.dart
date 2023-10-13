@@ -235,7 +235,8 @@ class _ConnexionState extends State<Connexion>
                         style: TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline),
-                      ))
+                      )
+                      )
                 ],
               ))),
     );

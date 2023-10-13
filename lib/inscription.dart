@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:quiz_app/connexion.dart';
 import 'package:quiz_app/models/user.dart';
 import 'package:quiz_app/services/user_service.dart';
 
@@ -38,6 +39,7 @@ class _IncriptionState extends State<Incription>
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       _formKey.currentState?.reset();
+      Navigator.pushNamed(context, '/connexion');
       debugPrint("ok");
       User user = User(
           userId: null,
@@ -66,7 +68,6 @@ class _IncriptionState extends State<Incription>
       if (response.statusCode == 200) {
         // Succès : les données ont été envoyées avec succès à votre API
         debugPrint("Données envoyées avec succès !");
-        Navigator.pushNamed(context, '/connexion');
       } else {
         // Échec : les données n'ont pas pu être envoyées à votre API
         debugPrint("Erreur lors de l'envoi des données à l'API");
@@ -148,7 +149,6 @@ class _IncriptionState extends State<Incription>
                 keyboardType: TextInputType.text,
                 autocorrect: true,
                 autofocus: true,
-                onChanged: affichage,
               ),
               const SizedBox(
                 height: 10,
@@ -175,7 +175,6 @@ class _IncriptionState extends State<Incription>
                 keyboardType: TextInputType.text,
                 autocorrect: true,
                 autofocus: true,
-                onChanged: affichage,
               ),
               const SizedBox(
                 height: 10,
@@ -340,6 +339,22 @@ class _IncriptionState extends State<Incription>
                         borderRadius: BorderRadius.circular(15)),
                     minimumSize: Size(300, 40)),
               ),
+              const SizedBox(
+                    height: 20,
+                  ),
+                  Text("si vous avez deja un compte ?"),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => SignIn()));
+                      },
+                      child: Text(
+                        "connecter vous",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                      )
+                      )
             ],
           )),
     ));

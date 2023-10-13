@@ -92,6 +92,13 @@ class _QuestionPageState extends State<QuestionPage> {
   List<String> type = [];
   List<String> choix = [];
   bool? isvalue = false;
+  int convertedValue = 0;
+  int intValue = 0;
+
+ int convertBoolToInt(bool value) { //conversion de la valeur boolean en int
+  return value ? 1 : 0;
+}
+
 
   @override
   void initState() {
@@ -179,89 +186,88 @@ class _QuestionPageState extends State<QuestionPage> {
                             labelText: 'Question',
                             border: OutlineInputBorder()),
                       ),
-                      SizedBox(height: 10,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Radio<SingingCharacter>(
-                            value: SingingCharacter.choixMultiple,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              setState(() {
-                                _character = value;
-                              });
-                            },
-                          ),
-                          const Text('Choix Multiple'),
-                          Radio<SingingCharacter>(
-                            value: SingingCharacter.vraiFaux,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              setState(() {
-                                _character = value;
-                              });
-                            },
-                          ),
-                          const Text('Vrai/Faux'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: <Widget>[
+                      //     Radio<SingingCharacter>(
+                      //       value: SingingCharacter.choixMultiple,
+                      //       groupValue: _character,
+                      //       onChanged: (SingingCharacter? value) {
+                      //         setState(() {
+                      //           _character = value;
+                      //         });
+                      //       },
+                      //     ),
+                      //     const Text('Choix Multiple'),
+                      //     Radio<SingingCharacter>(
+                      //       value: SingingCharacter.vraiFaux,
+                      //       groupValue: _character,
+                      //       onChanged: (SingingCharacter? value) {
+                      //         setState(() {
+                      //           _character = value;
+                      //         });
+                      //       },
+                      //     ),
+                      //     const Text('Vrai/Faux'),
+                      //   ],
+                      // ),
+
+                      DropDownMultiSelect(
+                          onChanged: (List<String> x) {
+                            setState(() {
+                              type = x;
+                            });
+                          },
+                          options: ['vrai-faux', 'choix-multiple'],
+                          selectedValues: type,
+                          whenEmpty: 'Type de question'),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (int i = 0; i < _textFieldCount; i++)
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.all(8),
+                                    child: TextFormField(
+                                      controller: _reponseControllers[i],
+                                      decoration: const InputDecoration(
+                                          hintText: 'Reponse',
+                                          labelText: 'Reponse',
+                                          border: OutlineInputBorder()),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Transform.scale(
+                                  scale: 2,
+                                  child: Checkbox(
+                                    value: checkboxStates[i], // Utilisez l'état de la Checkbox correspondante
+                                    onChanged: (bool? newValue) {
+                                      setState(() {
+                                        checkboxStates[i] = newValue ?? false; // Mettez à jour l'état dans la liste
+                                        intValue = convertBoolToInt(checkboxStates[i]); // Affectez la valeur entière convertie
+                                      });
+                                    },
+                                    activeColor: Color(0xFF031B49),
+                                  ),
+                                )
+                              ],
+                            ),
                         ],
                       ),
                     ],
                   ),
                 ])),
-          ),
-          SizedBox( height: 2, ),
-
-          // DropDownMultiSelect(
-          //     onChanged: (List<String> x) {
-          //       setState(() {
-          //         type = x;
-          //       });
-          //     },
-          //     options: ['vrai-faux', 'choix-multiple'],
-          //     selectedValues: type,
-          //     whenEmpty: 'Type de question'),
-          // SizedBox(
-          //   height: 15,
-          // ),
-          Column( 
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-           
-            children: [
-              for (int i = 0; i < _textFieldCount; i++)
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.all(8),
-                        child: TextFormField(
-                          controller: _reponseControllers[i],
-                          decoration: const InputDecoration(
-                              hintText: 'Reponse',
-                              labelText: 'Reponse',
-                              border: OutlineInputBorder()),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Transform.scale(
-                      scale: 2,
-                      child: Checkbox(
-                        value: checkboxStates[
-                            i], // Utilisez l'état de la Checkbox correspondante
-                        onChanged: (bool? newValue) {
-                          setState(() {
-                            checkboxStates[i] = newValue ??
-                                false; // Mettez à jour l'état dans la liste
-                          });
-                        },
-                        activeColor: Color(0xFF031B49),
-                      ),
-                    )
-                  ],
-                ),
-            ],
           ),
           SizedBox(
             height: 15,
@@ -287,15 +293,15 @@ class _QuestionPageState extends State<QuestionPage> {
                           .add(choise); // Ajoutez l'objet Choise à la liste
                     }
                     for (int i = 0; i < _textFieldCount; i++) {
-                      int currentCheckboxValue = checkboxStates[i] ? 1 : 0;
+                      // int currentCheckboxValue = checkboxStates[i] ? 1 : 0;
 
                       Question question = Question(
                         questionId: null,
                         point: 5,
                         text: textController.text,
-                        type: _character.toString().split('.').last,
+                        type: type.first,
                         rank: 1,
-                        rankResponse: currentCheckboxValue,
+                        rankResponse: intValue,
                         choises: choisesList,
                       );
 

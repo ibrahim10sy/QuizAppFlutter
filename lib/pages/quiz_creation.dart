@@ -5,13 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/data/quizzes.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:quiz_app/models/user.dart';
-import 'package:quiz_app/pages/question.dart';
+import 'package:quiz_app/pages/question_page.dart';
 import 'package:quiz_app/services/quiz_service.dart';
+
+enum SingingCharacter { public, private }
 
 class QuizCreation extends StatefulWidget {
   static String routeName = "/quiz_detail";
@@ -26,7 +27,7 @@ class QuizCreation extends StatefulWidget {
 class _QuizCreationState extends State<QuizCreation> {
   File? image;
   String? imageSrc; // Variable pour stocker le chemin de notre l'image upload
- 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -78,30 +79,33 @@ class _QuizCreationState extends State<QuizCreation> {
     });
   }
 
-
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descController = TextEditingController();
   final categorieController = TextEditingController();
   final dateController = TextEditingController();
-  
+  SingingCharacter? _character = SingingCharacter.public;
   List<String> visibilite = [];
   @override
   Widget build(BuildContext context) {
-    const d_color1 = Color(0xFF031B49);
-    const d_color2 = Color(0xEAEAFF);
+    const dColor1 = Color(0xFF031B49);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context) ,),
-            backgroundColor: kAppBarColor,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            backgroundColor: dColor1,
             centerTitle: true,
             // theme: theme(),
             title: const Padding(
-              padding: EdgeInsets.all(100),
+              padding: EdgeInsets.all(10),
               child: Text(
-                'Créer un quiz de categorie',
+                'Créer un quiz de categorie ',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: 'Poppins',
@@ -124,7 +128,7 @@ class _QuizCreationState extends State<QuizCreation> {
                         fit: BoxFit.cover,
                       )
                     : Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                           image: AssetImage('images/background-quiz-card.jpg'),
                           fit: BoxFit.cover,
@@ -133,7 +137,7 @@ class _QuizCreationState extends State<QuizCreation> {
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'Ajouter une image',
                               style: TextStyle(
                                 fontSize: 20,
@@ -148,7 +152,7 @@ class _QuizCreationState extends State<QuizCreation> {
                           ],
                         ))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text('Quiz categorie : ' + widget.categorie),
@@ -176,29 +180,49 @@ class _QuizCreationState extends State<QuizCreation> {
                         const SizedBox(height: 5),
                         TextFormField(
                           controller: descController,
-                          validator: (value) {
-                            if (value!.length < 10 || value.length > 50) {
-                              return 'Le titre doit avoir entre 10 et 50 caracteres';
-                            }
-                            return null;
-                          },
                           decoration: const InputDecoration(
                               hintText: 'Description du quiz',
                               labelText: 'Description',
                               border: OutlineInputBorder()),
                         ),
-                       
+
                         const SizedBox(height: 5),
-                        DropDownMultiSelect(
-                          onChanged: (List<String> x){
-                            setState(() {
-                              visibilite = x;
-                            });
-                          },
-                          options : ['public','private'],
-                          selectedValues: visibilite,
-                          whenEmpty : 'Type de visibilité'
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Radio<SingingCharacter>(
+                              value: SingingCharacter.public,
+                              groupValue: _character,
+                              onChanged: (SingingCharacter? value) {
+                                setState(() {
+                                  _character = value;
+                                });
+                              },
+                            ),
+                            const Text('Public'),
+                            Radio<SingingCharacter>(
+                              value: SingingCharacter.private,
+                              groupValue: _character,
+                              onChanged: (SingingCharacter? value) {
+                                setState(() {
+                                  _character = value;
+                                });
+                              },
+                            ),
+                            const Text('Private'),
+                          ],
                         ),
+                        // DropDownMultiSelect(
+                        //   onChanged: (List<String> x){
+                        //     setState(() {
+                        //       visibilite = x;
+                        //     });
+                        //   },
+                        //   options : ['public','private'],
+                        //   selectedValues: visibilite,
+                        //   whenEmpty : 'Type de visibilité'
+                        // ),
                         const SizedBox(height: 5),
                         Align(
                           alignment: Alignment.centerRight,
@@ -208,7 +232,8 @@ class _QuizCreationState extends State<QuizCreation> {
                                 debugPrint('Debut ');
                                 Quiz quizz = Quiz(
                                     quizId: null,
-                                    visibility: visibilite.first,
+                                    visibility:
+                                        _character.toString().split('.').last,
                                     description: descController.text,
                                     creationDate: "",
                                     category: widget.categorie,
@@ -231,7 +256,8 @@ class _QuizCreationState extends State<QuizCreation> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => QuestionPage(quizz: quizz)));
+                                        builder: (context) =>
+                                            QuestionPage(quizz: quizz)));
                               } else {
                                 print('Quiz non crée');
                               }
@@ -240,7 +266,7 @@ class _QuizCreationState extends State<QuizCreation> {
                               side: BorderSide.none,
                               backgroundColor: Color(0xFF031B49),
                             ),
-                            child: Text(
+                            child: const Text(
                               'Suivant',
                               style: TextStyle(
                                 color: Colors.white,
@@ -259,6 +285,3 @@ class _QuizCreationState extends State<QuizCreation> {
     );
   }
 }
-
-
-

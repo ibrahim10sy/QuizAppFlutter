@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-// import 'package:quiz_app/pages/question.dart';
+// import 'package:quiz_app/pages/question_page.dart';
 
 class Quiz extends StatelessWidget {
   const Quiz({super.key});

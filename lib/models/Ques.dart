@@ -1,6 +1,6 @@
 // import 'dart:async';
 // import 'package:flutter/material.dart';
-// import 'package:quiz_app/models/question.dart'; // Assurez-vous d'importer votre classe Question ici.
+// import 'package:quiz_app/models/question_page.dart'; // Assurez-vous d'importer votre classe Question ici.
 
 // class QuestionChoose extends StatefulWidget {
 //   final List<Question> questions;

@@ -86,8 +86,8 @@ class _QuestionPageState extends State<QuestionPage> {
   final textController = TextEditingController();
   final reponseController = TextEditingController();
   List<TextEditingController> reponseControllers =
-      List.generate(5, (index) => TextEditingController());
-  List<bool> checkboxStates = List.generate(5, (index) => false);
+      List.generate(4, (index) => TextEditingController());
+  List<int> checkboxStates = List.generate(4, (index) => index+1);
   SingingCharacter? _character = SingingCharacter.choixMultiple;
   List<String> type = [];
   List<String> choix = [];
@@ -102,6 +102,7 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   void initState() {
+    print(checkboxStates);
     Choix_List = [];
     _reponseControllers = [];
     super.initState();
@@ -250,17 +251,29 @@ class _QuestionPageState extends State<QuestionPage> {
                                 ),
                                 Transform.scale(
                                   scale: 2,
-                                  child: Checkbox(
-                                    value: checkboxStates[i], // Utilisez l'état de la Checkbox correspondante
-                                    onChanged: (bool? newValue) {
+                                  // child: Checkbox(
+                                  //   value: checkboxStates[i],
+                                  //   onChanged: (newValue) {
+                                  //     setState(() {
+                                  //       checkboxStates[i] = newValue!; // Mettez à jour l'état dans la liste
+                                  //       convertedValue =
+                                  //           convertBoolToInt(checkboxStates[i]);
+                                  //     });
+                                  //   },
+                                  //   activeColor: Color(0xFF031B49),
+                                  // ),
+                                  child: Radio(
+                                   value: checkboxStates[i],
+                                   groupValue: convertedValue, 
+                                    onChanged: (newValue) {
                                       setState(() {
-                                        checkboxStates[i] = newValue ?? false; // Mettez à jour l'état dans la liste
-                                        intValue = convertBoolToInt(checkboxStates[i]); // Affectez la valeur entière convertie
+                                        checkboxStates[i] = newValue!; // Mettez à jour l'état dans la liste
+                                        convertedValue = checkboxStates[i];
                                       });
-                                    },
-                                    activeColor: Color(0xFF031B49),
-                                  ),
-                                )
+                                },
+                                activeColor: Color(0xFF031B49), 
+                              ),
+                            ),
                               ],
                             ),
                         ],
@@ -288,7 +301,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       String choiseText = _reponseControllers[i]
                           .text; // Récupérez le texte du contrôleur
                       Choise choise =
-                          Choise(choiseId: null, text: choiseText, rank: 1);
+                          Choise(choiseId: null, text: choiseText, rank: checkboxStates[i]);
                       choisesList
                           .add(choise); // Ajoutez l'objet Choise à la liste
                     }
@@ -301,7 +314,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         text: textController.text,
                         type: type.first,
                         rank: 1,
-                        rankResponse: intValue,
+                        rankResponse: convertedValue,
                         choises: choisesList,
                       );
 

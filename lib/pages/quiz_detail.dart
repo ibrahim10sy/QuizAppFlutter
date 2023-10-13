@@ -176,12 +176,7 @@ class _QuizDetailState extends State<QuizDetail> {
                         const SizedBox(height: 5),
                         TextFormField(
                           controller: descController,
-                          validator: (value) {
-                            if (value!.length < 10 || value.length > 50) {
-                              return 'Le titre doit avoir entre 10 et 50 caracteres';
-                            }
-                            return null;
-                          },
+                          
                           decoration: const InputDecoration(
                               hintText: 'Description du quiz',
                               labelText: 'Description',

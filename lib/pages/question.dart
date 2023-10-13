@@ -10,9 +10,8 @@ import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/choise.dart';
 import 'package:quiz_app/services/choix_service.dart';
 import 'package:quiz_app/services/question_service.dart';
-import 'package:multiselect/multiselect.dart';
+import 'package:radio_group_v2/radio_group_v2.dart';
 
-enum SingingCharacter { choixMultiple, vraiFaux }
 
 class QuestionPage extends StatefulWidget {
   static String routeName = "/QuestionPage";
@@ -34,10 +33,12 @@ class _QuestionPageState extends State<QuestionPage> {
 
   bool isAddingResponse = false;
   int _textFieldCount = 0;
+  int questionTypeIndex=1;
 
-  void generateTextField() {
-    if (_textFieldCount < 5) {
+  void generateTextField(String questionTypeString) {
+    if (_textFieldCount < 4) {
       setState(() {
+      questionTypeIndex = convertStringToInt(questionTypeString);
         _textFieldCount++;
         _reponseControllers
             .add(TextEditingController()); // Ajoutez un nouveau contrôleur
@@ -86,17 +87,16 @@ class _QuestionPageState extends State<QuestionPage> {
   final textController = TextEditingController();
   final reponseController = TextEditingController();
   List<TextEditingController> reponseControllers =
-      List.generate(4, (index) => TextEditingController());
+  List.generate(4, (index) => TextEditingController());
   List<int> checkboxStates = List.generate(4, (index) => index+1);
-  SingingCharacter? _character = SingingCharacter.choixMultiple;
   List<String> type = [];
   List<String> choix = [];
   bool? isvalue = false;
   int convertedValue = 0;
   int intValue = 0;
 
- int convertBoolToInt(bool value) { //conversion de la valeur boolean en int
-  return value ? 1 : 0;
+ int convertStringToInt(String value) { //conversion de la valeur boolean en int
+  return (value == 'vrai-faux') ? 0 : 1;
 }
 
 
@@ -110,6 +110,8 @@ class _QuestionPageState extends State<QuestionPage> {
 
   @override
   Widget build(BuildContext context) {
+      RadioGroupController myController = RadioGroupController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -190,41 +192,24 @@ class _QuestionPageState extends State<QuestionPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: <Widget>[
-                      //     Radio<SingingCharacter>(
-                      //       value: SingingCharacter.choixMultiple,
-                      //       groupValue: _character,
-                      //       onChanged: (SingingCharacter? value) {
-                      //         setState(() {
-                      //           _character = value;
-                      //         });
-                      //       },
-                      //     ),
-                      //     const Text('Choix Multiple'),
-                      //     Radio<SingingCharacter>(
-                      //       value: SingingCharacter.vraiFaux,
-                      //       groupValue: _character,
-                      //       onChanged: (SingingCharacter? value) {
-                      //         setState(() {
-                      //           _character = value;
-                      //         });
-                      //       },
-                      //     ),
-                      //     const Text('Vrai/Faux'),
-                      //   ],
-                      // ),
-
-                      DropDownMultiSelect(
-                          onChanged: (List<String> x) {
-                            setState(() {
-                              type = x;
-                            });
-                          },
-                          options: ['vrai-faux', 'choix-multiple'],
-                          selectedValues: type,
-                          whenEmpty: 'Type de question'),
+                     RadioGroup(    
+                      controller : myController,
+                      values : ['vrai-faux', 'choix-multiple'],
+                      indexOfDefault: questionTypeIndex,
+                       orientation: RadioGroupOrientation.horizontal,
+                      onChanged: (value){
+                        print(value);
+                      } 
+                     ),
+                      // DropDownMultiSelect(
+                      //     onChanged: (List<String> x) {
+                      //       setState(() {
+                      //         type = x;
+                      //       });
+                      //     },
+                      //     options: ['vrai-faux', 'choix-multiple'],
+                      //     selectedValues: type,
+                      //     whenEmpty: 'Type de question'),
                       SizedBox(
                         height: 15,
                       ),
@@ -251,17 +236,6 @@ class _QuestionPageState extends State<QuestionPage> {
                                 ),
                                 Transform.scale(
                                   scale: 2,
-                                  // child: Checkbox(
-                                  //   value: checkboxStates[i],
-                                  //   onChanged: (newValue) {
-                                  //     setState(() {
-                                  //       checkboxStates[i] = newValue!; // Mettez à jour l'état dans la liste
-                                  //       convertedValue =
-                                  //           convertBoolToInt(checkboxStates[i]);
-                                  //     });
-                                  //   },
-                                  //   activeColor: Color(0xFF031B49),
-                                  // ),
                                   child: Radio(
                                    value: checkboxStates[i],
                                    groupValue: convertedValue, 
@@ -345,7 +319,9 @@ class _QuestionPageState extends State<QuestionPage> {
                 width: 10,
               ),
               ElevatedButton(
-                onPressed: generateTextField,
+                onPressed: (){
+                  generateTextField(myController.value.toString());
+                },
                 child: Text('Ajouter reponse'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

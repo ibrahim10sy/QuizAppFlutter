@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 import '../models/rank.dart';
 
 class QuizService {
-  static const baseQuizUrl = "${baseUrl}:9000/api/quizzes";
+  static const baseQuizUrl = "$baseUrl:9000/api/quizzes";
   static const baseQuizUrlForUser = "${baseUrl}:9000/api/users";
 
   Future<List<Quiz>?> getQuizzes(String category) async {
     final response =
-    await http.get(Uri.parse(baseQuizUrl + "?domain=" + category));
+    await http.get(Uri.parse("$baseQuizUrl?domain=$category"));
 
     if (response.statusCode == 200) {
       var responseData = json.decode(utf8.decode(response.bodyBytes));

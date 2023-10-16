@@ -40,7 +40,7 @@ class _ProfileState extends State<Profile> {
                       password: "password",
                       login: "login",
                       imageUrl:
-                      "informatique1.jpg")),
+                      "informatique1.jpg"), questions: []),
               press: () {}),
         )
     );

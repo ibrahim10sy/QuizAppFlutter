@@ -4,12 +4,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class QuestionService {
-  const QuestionService();
-  static const baseQestionUrlForUser = "$baseUrl:9000/api/users";
+  static const baseQuestionUrlForUser = "$baseUrl:9000/api/users";
 
-  // Obtenir les questions
-  static Future<List<Question>?> getQuestions(int userId, int quizId) async {
-    final response = await http.get(Uri.parse('$baseQestionUrlForUser/$userId/quizzes/$quizId/questions'));
+  Future<List<Question>?> getQuestionsForUserInQuiz(int userId, int quizId) async {
+    // Obtenir les questions d'un quiz d'un utilisateur
+    final response = await http.get(Uri.parse('$baseQuestionUrlForUser/$userId/quizzes/$quizId/questions'));
 
     if (response.statusCode == 200) {
       Iterable responseData = json.decode(response.body);
@@ -23,7 +22,7 @@ class QuestionService {
 
   Future<Question?> createQuestion(int userId, int quizId, Question question) async {
     final response = await http.post(
-      Uri.parse('$baseQestionUrlForUser/$userId/quizzes/$quizId/questions'),
+      Uri.parse('$baseQuestionUrlForUser/$userId/quizzes/$quizId/questions'),
       body: json.encode(question), // Convertissez la question en JSON
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',

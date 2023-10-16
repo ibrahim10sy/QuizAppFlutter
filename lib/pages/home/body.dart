@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/extensions/string_extension.dart';
+import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 import 'package:quiz_app/services/user_service.dart';
 import 'package:quiz_app/widgets/buttom_chip.dart';
@@ -12,6 +13,7 @@ import '../../widgets/user_circle_avatar.dart';
 import '../account_public.dart';
 import '../comptepublic.dart';
 import '../quiz_detail/quiz_detail.dart';
+import 'home.dart';
 
 
 class Body extends StatefulWidget {
@@ -162,7 +164,7 @@ class _BodyState extends State<Body> {
                                   ? QuizCard(
                                 quiz: snapshot.data![index],
                                 press: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(quiz: snapshot.data![index])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(quiz: snapshot.data![index], previewWidget: Nav(),)));
                                 },
                               )
                                   : Shimmer.fromColors(
@@ -189,7 +191,7 @@ class _BodyState extends State<Body> {
                                             password: "password",
                                             login: "login",
                                             imageUrl:
-                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg")),
+                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg"), questions: []),
                                     press: () {}),
                               );
                             },

@@ -247,7 +247,7 @@ class _QuizCreationState extends State<QuizCreation> {
                                         email: "email",
                                         password: "password",
                                         login: "login",
-                                        imageUrl: "imageUrl"));
+                                        imageUrl: "imageUrl"), questions: []);
                                 QuizService service = QuizService();
                                 await service.createQuiz(1, quizz);
                                 descController.clear();

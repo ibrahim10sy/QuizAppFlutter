@@ -2,10 +2,14 @@ import 'dart:convert';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_app/constantes.dart';
+import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/nav.dart';
+import 'package:quiz_app/pages/play_quiz/PlayQuiz.dart';
 import 'package:quiz_app/pages/quiz_detail/quiz_detail.dart';
 import 'package:quiz_app/pages/splashScreen.dart';
 import 'package:quiz_app/services/push_notifications.dart';
+import 'package:quiz_app/services/quiz_service.dart';
 import 'package:quiz_app/theme.dart';
 import 'firebase_options.dart';
 
@@ -63,10 +67,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   late FirebaseMessaging messaging;
+  late Quiz quiz;
+  QuizService quizService = QuizService();
   @override
   void initState() {
 
     super.initState();
+    quizService.getQuiz(1).then((value) {
+      setState(() {
+        quiz = value!;
+        print(quiz);
+      });
+    });
     /*messaging = FirebaseMessaging.instance;
     messaging.getToken().then((value){
       print(value);
@@ -109,7 +121,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
       home:SplashScreen(),
-      //home: QuizDetail(),
+      //home: PlayQuiz(quiz: quiz,),
     );
   }
 }

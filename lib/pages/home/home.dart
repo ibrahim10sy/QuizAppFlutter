@@ -7,6 +7,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:quiz_app/services/user_service.dart';
 
 class Home extends StatefulWidget {
+  static String routeName = 'home_page';
   const Home({super.key});
 
   @override

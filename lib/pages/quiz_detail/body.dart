@@ -56,7 +56,7 @@ class _BodyState extends State<Body> {
                 width: MediaQuery.sizeOf(context).width*0.9,
                 height: MediaQuery.sizeOf(context).height*0.3,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
                     image: DecorationImage(image: NetworkImage("${kBaseUrlForImage}${widget.quiz.category}/${widget.quiz.imageUrl}"), fit: BoxFit.cover)
                 ),
               ),

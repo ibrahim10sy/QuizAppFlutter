@@ -3,16 +3,22 @@ import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/pages/quiz_detail/body.dart';
 
 import '../../models/quiz.dart';
-import '../test.dart';
+import '../play_quiz/PlayQuiz.dart';
 
 class QuizDetail extends StatelessWidget {
-  const QuizDetail({super.key, required this.quiz});
+  const QuizDetail({super.key, required this.quiz, this.routeToPreviewPage, this.previewWidget});
   final Quiz quiz;
+  final String? routeToPreviewPage;
+  final Widget? previewWidget;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
+          (routeToPreviewPage==null)?Navigator.push(context, MaterialPageRoute(builder: (context)=>previewWidget!)):Navigator.pushNamed(context, routeToPreviewPage!);
+        },),
         centerTitle: true,
         title: Center(
           child: SizedBox(
@@ -29,7 +35,7 @@ class QuizDetail extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: kAppBarColor,
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>QuestionsChoose()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>PlayQuiz(quiz: quiz)));
         },
         tooltip: 'Jouer',
         child: const Icon(Icons.play_arrow, color: Colors.white, size: 40,),

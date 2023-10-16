@@ -5,6 +5,7 @@ import '../../services/user_service.dart';
 import '../notification/notification_page.dart';
 
 class Played extends StatefulWidget {
+  static String routeName = 'played_page';
   const Played({super.key});
 
   @override

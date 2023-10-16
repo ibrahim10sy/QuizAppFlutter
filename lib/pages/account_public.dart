@@ -266,7 +266,10 @@ class _AccountPublicState extends State<AccountPublic> {
                                   ? QuizCard(
                                 quiz: snapshot.data![index],
                                 press: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(quiz: snapshot.data![index])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(
+                                    quiz: snapshot.data![index],
+                                    previewWidget: AccountPublic(user: widget.user)
+                                    ,)));
                                 },
                               )
                                   : Shimmer.fromColors(
@@ -293,7 +296,7 @@ class _AccountPublicState extends State<AccountPublic> {
                                             password: "password",
                                             login: "login",
                                             imageUrl:
-                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg")),
+                                            "https://i.pinimg.com/564x/7d/59/fe/7d59feb61af3de07172a774e86eea28b.jpg"), questions: []),
                                     press: () {}),
                               );
                             },

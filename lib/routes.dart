@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/pages/question_page.dart';
+import 'package:quiz_app/pages/home/home.dart';
+import 'package:quiz_app/pages/played/played.dart';
 
 
 final Map<String, WidgetBuilder> routes = {
-//  QuizDetail.routeName : (BuildContext context) => QuizDetail(),
-  // QuestionPage.routeName: (context) => QuestionPage(),
-//  ' /success':(context) => SuccessPage(),
-
+  Home.routeName: (context) => const Home(),
+  Played.routeName: (context) =>const Played(),
 } ;

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:quiz_app/constantes.dart';
+import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/pages/bravo.dart';
+import 'package:quiz_app/pages/home/home.dart';
 import 'package:quiz_app/pages/lost.dart';
+import 'package:quiz_app/pages/quiz_detail/quiz_detail.dart';
 import 'package:quiz_app/services/play_service.dart';
 import 'package:quiz_app/services/question_service.dart';
 
@@ -227,7 +230,7 @@ class _PlayQuizState extends State<PlayQuiz> {
           leading: IconButton(
         icon: const Icon(Icons.close, size: 30),
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetail(quiz: widget.quiz, previewWidget: Nav(),)));
         },
       )),
       backgroundColor: Colors.white,
@@ -244,12 +247,12 @@ class _PlayQuizState extends State<PlayQuiz> {
               children: [
                 Text(
                   "Question ${nextQuestion.rank}/${widget.quiz.nbQuestion}",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Score: $score",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: kAppBarColor),
                 ),
@@ -266,7 +269,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                       style: TextStyle(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                          fontSize: 14),
                     )
                   ],
                 ),
@@ -299,7 +302,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                     child: Text(
                       "${nextQuestion.text}",
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
+                          fontWeight: FontWeight.bold, fontSize: 14),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -356,7 +359,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                                                       : Colors.black
                                               : Colors.black,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                       textAlign: TextAlign.start),
                                   Container(
                                     width: 1,
@@ -373,7 +376,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                                   ),
                                   SizedBox(
                                       width: MediaQuery.of(context).size.width *
-                                          0.75,
+                                          0.6,
                                       child: Text(
                                         "${choice.text}",
                                         style: TextStyle(
@@ -387,7 +390,7 @@ class _PlayQuizState extends State<PlayQuiz> {
                                                         : Colors.black
                                                 : Colors.black,
                                             fontWeight: FontWeight.w400,
-                                            fontSize: 18,
+                                            fontSize: 14,
                                             overflow: TextOverflow.fade),
                                         textAlign: TextAlign.start,
                                         maxLines: 2,

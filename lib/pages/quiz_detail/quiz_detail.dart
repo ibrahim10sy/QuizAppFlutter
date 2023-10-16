@@ -26,7 +26,7 @@ class QuizDetail extends StatelessWidget {
             child: ListTile(
               horizontalTitleGap: 5,
               leading: CircleAvatar(backgroundImage: NetworkImage("$kBaseUrlForImage${quiz.category}/${quiz.imageUrl}"), radius: 20,),
-              title: Text("${quiz.user.login}", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20), overflow: TextOverflow.ellipsis, maxLines: 1,),
+              title: Text("${quiz.user.login}", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14), overflow: TextOverflow.ellipsis, maxLines: 1,),
             ),
           ),
         ),

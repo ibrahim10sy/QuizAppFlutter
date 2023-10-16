@@ -11,6 +11,7 @@ import '../widgets/buttom_chip.dart';
 import '../widgets/quiz_card.dart';
 import '../widgets/user_circle_avatar.dart';
 import 'comptepublic.dart';
+import 'home/home.dart';
 
 class AccountPublic extends StatefulWidget {
   const AccountPublic({Key? key, required this.user}) : super(key: key);
@@ -150,6 +151,9 @@ class _AccountPublicState extends State<AccountPublic> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+        },),
         backgroundColor: kAppBarColor,
         centerTitle: true,
         title: Text("${widget.user.login}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
@@ -459,7 +463,7 @@ class _DataRowState extends State<DataRow> {
             const SizedBox(width: 20,),
             ElevatedButton(
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width*0.25, 40)),
+                minimumSize: MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width*0.15, 40)),
                 backgroundColor: MaterialStateProperty.all<Color>((widget.isSubscribed)?Colors.red.withOpacity(0.9):kAppBarColor),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -468,7 +472,7 @@ class _DataRowState extends State<DataRow> {
                 ),
               ),
               onPressed: () => widget.onSubscribe(),
-              child: Text(widget.isSubscribed ? 'Arrêter' : 'Suivre', style: const TextStyle(fontSize: 18)),
+              child: Text(widget.isSubscribed ? 'Arrêter' : 'Suivre', style: const TextStyle(fontSize: 14)),
             )
           ],
         ),

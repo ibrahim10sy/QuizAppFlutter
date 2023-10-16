@@ -59,23 +59,23 @@ class QuizCard extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 14,
                       overflow: TextOverflow.ellipsis,
                     ),
                     maxLines: 1,),
                   const SizedBox(height: 5,),
-                  Text('${quiz.nbQuestion} Q', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                  Text('${quiz.nbQuestion} Q', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 14),),
 
                   Container(
                     margin: const EdgeInsets.only(top: 5),
                     child: Row(
                       children: [
                         CircleAvatar(
-                          radius: 13,
+                          radius: 10,
                           backgroundImage: NetworkImage((useBaseUrl)?kBaseUrlForImage+"user/"+quiz.user.imageUrl:quiz.imageUrl),
                         ),
                         const SizedBox(width: 5,),
-                        Text(quiz.user.login, style: const TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,)
+                        Text(quiz.user.login, style: const TextStyle(color: Colors.white, fontSize: 12),overflow: TextOverflow.ellipsis,)
                       ],
                     ),
                   ),

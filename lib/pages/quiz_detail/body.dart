@@ -74,23 +74,6 @@ class _BodyState extends State<Body> {
                   padding: EdgeInsets.all(5),
                   width: MediaQuery.sizeOf(context).width * 0.25,
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent.withOpacity(0.7),
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('${nbParticipation}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                      Text("Participations", style: TextStyle(fontSize: 14),textAlign: TextAlign.center,)
-                    ],
-                  ),
-                ),
-
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  padding: EdgeInsets.all(5),
-                  width: MediaQuery.sizeOf(context).width * 0.25,
-                  decoration: BoxDecoration(
                     color: Colors.redAccent.withOpacity(0.7),
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
@@ -102,7 +85,22 @@ class _BodyState extends State<Body> {
                     ],
                   ),
                 ),
-
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  padding: EdgeInsets.all(5),
+                  width: MediaQuery.sizeOf(context).width * 0.35,
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent.withOpacity(0.7),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('${nbParticipation}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                      const Text("Participations", style: TextStyle(fontSize: 14, ),textAlign: TextAlign.center,)
+                    ],
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   padding: EdgeInsets.all(5),
@@ -119,7 +117,6 @@ class _BodyState extends State<Body> {
                     ],
                   ),
                 ),
-
               ],
             ),
             const SizedBox(height: 10,),

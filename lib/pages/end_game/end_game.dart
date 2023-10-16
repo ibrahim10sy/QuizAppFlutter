@@ -37,9 +37,9 @@ class EndGame extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(3),
                   height: 100,
-                  width: 100,
+                  width: MediaQuery.of(context).size.width*0.3,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.blueAccent),
@@ -55,14 +55,14 @@ class EndGame extends StatelessWidget {
                           ),
                           const Text(
                             "correctes",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+                            style: TextStyle(color: Colors.black, fontSize: 16),
                           )
                         ]),
                   ),
                 ),
                 Container(
                   height: 100,
-                  width: 100,
+                  width: MediaQuery.of(context).size.width*0.3,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.redAccent),
@@ -78,7 +78,7 @@ class EndGame extends StatelessWidget {
                           ),
                           const Text(
                             "Incorrectes",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+                            style: TextStyle(color: Colors.black, fontSize: 16),
                           )
                         ]),
                   ),
@@ -86,7 +86,7 @@ class EndGame extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(10),
                   height: 100,
-                  width: 100,
+                  width: MediaQuery.of(context).size.width*0.3,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.green),
@@ -101,8 +101,8 @@ class EndGame extends StatelessWidget {
                                 color: Colors.black),textAlign: TextAlign.center,
                           ),
                           Text(
-                            "Par Question",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+                            "/Question",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
                           )
                         ]),
                   ),
@@ -114,7 +114,7 @@ class EndGame extends StatelessWidget {
             ),
             Container(
               height: 100,
-              width: 100,
+              width: MediaQuery.of(context).size.width*0.3,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.amber),
@@ -129,7 +129,7 @@ class EndGame extends StatelessWidget {
                       ),
                       const Text(
                         "Score",
-                        style: TextStyle(color: Colors.black, fontSize: 18),
+                        style: TextStyle(color: Colors.black, fontSize: 16),
                       )
                     ]),
               ),

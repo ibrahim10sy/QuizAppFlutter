@@ -10,6 +10,7 @@ import 'package:quiz_app/constantes.dart';
 import 'package:quiz_app/extensions/string_extension.dart';
 import 'package:quiz_app/models/quiz.dart';
 import 'package:quiz_app/models/user.dart';
+import 'package:quiz_app/modifier.dart';
 import 'package:quiz_app/services/quiz_service.dart';
 import 'package:quiz_app/widgets/buttom_chip.dart';
 
@@ -627,6 +628,24 @@ class _UserProfileScreenState extends State<UserProfile> {
       if (value == 'detail') {
         // Action de détail
       } else if (value == 'modifier') {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              // Créez et retournez la page de modification avec les valeurs actuelles
+              return EditAttributesPage(
+                  // // Passez les attributs à la page de modification
+                  // title: "Titre actuel",
+                  // nbQuestion: 42, // Remplacez par la valeur actuelle
+                  // visibility: "Visibilité actuelle",
+                  // description: "Description actuelle",
+                  // creationDate: "Date actuelle",
+                  // category: "Catégorie actuelle",
+                  // imageUrl:
+                  //     "URL de l'image actuelle", // Remplacez par l'utilisateur actuel
+                  );
+            },
+          ),
+        );
         // Action de modification
       } else if (value == 'supprimer') {
         // Action de suppression

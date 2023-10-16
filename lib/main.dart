@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/modifier.dart';
 import 'package:quiz_app/nav.dart';
 import 'package:quiz_app/theme.dart';
 
@@ -13,7 +14,7 @@ class Myapp extends StatelessWidget {
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Quiz Master',
-      home: Nav(),
+      home: EditAttributesPage(),
     );
   }
 }
